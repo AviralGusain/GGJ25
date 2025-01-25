@@ -80,7 +80,6 @@ public class GridManager : MonoBehaviour
         x = Mathf.Clamp(x, 0, gridWidth - 1);
         z = Mathf.Clamp(z, 0, gridHeight - 1);
 
-        // Return the center of the cell on the X-Z plane
         return new Vector3(x * cellSize + cellSize / 2, 0, z * cellSize + cellSize / 2);
     }
 
@@ -115,22 +114,28 @@ public class GridManager : MonoBehaviour
 
     void HighlightCell()
     {
-        // Get the mouse position in world space
+        // Create a ray from the camera through the mouse position
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+        // Check if the ray hits the grid plane
         if (Physics.Raycast(ray, out RaycastHit hit))
         {
-            // Snap the hit point to the nearest cell center
+            Debug.Log($"Raycast Hit: {hit.point}"); // Log where the ray hits
+
+            // Snap the hit point to the nearest grid cell center
             Vector3 cellCenter = GetCellCenter(hit.point);
 
             // Move the highlight object to the cell center
             if (highlight != null)
             {
                 highlight.transform.position = cellCenter;
-                highlight.SetActive(true); // Make sure it’s visible
+                highlight.SetActive(true); // Ensure the highlight is visible
             }
         }
         else
         {
+            Debug.Log("Raycast Missed"); // Log if the raycast doesn't hit anything
+
             // Hide the highlight if the mouse is not over the grid
             if (highlight != null)
             {

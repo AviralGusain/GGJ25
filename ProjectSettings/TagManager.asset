@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Bouncer
   - Fan
+  - Bubble
   layers:
   - Default
   - TransparentFX
