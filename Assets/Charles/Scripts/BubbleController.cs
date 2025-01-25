@@ -20,6 +20,8 @@ public class BubbleController : MonoBehaviour
   private bool lerp = false;
   private Vector3 finalPos;
 
+  public bool reset = false;
+
   // Start is called once before the first execution of Update after the MonoBehaviour is created
   void Start()
   {
@@ -33,6 +35,14 @@ public class BubbleController : MonoBehaviour
 
 
     if (!freeMovement) BouncerTest(Time.deltaTime);
+
+    // STRICTLY FOR TESTING PURPOSES
+    if (reset)
+    {
+      bubble.transform.position = new Vector3(3, 1, 0);
+      direction = Vector3.left;
+      reset = false;
+    }
   }
 
   private void FixedUpdate()
@@ -59,7 +69,7 @@ public class BubbleController : MonoBehaviour
   private void OnTriggerEnter(Collider collision)
   {
     // Collision with a bouncer, pass the bouncer controller to the bouncer collision method
-    if (collision.TryGetComponent(out BouncerController bouncerController) && !lerp)
+    if (collision.TryGetComponent(out BouncerController bouncerController) )
     {
       BouncerCollision(bouncerController);
     }
@@ -106,8 +116,16 @@ public class BubbleController : MonoBehaviour
     // Retrieve the gameobject attached to the bouncer
     bouncer = bouncerController.gameObject;
 
+    bool possible = true;
+
     // Should reflect the bubble depending on orientation of the bouncer
-    int plane = bouncerController.GetReflectionPlane(direction);
+    int plane = bouncerController.GetReflectionPlane(direction, ref possible);
+
+    if (!possible)
+    {
+      Destroy(gameObject);
+      return;
+    }
 
     Debug.Log("Plane: " + plane);
 
