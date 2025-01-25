@@ -1,5 +1,6 @@
 using Unity.VisualScripting;
 using UnityEngine;
+using System.Collections;
 
 public class BubbleController : MonoBehaviour
 {
@@ -13,13 +14,15 @@ public class BubbleController : MonoBehaviour
 
   public bool freeMovement = false;
 
-  private Rigidbody bubbleRigidBody;
-
   public float timer = 0.0f;
+
+  private bool lerp = false;
+  private Vector3 finalPos;
 
   // Start is called once before the first execution of Update after the MonoBehaviour is created
   void Start()
   {
+
   }
 
   // Update is called once per frame
@@ -37,9 +40,12 @@ public class BubbleController : MonoBehaviour
     {
       bubble.MovePosition(bubble.position + input * Time.deltaTime * moveSpeed);
     }
-    else
+    else if (!lerp)
     {
       bubble.MovePosition(bubble.position + direction * Time.deltaTime * moveSpeed);
+    }
+    else 
+    {
     }
   }
 
@@ -50,15 +56,15 @@ public class BubbleController : MonoBehaviour
     b = temp;
   }
 
-  private void OnCollisionEnter(Collision collision)
+  private void OnTriggerEnter(Collider collision)
   {
-    if (collision.gameObject.name == "Bouncer")
+    if (collision.gameObject.name == "Bouncer" && !lerp)
     {
       // Retrieve the gameobject attached to the bouncer
       BouncerController bouncerController = collision.gameObject.GetComponent<BouncerController>();
 
       // Should reflect the bubble depending on orientation of the bouncer
-      int plane = bouncerController.GetReflectionPlane();
+      int plane = bouncerController.GetReflectionPlane(direction);
 
       Debug.Log("Plane: " + plane);
 
@@ -66,7 +72,30 @@ public class BubbleController : MonoBehaviour
       GenericSwap<float>(ref direction.x, ref direction.z);
 
       if (plane % 2 != 0) direction *= -1;
+
+      // Move in the direction by one tile using the bouncer transform
+      finalPos = new Vector3(bouncer.transform.position.x + direction.x, 1.0f, bouncer.transform.position.z + direction.z);
+      lerp = true;
+
+      // Calculate time it should take to move to the next tile
+      StartCoroutine(MoveOverTime(bubble.transform, bubble.position, finalPos, moveSpeed));
     }
+  }
+
+  IEnumerator MoveOverTime(Transform obj, Vector3 startPos, Vector3 endPos, float speed)
+  {
+    float duration = (moveSpeed > 0.0f) ? (Vector3.Distance(bubble.position, finalPos) / moveSpeed) : 0;
+    float elapsedTime = 0;
+
+    while (elapsedTime < duration)
+    {
+      obj.position = Vector3.Lerp(startPos, endPos, elapsedTime / duration);
+      elapsedTime += Time.deltaTime;
+      yield return null;
+    }
+
+    obj.position = endPos; // Ensure it reaches the exact position
+    lerp = false;
   }
 
   private bool test1 = false;
@@ -148,7 +177,7 @@ public class BubbleController : MonoBehaviour
     if (first)
     {
       // set the ball to the right of the bouncer
-      bubble.transform.position = new Vector3(5, 0, 0);
+      bubble.transform.position = new Vector3(5, 1, 0);
 
       // Set the direction of the ball to the left
       direction = Vector3.left;
@@ -156,7 +185,7 @@ public class BubbleController : MonoBehaviour
     else
     {
       // set the ball to the left of the bouncer
-      bubble.transform.position = new Vector3(0, 0, -5);
+      bubble.transform.position = new Vector3(0, 1, -5);
 
       // Set the direction of the ball to the right
       direction = Vector3.forward;
@@ -171,7 +200,7 @@ public class BubbleController : MonoBehaviour
     if (first)
     {
       // set the ball to the right of the bouncer
-      bubble.transform.position = new Vector3(5, 0, 0);
+      bubble.transform.position = new Vector3(5, 1, 0);
 
       // Set the direction of the ball to the left
       direction = Vector3.left;
@@ -179,7 +208,7 @@ public class BubbleController : MonoBehaviour
     else
     {
       // set the ball to the left of the bouncer
-      bubble.transform.position = new Vector3(0, 0, 5);
+      bubble.transform.position = new Vector3(0, 1, 5);
 
       // Set the direction of the ball to the right
       direction = Vector3.back;
@@ -194,7 +223,7 @@ public class BubbleController : MonoBehaviour
     if (first)
     {
       // set the ball to the right of the bouncer
-      bubble.transform.position = new Vector3(0, 0, 5);
+      bubble.transform.position = new Vector3(0, 1, 5);
 
       // Set the direction of the ball to the left
       direction = Vector3.back;
@@ -202,7 +231,7 @@ public class BubbleController : MonoBehaviour
     else
     {
       // set the ball to the left of the bouncer
-      bubble.transform.position = new Vector3(-5, 0, 0);
+      bubble.transform.position = new Vector3(-5, 1, 0);
 
       // Set the direction of the ball to the right
       direction = Vector3.right;
@@ -217,7 +246,7 @@ public class BubbleController : MonoBehaviour
     if (first)
     {
       // set the ball to the right of the bouncer
-      bubble.transform.position = new Vector3(-5, 0, 0);
+      bubble.transform.position = new Vector3(-5, 1, 0);
 
       // Set the direction of the ball to the left
       direction = Vector3.right;
@@ -225,7 +254,7 @@ public class BubbleController : MonoBehaviour
     else
     {
       // set the ball to the left of the bouncer
-      bubble.transform.position = new Vector3(0, 0, -5);
+      bubble.transform.position = new Vector3(0, 1, -5);
 
       // Set the direction of the ball to the right
       direction = Vector3.forward;
