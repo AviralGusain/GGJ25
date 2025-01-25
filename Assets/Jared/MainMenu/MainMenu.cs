@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -14,6 +15,8 @@ public class MainMenu : MonoBehaviour
     public GameObject OptionsMenu;
     public GameObject CreditsMenu;
     public GameObject QuitConfirmation;
+    public List<GameObject> Submenus;
+
 
     private void Start()
     {
@@ -25,7 +28,10 @@ public class MainMenu : MonoBehaviour
 
     private void Update()
     {
-
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            DestroySubmenus();
+        }
     }
 
     public void Play()
@@ -35,16 +41,26 @@ public class MainMenu : MonoBehaviour
 
     public void Options()
     {
-        OptionsMenu.SetActive(true);
+        Submenus.Add(Instantiate(OptionsMenu, this.gameObject.transform));
     }
 
     public void Credits()
     {
-        CreditsMenu.SetActive(true);
+        Submenus.Add(Instantiate(CreditsMenu, this.gameObject.transform));
     }
 
     public void Quit()
     {
-        QuitConfirmation.SetActive(true);
+        Submenus.Add(Instantiate(QuitConfirmation, this.gameObject.transform));
+    }
+
+    public void DestroySubmenus()
+    {
+        for (int i = 0; i < Submenus.Count; i++)
+        {
+            Destroy(Submenus[i]);
+        }
+
+        Submenus.Clear();
     }
 }
