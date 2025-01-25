@@ -7,7 +7,7 @@ public class GridManager : MonoBehaviour
     public float cellSize = 1f;
     public GameObject bouncerPrefab;
     public GameObject fanPrefab;
-    public GameObject highlight; // Assign the highlight object here in the Inspector
+    public GameObject highlight;
 
     private GameObject[,] grid;
 
