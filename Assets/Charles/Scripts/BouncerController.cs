@@ -26,6 +26,14 @@ public class BouncerController : MonoBehaviour
     // Make sure the direction passed in valid with the specified orientation
     Debug.Log("Direction: " + direction);
 
+    // Orientation 0 (no movement down/right)
+
+    // Orientation 1 (no movement down/left)
+
+    // Orientation 2 (no movement up/left)
+
+    // Orientation 3 (no movement up/right)
+
     return true;
   }
 }
