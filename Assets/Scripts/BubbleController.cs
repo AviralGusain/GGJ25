@@ -2,13 +2,13 @@ using UnityEngine;
 
 public class Bubble : MonoBehaviour
 {
-    public float speed = 2f; // Speed of movement
-    public int travelDistance = 3; // Number of grid cells to travel when spawned
+    public float speed = 2f;                // Speed of movement
+    public int travelDistance = 3;          // Number of grid cells to travel when spawned
     public bool limitTravelDistance = true; // Whether the bubble's movement should be limited
 
     private Vector3 direction = Vector3.right; // Initial movement direction
-    private Vector3 targetPosition; // The next grid cell the bubble is moving to
-    private int cellsTraveled = 0; // Counter for traveled cells
+    private Vector3 targetPosition;            // The next grid cell the bubble is moving to
+    private int cellsTraveled = 0;             // Counter for traveled cells
 
     void Start()
     {
@@ -30,8 +30,6 @@ public class Bubble : MonoBehaviour
         {
             // Snap to the target position
             transform.position = targetPosition;
-
-            // Increment the travel counter
             cellsTraveled++;
 
             // Check if movement should be limited and stop if necessary

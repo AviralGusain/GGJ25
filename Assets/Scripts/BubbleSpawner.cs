@@ -22,7 +22,6 @@ public class BubbleSpawner : MonoBehaviour
 
     void SpawnBubble()
     {
-        // Instantiate the bubble
         GameObject bubble = Instantiate(bubblePrefab, spawnPoint.position, Quaternion.identity);
 
         // Configure the bubble's travel settings

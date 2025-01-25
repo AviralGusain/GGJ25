@@ -8,7 +8,6 @@ public class Bouncer : MonoBehaviour
     {
         if (other.CompareTag("Bubble"))
         {
-            // Get the Bubble component
             Bubble bubble = other.GetComponent<Bubble>();
             if (bubble != null)
             {
@@ -17,7 +16,6 @@ public class Bouncer : MonoBehaviour
                 float angle = switchToLeft ? -90f : 90f; // Left (-90) or Right (+90)
                 Vector3 newDirection = Quaternion.Euler(0, angle, 0) * currentDirection;
 
-                // Change the bubble's direction
                 bubble.ChangeDirection(newDirection);
             }
         }
