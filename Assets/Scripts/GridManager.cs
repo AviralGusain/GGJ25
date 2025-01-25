@@ -11,6 +11,8 @@ public class GridManager : MonoBehaviour
 
     private GameObject[,] grid;
 
+    public GameObject tempTilePrefab;
+
     void Start()
     {
         grid = new GameObject[gridWidth, gridHeight];
@@ -45,6 +47,9 @@ public class GridManager : MonoBehaviour
                 Vector3 start = new Vector3(x * cellSize, 0, z * cellSize); // X-Z plane
                 Vector3 endX = start + new Vector3(0, 0, cellSize);         // Forward line
                 Vector3 endZ = start + new Vector3(cellSize, 0, 0);         // Right line
+
+                if(tempTilePrefab != null)
+                    Instantiate(tempTilePrefab, new Vector3(x + cellSize / 2, 0, z + cellSize / 2), Quaternion.identity);
 
                 Debug.DrawLine(start, endX, Color.gray, 100f);
                 Debug.DrawLine(start, endZ, Color.gray, 100f);
