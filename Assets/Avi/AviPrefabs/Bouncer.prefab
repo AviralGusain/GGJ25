@@ -121,4 +121,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af755e418971b2f46b2dd1a901d4b699, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  switchToLeft: 0
+  switchToLeft: 1
