@@ -1,0 +1,52 @@
+{
+    "gridWidth": 16,
+    "gridHeight": 9,
+    "cellSize": 1.0,
+    "bouncerPrefab": {
+        "instanceID": 42692
+    },
+    "fanPrefab": {
+        "instanceID": 42694
+    },
+    "baseGoalPrefab": {
+        "instanceID": 42666
+    },
+    "highlight": {
+        "instanceID": 42696
+    },
+    "tempTilePrefab": {
+        "instanceID": 42698
+    },
+    "tilePrefabs": [
+        {
+            "instanceID": 42700
+        },
+        {
+            "instanceID": 42702
+        },
+        {
+            "instanceID": 42704
+        },
+        {
+            "instanceID": 42706
+        }
+    ],
+    "levelSaveData": {
+        "mItems": [
+            {
+                "prefabName": "",
+                "position": {
+                    "x": -2.5,
+                    "y": 0.0,
+                    "z": -5.5
+                },
+                "rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 1.0
+                }
+            }
+        ]
+    }
+}
