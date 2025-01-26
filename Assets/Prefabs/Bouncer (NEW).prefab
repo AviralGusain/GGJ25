@@ -10,9 +10,12 @@ GameObject:
   m_Component:
   - component: {fileID: 7498053188300231612}
   - component: {fileID: 6258355097211814498}
+  - component: {fileID: 1550568320449413144}
+  - component: {fileID: -222281411108039429}
+  - component: {fileID: -5316093483514706699}
   m_Layer: 0
   m_Name: Bouncer (NEW)
-  m_TagString: Untagged
+  m_TagString: Bouncer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -43,6 +46,52 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2b7f84b601dc41845949ee0a492a4ef4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!65 &1550568320449413144
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 118669754924287851}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.27, y: 1.19, z: 1}
+  m_Center: {x: 0, y: 0.6, z: 0.18}
+--- !u!114 &-222281411108039429
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 118669754924287851}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddbb17660aa24514bb00e9b0ee190c23, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bouncer: {fileID: 436551080071988558, guid: b75f32d5c1966104a8b127f64dfe7335, type: 3}
+--- !u!114 &-5316093483514706699
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 118669754924287851}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 573cd678b5f6df547a1d53b8c4725d3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &4785765357525526412
