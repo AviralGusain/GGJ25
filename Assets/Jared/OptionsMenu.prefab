@@ -1405,6 +1405,7 @@ GameObject:
   - component: {fileID: 4288521279330537499}
   - component: {fileID: 1300581665478406641}
   - component: {fileID: 7495551072378203503}
+  - component: {fileID: 1153355525762145748}
   m_Layer: 5
   m_Name: OptionsMenu
   m_TagString: Untagged
@@ -1453,14 +1454,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.8627451}
+  m_Color: {r: 0.09803922, g: 0, b: 0.19607843, a: 0.88235295}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 0}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1486,6 +1487,28 @@ MonoBehaviour:
   ResolutionDropdown: {fileID: 5193259892620758276}
   FullscreenToggle: {fileID: 5861505635020101428}
   AudioMixer: {fileID: 24100000, guid: 42e04d8d0c5c361499b3a6567a93ad22, type: 2}
+--- !u!95 &1153355525762145748
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3981676971643510127}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: c82036320865e994a83ae3378d0bb583, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 2
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &4336902358123602053
 GameObject:
   m_ObjectHideFlags: 0
