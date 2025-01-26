@@ -12,7 +12,7 @@ public class BubbleController : MonoBehaviour
   private Vector3 input;
   private float moveSpeed = 0.0f;
 
-  private float defaultSpeed = 6f;
+  private float defaultSpeed = 5f;
   private float speedMultiplier = 2.0f;
 
   public Vector3 direction = Vector3.left;
