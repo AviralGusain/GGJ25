@@ -68,7 +68,7 @@ public class BubbleController : MonoBehaviour
     }
 
     // Raycast to check if the bubble is in line with a fan
-    if (!lerp && !launching)
+    else if (!lerp && !launching)
     {
       bubble.MovePosition(bubble.position + moveSpeed * Time.deltaTime * direction);
     }
@@ -92,7 +92,7 @@ public class BubbleController : MonoBehaviour
     }
 
     // If colliding with a wind object, pass the wind object to the fan collision method
-    if (collider.CompareTag("Wind") && !launching)
+    if (collider.CompareTag("Wind"))
     {
       GameObject parent = collider.transform.parent.gameObject;
       Debug.Log("Parent tag: " + parent.tag);
