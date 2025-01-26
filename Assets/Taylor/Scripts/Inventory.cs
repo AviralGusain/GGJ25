@@ -30,7 +30,6 @@ public class Inventory : MonoBehaviour
         UpdateCounterDisplays();
     }
 
-
     public void SelectItem(string itemName)
     {
         if ((itemName == "Bouncer" && bouncerInvCount > 0) ||
@@ -42,16 +41,33 @@ public class Inventory : MonoBehaviour
             SpawnHoverObject(itemName);
         }
     }
-
     private void SpawnHoverObject(string itemName)
     {
         if (hoverObject != null)
             Destroy(hoverObject);
 
         GameObject prefab = itemName == "Bouncer" ? bouncerPrefab : fanPrefab;
+
+        if (prefab == null)
+        {
+            Debug.LogError($"Prefab for {itemName} is not assigned in the Inventory!");
+            return;
+        }
+
         hoverObject = Instantiate(prefab, new Vector3(0, -1000, 0), Quaternion.identity); // Spawn offscreen
-        hoverObject.GetComponent<Object>().SetHoverMode(true); // Enable hover mode
+
+        // Check if the prefab has the Object script
+        Object objectScript = hoverObject.GetComponent<Object>();
+        if (objectScript != null)
+        {
+            objectScript.SetHoverMode(true); // Enable hover mode
+        }
+        else
+        {
+            Debug.LogError($"The prefab for {itemName} does not have the Object script attached!");
+        }
     }
+
 
     public void PlaceItem()
     {

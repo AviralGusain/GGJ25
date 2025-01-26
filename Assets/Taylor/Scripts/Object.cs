@@ -64,14 +64,14 @@ public class Object : MonoBehaviour
     {
         if (Input.mouseScrollDelta.y > 0)
         {
-            // Scroll up: Rotate 90 degrees clockwise
-            currentRotation = (currentRotation + 90) % 360;
+            // Scroll up: Rotate 90 degrees counterclockwise
+            currentRotation = (currentRotation - 90 + 360) % 360; // Add 360 to avoid negative angles
             transform.rotation = Quaternion.Euler(0, currentRotation, 0);
         }
         else if (Input.mouseScrollDelta.y < 0)
         {
-            // Scroll down: Rotate 90 degrees counterclockwise
-            currentRotation = (currentRotation - 90 + 360) % 360; // Add 360 to avoid negative angles
+            // Scroll down: Rotate 90 degrees clockwise
+            currentRotation = (currentRotation + 90) % 360;
             transform.rotation = Quaternion.Euler(0, currentRotation, 0);
         }
     }

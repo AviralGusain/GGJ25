@@ -17,6 +17,7 @@ public class MainMenu : MonoBehaviour
     public GameObject QuitConfirmation;
     public List<GameObject> Submenus;
 
+    public List<ParticleSystem> BubbleParticles;
 
     private void Start()
     {
@@ -42,16 +43,34 @@ public class MainMenu : MonoBehaviour
     public void Options()
     {
         Submenus.Add(Instantiate(OptionsMenu, this.gameObject.transform));
+        PauseParticles();
     }
 
     public void Credits()
     {
         Submenus.Add(Instantiate(CreditsMenu, this.gameObject.transform));
+        PauseParticles();
     }
 
     public void Quit()
     {
         Submenus.Add(Instantiate(QuitConfirmation, this.gameObject.transform));
+    }
+
+    public void PauseParticles()
+    {
+        for (int i = 0; i < BubbleParticles.Count; i++)
+        {
+            BubbleParticles[i].Stop();
+        }
+    }
+
+    public void PlayParticles()
+    {
+        for (int i = 0; i < BubbleParticles.Count; i++)
+        {
+            BubbleParticles[i].Play();
+        }
     }
 
     public void DestroySubmenus()
@@ -62,5 +81,6 @@ public class MainMenu : MonoBehaviour
         }
 
         Submenus.Clear();
+        PlayParticles();
     }
 }
