@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using UnityEngine;
+using UnityEngine.Rendering.UI;
 
 public enum BubbleSize
 {
@@ -19,6 +20,9 @@ public struct BubbleData
     public BubbleSize mSize;
     public BubbleColor mColor;
 }
+
+
+
 
 public class LevelStateManager : MonoBehaviour
 {
@@ -46,7 +50,18 @@ public class LevelStateManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyUp(KeyCode.S))
+        {
+            LevelSaver.SaveCurrentLevel(FindFirstObjectByType<GridManager>());
+        }
+
+        if (Input.GetKeyUp(KeyCode.R))
+        {
+            GridManager grid = FindFirstObjectByType<GridManager>();
+            grid.ResetGridToEmpty();
+
+            LevelSaver.LoadLevel("TestLevel", grid, FindFirstObjectByType<LevelStateManager>());
+        }
     }
 
     // Public interface

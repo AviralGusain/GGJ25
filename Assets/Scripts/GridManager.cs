@@ -1,4 +1,7 @@
+using System;
 using UnityEngine;
+using System.Collections.Generic;
+using Unity.VisualScripting;
 
 public class GridManager : MonoBehaviour
 {
@@ -13,6 +16,8 @@ public class GridManager : MonoBehaviour
     public GameObject tempTilePrefab; // Temporary tile prefab for visualization
 
     private Vector3 gridOrigin; // The starting point of the grid
+
+    public FileHandler.ArraySerializeWrapper<LevelItemPackage> levelSaveData;
 
     void Start()
     {
@@ -88,8 +93,8 @@ public class GridManager : MonoBehaviour
             if (grid[x, z] == null)
             {
                 // Instantiate the object and register it in the grid
-                GameObject placedObject = Instantiate(prefab, cellCenter, Quaternion.identity);
-                grid[x, z] = placedObject;
+                GameObject placeObject = Instantiate(prefab, cellCenter, Quaternion.identity);
+                grid[x, z] = placeObject;
             }
             else
             {
@@ -97,6 +102,58 @@ public class GridManager : MonoBehaviour
             }
         }
     }
+
+    // Spawns a prefab at given location, snapped to the grid, and returns prefab spawned
+    public GameObject PlaceObjectAtPosition(Vector3 worldPosition, GameObject prefab)
+    {
+        // Raycast to determine the grid cell
+            // Snap the hit point to the nearest cell center
+            Vector3 cellCenter = GetCellCenter(worldPosition);
+
+            // Convert the world position to grid indices
+            Vector3 localPosition = cellCenter - gridOrigin;
+            int x = Mathf.FloorToInt(localPosition.x / cellSize);
+            int z = Mathf.FloorToInt(localPosition.z / cellSize);
+
+            // Check if the cell is empty
+            if (grid[x, z] == null)
+            {
+                // Instantiate the object and register it in the grid
+                GameObject placeObject = Instantiate(prefab, cellCenter, Quaternion.identity);
+                grid[x, z] = placeObject;
+                return placeObject;
+            }
+            else
+            {
+                Debug.Log("Cell is already occupied!");
+                return null;
+            }
+    }
+
+
+    public void PlaceAlreadySpawnedObject(Vector3 worldPosition, GameObject existingObject)
+    {
+        // Snap the hit point to the nearest cell center
+        Vector3 cellCenter = GetCellCenter(worldPosition);
+
+        // Convert the world position to grid indices
+        Vector3 localPosition = cellCenter - gridOrigin;
+        int x = Mathf.FloorToInt(localPosition.x / cellSize);
+        int z = Mathf.FloorToInt(localPosition.z / cellSize);
+
+        // Check if the cell is empty
+        if (grid[x, z] == null)
+        {
+
+            // register it in the grid
+            grid[x, z] = existingObject;
+        }
+        else
+        {
+            Debug.Log("Cell is already occupied!");
+        }
+    }
+
 
     void HighlightCell()
     {
@@ -124,5 +181,67 @@ public class GridManager : MonoBehaviour
                 highlight.SetActive(false);
             }
         }
+    }
+
+
+    // Test serialization functions
+    public GameObject GetLevelGridItem(int width, int height)
+    {
+        return grid[width, height];
+    }
+
+    public void SetLevelSaveData(List<LevelItemPackage> saveData)
+    {
+        levelSaveData.mItems = saveData.ToArray();
+    }
+
+    public List<LevelItemPackage> GetLevelSaveData()
+    {
+        return new List<LevelItemPackage>(levelSaveData.mItems);
+    }
+
+    public GameObject GetPrefabByTagName(string name)
+    {
+        if (name == "Bouncer")
+        {
+            return bouncerPrefab;
+        }
+        else if (name == "Fan")
+        {
+            return fanPrefab;
+        }
+        else if (name == "Launcher")
+        {
+            return null; // Add when we have it
+        }
+
+        return null; // name did not match a prefab, return null
+    }
+
+    public void ResetGridToEmpty()
+    {
+        for (int i = 0; i < gridWidth; i++)
+        {
+            for (int j = 0; j < gridHeight; j++)
+            {
+                if (grid[i, j] == null)
+                {
+                    continue;
+                }
+
+                Destroy(grid[i, j]); // Destroy existing object
+                grid[i, j] = null; // Clear space on grid
+            }
+        }
+    }
+
+    public void RebuildGrid()
+    {
+        // Once updating, destroy all tiles before regenerating
+        //tempTilePrefab
+
+        gridOrigin = transform.position; // Set the grid origin to the GridManager's position
+        grid = new GameObject[gridWidth, gridHeight];
+        DrawGrid();
     }
 }

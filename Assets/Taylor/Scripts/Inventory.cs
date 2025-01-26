@@ -64,6 +64,9 @@ public class Inventory : MonoBehaviour
             fanInvCount--;
         }
 
+        // Tell grid manager object was placed
+        FindFirstObjectByType<GridManager>().PlaceAlreadySpawnedObject(hoverObject.transform.position, hoverObject);
+
         // Update inventory display and reset hover object
         UpdateCounterDisplays();
         hoverObject = null;
