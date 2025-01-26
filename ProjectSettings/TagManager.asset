@@ -8,6 +8,7 @@ TagManager:
   - Fan
   - Bubble
   - Wind
+  - Wall
   layers:
   - Default
   - TransparentFX
