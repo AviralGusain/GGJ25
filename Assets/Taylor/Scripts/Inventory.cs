@@ -19,8 +19,9 @@ public class Inventory : MonoBehaviour
     private Button bouncerButton;
     private Button fanButton;
 
-    private string selectedItem = null;    // Tracks the currently selected item
-    private GameObject hoverObject = null; // The object currently hovering with the mouse
+    private string selectedItem = null;     // Tracks the currently selected item
+    private GameObject hoverObject = null;  // The object currently hovering with the mouse
+    private bool hoverItemDeducted = false; // Tracks if the inventory count was deducted
 
     private void Start()
     {
@@ -40,15 +41,30 @@ public class Inventory : MonoBehaviour
             SelectItem("BaseGoal");
         }
     }
+
     public void SelectItem(string itemName)
     {
         if ((itemName == "Bouncer" && bouncerInvCount > 0) ||
-            (itemName == "Fan" && fanInvCount > 0) || 
-            FindFirstObjectByType<LevelStateManager>().IsInDebug() && itemName == "BaseGoal") // If a debug level, and goal key pressed
+            (itemName == "Fan" && fanInvCount > 0) ||
+            FindFirstObjectByType<LevelStateManager>().IsInDebug() && itemName == "BaseGoal") // Debug mode for goal
         {
             selectedItem = itemName;
 
-            // Spawn a hover object
+            // Deduct inventory count for hover
+            if (itemName == "Bouncer" && bouncerInvCount > 0)
+            {
+                bouncerInvCount--;
+                hoverItemDeducted = true; // Mark as deducted
+            }
+            else if (itemName == "Fan" && fanInvCount > 0)
+            {
+                fanInvCount--;
+                hoverItemDeducted = true; // Mark as deducted
+            }
+
+            UpdateCounterDisplays();
+
+            // Spawn a ghost hover object
             SpawnHoverObject(itemName);
         }
     }
@@ -110,11 +126,9 @@ public class Inventory : MonoBehaviour
         {
             case "Bouncer":
                 realPrefab = bouncerPrefab;
-                bouncerInvCount--;
                 break;
             case "Fan":
                 realPrefab = fanPrefab;
-                fanInvCount--;
                 break;
         }
 
@@ -123,13 +137,36 @@ public class Inventory : MonoBehaviour
             Instantiate(realPrefab, position, rotation); // Place the real object
         }
 
-        UpdateCounterDisplays();
+        // Reset hover item state
+        hoverObject = null;
+        selectedItem = null;
+        hoverItemDeducted = false; // Reset deduction flag
+    }
+
+    public void CancelPlacement()
+    {
+        if (hoverObject != null)
+        {
+            Destroy(hoverObject);
+
+            // Increment inventory count back if deducted
+            if (hoverItemDeducted)
+            {
+                if (selectedItem == "Bouncer") bouncerInvCount++;
+                if (selectedItem == "Fan") fanInvCount++;
+
+                hoverItemDeducted = false; // Reset flag
+                UpdateCounterDisplays();
+            }
+        }
+
         hoverObject = null;
         selectedItem = null;
     }
 
     public void DestroyItem(string itemName)
     {
+        // Increment inventory count when an item is picked up from the grid
         if (itemName == "Bouncer")
         {
             bouncerInvCount++;

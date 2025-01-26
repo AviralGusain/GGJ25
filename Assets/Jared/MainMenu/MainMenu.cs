@@ -12,6 +12,7 @@ public class MainMenu : MonoBehaviour
     public Button QuitButton;
 
     [Header("Submenus")]
+    public GameObject LevelSelectMenu;
     public GameObject OptionsMenu;
     public GameObject CreditsMenu;
     public GameObject QuitConfirmation;
@@ -37,7 +38,8 @@ public class MainMenu : MonoBehaviour
 
     public void Play()
     {
-        SceneManager.LoadScene("LevelScene");
+        Submenus.Add(Instantiate(LevelSelectMenu, this.gameObject.transform));
+        PauseParticles();
     }
 
     public void Options()

@@ -54,11 +54,11 @@ public class Object : MonoBehaviour
             // Cancel placement (return to inventory)
             if (Input.GetMouseButtonDown(1))
             {
-                Destroy(gameObject);
-                inventory.DestroyItem(tag);
+                inventory.CancelPlacement();
             }
         }
     }
+
 
     private void HandleRotationInput()
     {
