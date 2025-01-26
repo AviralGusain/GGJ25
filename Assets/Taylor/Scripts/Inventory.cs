@@ -120,7 +120,9 @@ public class Inventory : MonoBehaviour
 
         if (realPrefab != null)
         {
-            Instantiate(realPrefab, position, rotation); // Place the real object
+            GameObject placedObject = FindFirstObjectByType<GridManager>().PlaceObjectAtPosition(position, realPrefab);
+            placedObject.transform.rotation = rotation;
+            //Instantiate(realPrefab, position, rotation); // Place the real object
         }
 
         UpdateCounterDisplays();
