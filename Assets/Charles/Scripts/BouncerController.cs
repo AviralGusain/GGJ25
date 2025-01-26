@@ -7,7 +7,14 @@ public class BouncerController : MonoBehaviour
   public GameObject bouncer;
   private int orientation;
 
-  public int GetReflectionPlane(Vector3 direction, ref bool possible)
+    private Animator animator;
+
+    private void Start()
+    {
+        animator = GetComponentInChildren<Animator>();
+    }
+
+    public int GetReflectionPlane(Vector3 direction, ref bool possible)
   {
     int yAngle = (int)bouncer.transform.rotation.eulerAngles.y;
 
@@ -33,6 +40,9 @@ public class BouncerController : MonoBehaviour
 
   private bool CollisionCheck(Vector3 direction, int orientation)
   {
+        animator.SetTrigger("Bounce");
+        //AUDIO
+
     // Make sure the direction passed in valid with the specified orientation
     Debug.Log("Direction: " + direction);
 
