@@ -991,6 +991,17 @@ Transform:
   - {fileID: 1254413936}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &929761708 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3494407931692221538, guid: abb1db3566fff7e49b6921f9a87f2b4b, type: 3}
+  m_PrefabInstance: {fileID: 7529308897241118709}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1095109097
 GameObject:
   m_ObjectHideFlags: 0
@@ -1329,6 +1340,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mBubbleScoreTargets: 05000000
   mCurrBubbleScores: 
+  mNumStartingBouncers: 0
+  mNumStartingFans: 0
+  mNumStartingLaunchers: 0
 --- !u!4 &1254413936
 Transform:
   m_ObjectHideFlags: 0
@@ -2241,6 +2255,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 7960533863981271153, guid: 78cafc91753ee3d478bae4e26d8ee029, type: 3}
     - target: {fileID: 3914820491324946606, guid: abb1db3566fff7e49b6921f9a87f2b4b, type: 3}
+      propertyPath: launcherText
+      value: 
+      objectReference: {fileID: 929761708}
+    - target: {fileID: 3914820491324946606, guid: abb1db3566fff7e49b6921f9a87f2b4b, type: 3}
       propertyPath: bouncerPrefab
       value: 
       objectReference: {fileID: 118669754924287851, guid: 7699ddd373792c241bfa4e4f10d6cb14, type: 3}
@@ -2253,9 +2271,25 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 7960533863981271153, guid: 57d331c630e23e74dac3282a0aef4fff, type: 3}
     - target: {fileID: 3914820491324946606, guid: abb1db3566fff7e49b6921f9a87f2b4b, type: 3}
+      propertyPath: launcherPrefab
+      value: 
+      objectReference: {fileID: 4909567520097722462, guid: 84cb0c756d9814e42b1286a8ddbfd6e3, type: 3}
+    - target: {fileID: 3914820491324946606, guid: abb1db3566fff7e49b6921f9a87f2b4b, type: 3}
+      propertyPath: launcherInvCount
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3914820491324946606, guid: abb1db3566fff7e49b6921f9a87f2b4b, type: 3}
       propertyPath: ghostBouncerPrefab
       value: 
       objectReference: {fileID: 118669754924287851, guid: e6ba7b834ba23ea489688da872a5edf4, type: 3}
+    - target: {fileID: 3914820491324946606, guid: abb1db3566fff7e49b6921f9a87f2b4b, type: 3}
+      propertyPath: ghostLauncherPrefab
+      value: 
+      objectReference: {fileID: 4909567520097722462, guid: 84cb0c756d9814e42b1286a8ddbfd6e3, type: 3}
+    - target: {fileID: 4570354545159112860, guid: abb1db3566fff7e49b6921f9a87f2b4b, type: 3}
+      propertyPath: m_Name
+      value: LauncherAmount
+      objectReference: {fileID: 0}
     - target: {fileID: 6373536065418375371, guid: abb1db3566fff7e49b6921f9a87f2b4b, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 1

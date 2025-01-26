@@ -6,18 +6,23 @@ public class Inventory : MonoBehaviour
 {
     public GameObject bouncerPrefab;
     public GameObject fanPrefab;
-    public GameObject ghostBouncerPrefab; // Ghost version of Bouncer
-    public GameObject ghostFanPrefab;     // Ghost version of Fan
+    public GameObject launcherPrefab;        // Launcher prefab
+    public GameObject ghostBouncerPrefab;   // Ghost version of Bouncer
+    public GameObject ghostFanPrefab;       // Ghost version of Fan
+    public GameObject ghostLauncherPrefab;  // Ghost version of Launcher
     public GameObject baseGoalPrefab;
 
     public int bouncerInvCount;
     public int fanInvCount;
+    public int launcherInvCount;            // Inventory count for Launcher
 
     public TextMeshProUGUI bouncerText;
     public TextMeshProUGUI fanText;
+    public TextMeshProUGUI launcherText;    // UI for Launcher count
 
     private Button bouncerButton;
     private Button fanButton;
+    private Button launcherButton;          // Launcher button
 
     private string selectedItem = null;     // Tracks the currently selected item
     private GameObject hoverObject = null;  // The object currently hovering with the mouse
@@ -27,8 +32,9 @@ public class Inventory : MonoBehaviour
     {
         bouncerButton = bouncerText.GetComponentInParent<Button>();
         fanButton = fanText.GetComponentInParent<Button>();
+        launcherButton = launcherText.GetComponentInParent<Button>();
 
-        if (bouncerButton == null || fanButton == null)
+        if (bouncerButton == null || fanButton == null || launcherButton == null)
             Debug.LogError("Inventory buttons are not assigned correctly!");
 
         UpdateCounterDisplays();
@@ -46,6 +52,7 @@ public class Inventory : MonoBehaviour
     {
         if ((itemName == "Bouncer" && bouncerInvCount > 0) ||
             (itemName == "Fan" && fanInvCount > 0) ||
+            (itemName == "Launcher" && launcherInvCount > 0) ||  // Launcher selection
             FindFirstObjectByType<LevelStateManager>().IsInDebug() && itemName == "BaseGoal") // Debug mode for goal
         {
             selectedItem = itemName;
@@ -59,6 +66,11 @@ public class Inventory : MonoBehaviour
             else if (itemName == "Fan" && fanInvCount > 0)
             {
                 fanInvCount--;
+                hoverItemDeducted = true; // Mark as deducted
+            }
+            else if (itemName == "Launcher" && launcherInvCount > 0)
+            {
+                launcherInvCount--;
                 hoverItemDeducted = true; // Mark as deducted
             }
 
@@ -85,6 +97,9 @@ public class Inventory : MonoBehaviour
             case "Fan":
                 prefab = ghostFanPrefab;
                 break;
+            case "Launcher":
+                prefab = ghostLauncherPrefab;
+                break;
             case "BaseGoal":
                 prefab = baseGoalPrefab;
                 break;
@@ -110,7 +125,6 @@ public class Inventory : MonoBehaviour
         }
     }
 
-
     public void PlaceItem()
     {
         if (hoverObject == null) return;
@@ -129,6 +143,9 @@ public class Inventory : MonoBehaviour
                 break;
             case "Fan":
                 realPrefab = fanPrefab;
+                break;
+            case "Launcher":
+                realPrefab = launcherPrefab;
                 break;
         }
 
@@ -155,6 +172,7 @@ public class Inventory : MonoBehaviour
             {
                 if (selectedItem == "Bouncer") bouncerInvCount++;
                 if (selectedItem == "Fan") fanInvCount++;
+                if (selectedItem == "Launcher") launcherInvCount++;
 
                 hoverItemDeducted = false; // Reset flag
                 UpdateCounterDisplays();
@@ -176,6 +194,10 @@ public class Inventory : MonoBehaviour
         {
             fanInvCount++;
         }
+        else if (itemName == "Launcher")
+        {
+            launcherInvCount++;
+        }
 
         UpdateCounterDisplays();
     }
@@ -184,9 +206,11 @@ public class Inventory : MonoBehaviour
     {
         bouncerText.text = "x" + bouncerInvCount;
         fanText.text = "x" + fanInvCount;
+        launcherText.text = "x" + launcherInvCount;
 
         bouncerButton.interactable = bouncerInvCount > 0;
         fanButton.interactable = fanInvCount > 0;
+        launcherButton.interactable = launcherInvCount > 0;
     }
 
     public void SetNumBouncers(int numBouncers)
@@ -198,6 +222,12 @@ public class Inventory : MonoBehaviour
     public void SetNumFans(int numFans)
     {
         fanInvCount = numFans;
+        UpdateCounterDisplays();
+    }
+
+    public void SetNumLaunchers(int numLaunchers)
+    {
+        launcherInvCount = numLaunchers;
         UpdateCounterDisplays();
     }
 }
