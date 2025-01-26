@@ -99,9 +99,10 @@ GameObject:
   - component: {fileID: 4500603923939427892}
   - component: {fileID: 4460092567995905182}
   - component: {fileID: 5259054626275379036}
+  - component: {fileID: 4123128620336714694}
   m_Layer: 0
   m_Name: Fan
-  m_TagString: Untagged
+  m_TagString: Fan
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -212,6 +213,18 @@ MonoBehaviour:
   fan: {fileID: 4241612953946452569}
   castDistance: 10
   first: 1
+--- !u!114 &4123128620336714694
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4241612953946452569}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 573cd678b5f6df547a1d53b8c4725d3c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6087996904698214298
 GameObject:
   m_ObjectHideFlags: 0
