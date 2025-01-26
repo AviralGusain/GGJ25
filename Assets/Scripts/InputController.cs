@@ -2,21 +2,14 @@ using UnityEngine;
 
 public class InputController : MonoBehaviour
 {
-    public GridManager gridManager;
+    public Inventory inventory;
 
     void Update()
     {
+        // Left-click selects an inventory item
         if (Input.GetMouseButtonDown(0))
         {
-            Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            mousePosition.z = 0;
-            gridManager.PlaceObject(mousePosition, gridManager.bouncerPrefab);
-        }
-        else if (Input.GetMouseButtonDown(1))
-        {
-            Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            mousePosition.z = 0;
-            gridManager.PlaceObject(mousePosition, gridManager.fanPrefab);
+            // Selection logic happens through the Inventory UI buttons
         }
     }
 }

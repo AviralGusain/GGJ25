@@ -1,51 +1,65 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Object : MonoBehaviour
 {
     private Camera cam;
-    private bool followMouse = true;
-
+    private bool hoverMode = false;
     private Inventory inventory;
 
     void Start()
     {
-        inventory = FindAnyObjectByType<Inventory>();
+        inventory = FindObjectOfType<Inventory>();
         cam = Camera.main;
-        followMouse = true;
+
+        if (inventory == null)
+            Debug.LogError("Inventory is not assigned or could not be found!");
+        if (cam == null)
+            Debug.LogError("Main Camera is not found!");
     }
+
 
     void Update()
     {
-        FollowMousePosition();
-        HandleObjectDestruction();
+        if (hoverMode)
+        {
+            FollowMousePosition();
+        }
+        else
+        {
+            HandleObjectDestruction();
+        }
+    }
+
+    public void SetHoverMode(bool enable)
+    {
+        hoverMode = enable;
+        GetComponent<Collider>().enabled = !enable; // Disable collisions during hover
     }
 
     private void FollowMousePosition()
     {
-        if (!followMouse) return;
-
         Vector3 mousePosition = Input.mousePosition;
         Ray ray = cam.ScreenPointToRay(mousePosition);
 
-        RaycastHit hit;
-        if (Physics.Raycast(ray, out hit, Mathf.Infinity))
+        if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity))
         {
-            transform.position = hit.point;
+            // Snap to the grid center
+            Vector3 cellCenter = FindObjectOfType<GridManager>().GetCellCenter(hit.point);
+            transform.position = cellCenter;
 
-            //place the object
+            // Place the object
             if (Input.GetMouseButtonDown(0))
             {
-                followMouse = false;
+                hoverMode = false;
                 GetComponent<Collider>().enabled = true;
-                //change this to snap to grid point
+                inventory.PlaceItem();
             }
 
-            //delete the object
+            // Cancel placement (return to inventory)
             if (Input.GetMouseButtonDown(1))
             {
-                DestroyObject();
-                //should get added back to inventory
+                Destroy(gameObject);
+                inventory.DestroyItem(tag);
             }
         }
     }
@@ -55,22 +69,13 @@ public class Object : MonoBehaviour
         Vector3 mousePosition = Input.mousePosition;
         Ray ray = cam.ScreenPointToRay(mousePosition);
 
-        RaycastHit hit;
-        if (Physics.Raycast(ray, out hit, Mathf.Infinity))
+        if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity) && Input.GetMouseButtonDown(1))
         {
-            if(Input.GetMouseButtonDown(1) && hit.transform == transform)
+            if (hit.transform == transform)
             {
-                DestroyObject();
-                //should get added back to inventory
+                Destroy(gameObject);
+                inventory.DestroyItem(tag);
             }
         }
-    }
-
-    private void DestroyObject()
-    {
-        //tells the inventory to add it back into the inventory essentially
-        inventory.DestroyObject(this.tag);
-
-        Destroy(gameObject);
     }
 }

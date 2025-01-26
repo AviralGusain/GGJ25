@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2757562880383640464}
   - component: {fileID: 1446433912041965747}
   m_Layer: 0
-  m_Name: Bubble
+  m_Name: CharlesBubble
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -151,5 +151,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bubble: {fileID: 2757562880383640464}
   moveSpeed: 10
-  direction: {x: -1, y: 0, z: 0}
-  freeMovement: 1
+  direction: {x: 1, y: 0, z: 0}
+  freeMovement: 0

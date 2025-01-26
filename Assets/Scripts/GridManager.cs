@@ -48,7 +48,7 @@ public class GridManager : MonoBehaviour
                 Vector3 endX = start + new Vector3(0, 0, cellSize);         // Forward line
                 Vector3 endZ = start + new Vector3(cellSize, 0, 0);         // Right line
 
-                if(tempTilePrefab != null)
+                if (tempTilePrefab != null)
                     Instantiate(tempTilePrefab, new Vector3(x + cellSize / 2, 0, z + cellSize / 2), Quaternion.identity);
 
                 Debug.DrawLine(start, endX, Color.gray, 100f);
@@ -125,7 +125,7 @@ public class GridManager : MonoBehaviour
         // Check if the ray hits the grid plane
         if (Physics.Raycast(ray, out RaycastHit hit))
         {
-            Debug.Log($"Raycast Hit: {hit.point}"); // Log where the ray hits
+            //Debug.Log($"Raycast Hit: {hit.point}"); // Log where the ray hits
 
             // Snap the hit point to the nearest grid cell center
             Vector3 cellCenter = GetCellCenter(hit.point);
@@ -139,7 +139,7 @@ public class GridManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("Raycast Missed"); // Log if the raycast doesn't hit anything
+            //Debug.Log("Raycast Missed"); // Log if the raycast doesn't hit anything
 
             // Hide the highlight if the mouse is not over the grid
             if (highlight != null)
