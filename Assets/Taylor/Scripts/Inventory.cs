@@ -16,7 +16,7 @@ public class Inventory : MonoBehaviour
     private Button bouncerButton;
     private Button fanButton;
 
-    private string selectedItem = null; // Tracks the currently selected item
+    private string selectedItem = null;    // Tracks the currently selected item
     private GameObject hoverObject = null; // The object currently hovering with the mouse
 
     private void Start()
@@ -46,16 +46,12 @@ public class Inventory : MonoBehaviour
     private void SpawnHoverObject(string itemName)
     {
         if (hoverObject != null)
-        {
             Destroy(hoverObject);
-            hoverObject = null;
-        }
 
         GameObject prefab = itemName == "Bouncer" ? bouncerPrefab : fanPrefab;
         hoverObject = Instantiate(prefab, new Vector3(0, -1000, 0), Quaternion.identity); // Spawn offscreen
         hoverObject.GetComponent<Object>().SetHoverMode(true); // Enable hover mode
     }
-
 
     public void PlaceItem()
     {
