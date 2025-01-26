@@ -43,15 +43,25 @@ public class LevelStateManager : MonoBehaviour
 
     bool mInDebug = true;
 
+    bool mHasLoadedTestLevel = false;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         InitLevel();
+
     }
 
     // Update is called once per frame
     void Update()
     {
+        // RILEY NOTE: Load test level, just for now
+        if (mHasLoadedTestLevel == false)
+        {
+            LevelSaver.LoadLevel("TestLevel", FindFirstObjectByType<GridManager>(), this); // RILEY NOTE: Start with test level, for testing. Change this when loading actual levels
+            mHasLoadedTestLevel= true;
+        }
+
         if (Input.GetKeyUp(KeyCode.S))
         {
             LevelSaver.SaveCurrentLevel(FindFirstObjectByType<GridManager>());

@@ -3,70 +3,42 @@
     "gridHeight": 9,
     "cellSize": 1.0,
     "bouncerPrefab": {
-        "instanceID": 45254
+        "instanceID": 42692
     },
     "fanPrefab": {
-        "instanceID": 45148
+        "instanceID": 42694
     },
     "baseGoalPrefab": {
-        "instanceID": 45146
+        "instanceID": 42666
     },
     "highlight": {
-        "instanceID": 45514
+        "instanceID": 42696
     },
     "tempTilePrefab": {
-        "instanceID": 45516
+        "instanceID": 42698
     },
     "tilePrefabs": [
         {
-            "instanceID": 45216
+            "instanceID": 42700
         },
         {
-            "instanceID": 45212
+            "instanceID": 42702
         },
         {
-            "instanceID": 45158
+            "instanceID": 42704
         },
         {
-            "instanceID": 45192
+            "instanceID": 42706
         }
     ],
     "levelSaveData": {
         "mItems": [
             {
-                "prefabName": "Bouncer",
-                "position": {
-                    "x": -9.5,
-                    "y": 0.0,
-                    "z": -9.5
-                },
-                "rotation": {
-                    "x": 0.0,
-                    "y": 1.0,
-                    "z": 0.0,
-                    "w": -4.371138828673793e-8
-                }
-            },
-            {
-                "prefabName": "Bouncer",
+                "prefabName": "BaseGoal",
                 "position": {
                     "x": -7.5,
                     "y": 0.0,
                     "z": -7.5
-                },
-                "rotation": {
-                    "x": 0.0,
-                    "y": 0.0,
-                    "z": 0.0,
-                    "w": 1.0
-                }
-            },
-            {
-                "prefabName": "Fan",
-                "position": {
-                    "x": -5.5,
-                    "y": 0.0,
-                    "z": -9.5
                 },
                 "rotation": {
                     "x": 0.0,

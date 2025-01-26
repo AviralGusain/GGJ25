@@ -98,7 +98,7 @@ public class LevelSaver : ScriptableObject
         // Make a list of all objects
         grid.SetLevelSaveData(levelItemsList);
 
-        //Debug.Log(grid.levelSaveDataString);
+        Debug.Log("LevelSaver:SaveLevel: Level saved as \"Test Level\"");
 
         // Convert grid class to json
         string gridJson = JsonUtility.ToJson(grid, true);
