@@ -28,7 +28,7 @@ public class GridManager : MonoBehaviour
 
     void Update()
     {
-        HighlightCell();
+        //HighlightCell();
     }
 
     //void DrawGrid()
