@@ -6,6 +6,8 @@ public class Inventory : MonoBehaviour
 {
     public GameObject bouncerPrefab;
     public GameObject fanPrefab;
+    public GameObject ghostBouncerPrefab; // Ghost version of Bouncer
+    public GameObject ghostFanPrefab;     // Ghost version of Fan
     public GameObject baseGoalPrefab;
 
     public int bouncerInvCount;
@@ -50,31 +52,27 @@ public class Inventory : MonoBehaviour
             SpawnHoverObject(itemName);
         }
     }
+
     private void SpawnHoverObject(string itemName)
     {
         if (hoverObject != null)
             Destroy(hoverObject);
 
         GameObject prefab = null;
+
+        // Use ghost versions for hovering
         switch (itemName)
         {
             case "Bouncer":
-            {
-                prefab = bouncerPrefab;
+                prefab = ghostBouncerPrefab;
                 break;
-            }
             case "Fan":
-            {
-                prefab = fanPrefab;
+                prefab = ghostFanPrefab;
                 break;
-            }
             case "BaseGoal":
-            {
                 prefab = baseGoalPrefab;
                 break;
-            }
-        };
-
+        }
 
         if (prefab == null)
         {
@@ -84,11 +82,11 @@ public class Inventory : MonoBehaviour
 
         hoverObject = Instantiate(prefab, new Vector3(0, -1000, 0), Quaternion.identity); // Spawn offscreen
 
-        // Check if the prefab has the Object script
+        // Enable hover mode
         Object objectScript = hoverObject.GetComponent<Object>();
         if (objectScript != null)
         {
-            objectScript.SetHoverMode(true); // Enable hover mode
+            objectScript.SetHoverMode(true);
         }
         else
         {
@@ -99,19 +97,32 @@ public class Inventory : MonoBehaviour
 
     public void PlaceItem()
     {
-        if (selectedItem == "Bouncer")
+        if (hoverObject == null) return;
+
+        // Replace the ghost version with the real version
+        Vector3 position = hoverObject.transform.position;
+        Quaternion rotation = hoverObject.transform.rotation;
+        Destroy(hoverObject);
+
+        GameObject realPrefab = null;
+
+        switch (selectedItem)
         {
-            bouncerInvCount--;
-        }
-        else if (selectedItem == "Fan")
-        {
-            fanInvCount--;
+            case "Bouncer":
+                realPrefab = bouncerPrefab;
+                bouncerInvCount--;
+                break;
+            case "Fan":
+                realPrefab = fanPrefab;
+                fanInvCount--;
+                break;
         }
 
-        // Tell grid manager object was placed
-        FindFirstObjectByType<GridManager>().PlaceAlreadySpawnedObject(hoverObject.transform.position, hoverObject);
+        if (realPrefab != null)
+        {
+            Instantiate(realPrefab, position, rotation); // Place the real object
+        }
 
-        // Update inventory display and reset hover object
         UpdateCounterDisplays();
         hoverObject = null;
         selectedItem = null;

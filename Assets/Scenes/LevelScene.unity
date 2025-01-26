@@ -2176,6 +2176,14 @@ PrefabInstance:
       propertyPath: baseGoalPrefab
       value: 
       objectReference: {fileID: 4847660675711591734, guid: c1bf677a68b7cc74bbad3b9705c6542a, type: 3}
+    - target: {fileID: 3914820491324946606, guid: abb1db3566fff7e49b6921f9a87f2b4b, type: 3}
+      propertyPath: ghostFanPrefab
+      value: 
+      objectReference: {fileID: 7960533863981271153, guid: 57d331c630e23e74dac3282a0aef4fff, type: 3}
+    - target: {fileID: 3914820491324946606, guid: abb1db3566fff7e49b6921f9a87f2b4b, type: 3}
+      propertyPath: ghostBouncerPrefab
+      value: 
+      objectReference: {fileID: 118669754924287851, guid: e6ba7b834ba23ea489688da872a5edf4, type: 3}
     - target: {fileID: 6373536065418375371, guid: abb1db3566fff7e49b6921f9a87f2b4b, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
