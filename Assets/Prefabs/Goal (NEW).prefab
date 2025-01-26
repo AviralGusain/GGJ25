@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 1393980262482007239}
   m_Layer: 0
   m_Name: Goal (NEW)
-  m_TagString: Untagged
+  m_TagString: BaseGoal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -71,6 +71,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 573cd678b5f6df547a1d53b8c4725d3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hoverMode: 1
 --- !u!114 &-7947636602408259915
 MonoBehaviour:
   m_ObjectHideFlags: 0
