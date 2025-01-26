@@ -41,6 +41,8 @@ public class LevelStateManager : MonoBehaviour
 
     LevelState mCurrState = LevelState.Active;
 
+    bool mInDebug = true;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -58,7 +60,6 @@ public class LevelStateManager : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.R))
         {
             GridManager grid = FindFirstObjectByType<GridManager>();
-            grid.ResetGridToEmpty();
 
             LevelSaver.LoadLevel("TestLevel", grid, FindFirstObjectByType<LevelStateManager>());
         }
@@ -117,5 +118,10 @@ public class LevelStateManager : MonoBehaviour
         }
 
         return true; // All requirements met, return true
+    }
+
+    public bool IsInDebug()
+    {
+        return mInDebug;
     }
 }

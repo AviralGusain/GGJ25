@@ -1,7 +1,5 @@
-using System;
 using UnityEngine;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 
 public class GridManager : MonoBehaviour
 {
@@ -10,6 +8,7 @@ public class GridManager : MonoBehaviour
     public float cellSize = 1f;       // Size of each cell
     public GameObject bouncerPrefab;  // Bouncer prefab
     public GameObject fanPrefab;      // Fan prefab
+    public GameObject baseGoalPrefab; // base goal (will look into how we want to do colored goals later)
     public GameObject highlight;      // Highlight object for mouse hover
 
     private GameObject[,] grid;       // 2D array to store grid objects
@@ -270,6 +269,12 @@ public class GridManager : MonoBehaviour
         {
             return null; // Add when we have it
         }
+        else if (name == "BaseGoal")
+        {
+            return baseGoalPrefab;
+        }
+
+        print("GridManager:GetPrefabByTagName: Tag of name " + name + " did not correspond to a prefab in the grid manager");
 
         return null; // name did not match a prefab, return null
     }
@@ -291,13 +296,19 @@ public class GridManager : MonoBehaviour
         }
     }
 
+    // destroy, then re-create the grid, probably because we just loaded a level that could have a different size grid
     public void RebuildGrid()
     {
-        // Once updating, destroy all tiles before regenerating
-        //tempTilePrefab
+        // Destroy all tiles
+        GameObject[] tiles = GameObject.FindGameObjectsWithTag("Tile");
+        for (int i = 0;i < tiles.Length; i++)
+        {
+            Destroy(tiles[i]);
+        }
 
+        // Make a new grid with current values, usually
         gridOrigin = transform.position; // Set the grid origin to the GridManager's position
-        grid = new GameObject[gridWidth, gridHeight];
+        grid = new GameObject[gridWidth, gridHeight]; // Make grid with current width and height
         DrawGrid();
     }
 }

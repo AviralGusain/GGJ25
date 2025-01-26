@@ -6,6 +6,7 @@ public class Inventory : MonoBehaviour
 {
     public GameObject bouncerPrefab;
     public GameObject fanPrefab;
+    public GameObject baseGoalPrefab;
 
     public int bouncerInvCount;
     public int fanInvCount;
@@ -30,10 +31,18 @@ public class Inventory : MonoBehaviour
         UpdateCounterDisplays();
     }
 
+    private void Update()
+    {
+        if (FindFirstObjectByType<LevelStateManager>().IsInDebug() && Input.GetKeyUp(KeyCode.G))
+        {
+            SelectItem("BaseGoal");
+        }
+    }
     public void SelectItem(string itemName)
     {
         if ((itemName == "Bouncer" && bouncerInvCount > 0) ||
-            (itemName == "Fan" && fanInvCount > 0))
+            (itemName == "Fan" && fanInvCount > 0) || 
+            FindFirstObjectByType<LevelStateManager>().IsInDebug() && itemName == "BaseGoal") // If a debug level, and goal key pressed
         {
             selectedItem = itemName;
 
@@ -46,7 +55,26 @@ public class Inventory : MonoBehaviour
         if (hoverObject != null)
             Destroy(hoverObject);
 
-        GameObject prefab = itemName == "Bouncer" ? bouncerPrefab : fanPrefab;
+        GameObject prefab = null;
+        switch (itemName)
+        {
+            case "Bouncer":
+            {
+                prefab = bouncerPrefab;
+                break;
+            }
+            case "Fan":
+            {
+                prefab = fanPrefab;
+                break;
+            }
+            case "BaseGoal":
+            {
+                prefab = baseGoalPrefab;
+                break;
+            }
+        };
+
 
         if (prefab == null)
         {

@@ -78,6 +78,10 @@ public class LevelSaver : ScriptableObject
                 {
                     currItem.prefabName = "Launcher";
                 }
+                else if (currLevelObject.CompareTag("BaseGoal"))
+                {
+                    currItem.prefabName = "BaseGoal";
+                }
 
 
 
@@ -108,6 +112,10 @@ public class LevelSaver : ScriptableObject
     // Loads level into the given grid and level state managers
     public static void LoadLevel(string levelName, GridManager grid, LevelStateManager levelState)
     {
+        grid.ResetGridToEmpty();
+
+        grid.RebuildGrid();
+
         string levelJson = File.ReadAllText(levelName + ".json");
 
         JsonUtility.FromJsonOverwrite(levelJson, grid); // Load in grid data

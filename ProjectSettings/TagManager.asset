@@ -9,6 +9,8 @@ TagManager:
   - Bubble
   - Wind
   - Wall
+  - BaseGoal
+  - Tile
   layers:
   - Default
   - TransparentFX

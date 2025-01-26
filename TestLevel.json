@@ -3,81 +3,56 @@
     "gridHeight": 9,
     "cellSize": 1.0,
     "bouncerPrefab": {
-        "instanceID": 42480
+        "instanceID": 45254
     },
     "fanPrefab": {
-        "instanceID": 42482
+        "instanceID": 45148
+    },
+    "baseGoalPrefab": {
+        "instanceID": 45146
     },
     "highlight": {
-        "instanceID": 42484
+        "instanceID": 45514
     },
     "tempTilePrefab": {
-        "instanceID": 42486
+        "instanceID": 45516
     },
+    "tilePrefabs": [
+        {
+            "instanceID": 45216
+        },
+        {
+            "instanceID": 45212
+        },
+        {
+            "instanceID": 45158
+        },
+        {
+            "instanceID": 45192
+        }
+    ],
     "levelSaveData": {
         "mItems": [
             {
                 "prefabName": "Bouncer",
                 "position": {
-                    "x": -11.5,
-                    "y": 0.0,
-                    "z": -7.359999656677246
-                },
-                "rotation": {
-                    "x": 0.0,
-                    "y": 0.0,
-                    "z": 0.0,
-                    "w": 1.0
-                }
-            },
-            {
-                "prefabName": "Bouncer",
-                "position": {
-                    "x": -10.5,
-                    "y": 0.0,
-                    "z": -8.359999656677246
-                },
-                "rotation": {
-                    "x": 0.0,
-                    "y": 0.0,
-                    "z": 0.0,
-                    "w": 1.0
-                }
-            },
-            {
-                "prefabName": "Bouncer",
-                "position": {
                     "x": -9.5,
                     "y": 0.0,
-                    "z": -9.359999656677246
+                    "z": -9.5
                 },
                 "rotation": {
                     "x": 0.0,
-                    "y": 0.0,
+                    "y": 1.0,
                     "z": 0.0,
-                    "w": 1.0
+                    "w": -4.371138828673793e-8
                 }
             },
             {
                 "prefabName": "Bouncer",
                 "position": {
-                    "x": -9.5,
+                    "x": -7.5,
                     "y": 0.0,
-                    "z": -5.359999656677246
-                },
-                "rotation": {
-                    "x": 0.0,
-                    "y": 0.0,
-                    "z": 0.0,
-                    "w": 1.0
-                }
-            },
-            {
-                "prefabName": "Bouncer",
-                "position": {
-                    "x": -8.5,
-                    "y": 0.0,
-                    "z": -9.359999656677246
+                    "z": -7.5
                 },
                 "rotation": {
                     "x": 0.0,
@@ -89,37 +64,9 @@
             {
                 "prefabName": "Fan",
                 "position": {
-                    "x": -7.5,
+                    "x": -5.5,
                     "y": 0.0,
-                    "z": -8.359999656677246
-                },
-                "rotation": {
-                    "x": 0.0,
-                    "y": 0.0,
-                    "z": 0.0,
-                    "w": 1.0
-                }
-            },
-            {
-                "prefabName": "Bouncer",
-                "position": {
-                    "x": -7.5,
-                    "y": 0.0,
-                    "z": -5.359999656677246
-                },
-                "rotation": {
-                    "x": 0.0,
-                    "y": 0.0,
-                    "z": 0.0,
-                    "w": 1.0
-                }
-            },
-            {
-                "prefabName": "Fan",
-                "position": {
-                    "x": -6.5,
-                    "y": 0.0,
-                    "z": -8.359999656677246
+                    "z": -9.5
                 },
                 "rotation": {
                     "x": 0.0,
@@ -129,6 +76,5 @@
                 }
             }
         ]
-    },
-    "levelSaveDataString": "{\"Items:\":{\"$content\":[{\"prefabName\":\"Bouncer\",\"position\":{\"x\":-11.5,\"y\":0.0,\"z\":-7.36},\"rotation\":{\"x\":0.0,\"y\":0.0,\"z\":0.0,\"w\":1.0}},{\"prefabName\":\"Bouncer\",\"position\":{\"x\":-10.5,\"y\":0.0,\"z\":-8.36},\"rotation\":{\"x\":0.0,\"y\":0.0,\"z\":0.0,\"w\":1.0}},{\"prefabName\":\"Bouncer\",\"position\":{\"x\":-9.5,\"y\":0.0,\"z\":-9.36},\"rotation\":{\"x\":0.0,\"y\":0.0,\"z\":0.0,\"w\":1.0}},{\"prefabName\":\"Bouncer\",\"position\":{\"x\":-9.5,\"y\":0.0,\"z\":-5.36},\"rotation\":{\"x\":0.0,\"y\":0.0,\"z\":0.0,\"w\":1.0}},{\"prefabName\":\"Bouncer\",\"position\":{\"x\":-8.5,\"y\":0.0,\"z\":-9.36},\"rotation\":{\"x\":0.0,\"y\":0.0,\"z\":0.0,\"w\":1.0}},{\"prefabName\":\"Fan\",\"position\":{\"x\":-7.5,\"y\":0.0,\"z\":-8.36},\"rotation\":{\"x\":0.0,\"y\":0.0,\"z\":0.0,\"w\":1.0}},{\"prefabName\":\"Bouncer\",\"position\":{\"x\":-7.5,\"y\":0.0,\"z\":-5.36},\"rotation\":{\"x\":0.0,\"y\":0.0,\"z\":0.0,\"w\":1.0}},{\"prefabName\":\"Fan\",\"position\":{\"x\":-6.5,\"y\":0.0,\"z\":-8.36},\"rotation\":{\"x\":0.0,\"y\":0.0,\"z\":0.0,\"w\":1.0}}],\"$type\":\"System.Collections.Generic.List`1[[LevelItemPackage, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]\"}}"
+    }
 }
