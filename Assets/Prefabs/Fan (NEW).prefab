@@ -9,6 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4513524768953683153}
+  - component: {fileID: 5285145619313281667}
+  - component: {fileID: 582799455436603015}
+  - component: {fileID: 6964783005110970078}
   m_Layer: 0
   m_Name: Fan (NEW)
   m_TagString: Untagged
@@ -32,6 +35,54 @@ Transform:
   - {fileID: 832856678301822143}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5285145619313281667
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7960533863981271153}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe086ee6a475c27409ec38493ccfe889, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fan: {fileID: 4241612953946452569, guid: aefa43ecc4721464d8d76da8591c7650, type: 3}
+  castDistance: 10
+  first: 1
+--- !u!114 &582799455436603015
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7960533863981271153}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 573cd678b5f6df547a1d53b8c4725d3c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!65 &6964783005110970078
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7960533863981271153}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.19, y: 1.2, z: 1.2}
+  m_Center: {x: 0, y: 0.63, z: 0}
 --- !u!1001 &865922310966643540
 PrefabInstance:
   m_ObjectHideFlags: 0
