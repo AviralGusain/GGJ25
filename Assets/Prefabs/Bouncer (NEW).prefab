@@ -44,7 +44,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 118669754924287851}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2b7f84b601dc41845949ee0a492a4ef4, type: 3}
   m_Name: 
@@ -95,6 +95,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 573cd678b5f6df547a1d53b8c4725d3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hoverMode: 0
 --- !u!1 &1750439582769119502
 GameObject:
   m_ObjectHideFlags: 0

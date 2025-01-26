@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 7702925240640920534}
   - component: {fileID: -7795078471533616898}
   - component: {fileID: -7947636602408259915}
-  - component: {fileID: 1393980262482007239}
   m_Layer: 0
   m_Name: Goal (NEW)
   m_TagString: BaseGoal
@@ -73,18 +72,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hoverMode: 0
 --- !u!114 &-7947636602408259915
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4847660675711591734}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4e3ee4a9fd08c24e8bb6ed294683bf6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1393980262482007239
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
