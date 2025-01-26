@@ -205,7 +205,7 @@ public class BubbleController : MonoBehaviour
     launcher = launcherController.gameObject;
 
     // Swap the x and z values of the direction vector
-    direction = launcher.transform.right;
+    direction = launcher.transform.forward;
 
     // Move in the direction by one tile using the bouncer transform
     finalPos = launcher.transform.position;
