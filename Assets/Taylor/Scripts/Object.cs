@@ -5,24 +5,20 @@ public class Object : MonoBehaviour
     private Camera cam;
     private bool hoverMode = false;
     private Inventory inventory;
+    private int currentRotation = 0; // Track the current rotation on the Y-axis
 
     void Start()
     {
         inventory = FindObjectOfType<Inventory>();
         cam = Camera.main;
-
-        if (inventory == null)
-            Debug.LogError("Inventory is not assigned or could not be found!");
-        if (cam == null)
-            Debug.LogError("Main Camera is not found!");
     }
-
 
     void Update()
     {
         if (hoverMode)
         {
             FollowMousePosition();
+            HandleRotationInput();
         }
         else
         {
@@ -61,6 +57,22 @@ public class Object : MonoBehaviour
                 Destroy(gameObject);
                 inventory.DestroyItem(tag);
             }
+        }
+    }
+
+    private void HandleRotationInput()
+    {
+        if (Input.mouseScrollDelta.y > 0)
+        {
+            // Scroll up: Rotate 90 degrees clockwise
+            currentRotation = (currentRotation + 90) % 360;
+            transform.rotation = Quaternion.Euler(0, currentRotation, 0);
+        }
+        else if (Input.mouseScrollDelta.y < 0)
+        {
+            // Scroll down: Rotate 90 degrees counterclockwise
+            currentRotation = (currentRotation - 90 + 360) % 360; // Add 360 to avoid negative angles
+            transform.rotation = Quaternion.Euler(0, currentRotation, 0);
         }
     }
 
