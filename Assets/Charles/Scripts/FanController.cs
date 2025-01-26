@@ -63,7 +63,7 @@ public class FanController : MonoBehaviour
   private void OnTriggerEnter(Collider other)
   {
 
-    if (other.CompareTag("Fan"))
+    if (other.CompareTag("Bubble"))
     {
       Destroy(other.transform.gameObject);
     }
