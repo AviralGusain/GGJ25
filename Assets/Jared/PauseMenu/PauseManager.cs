@@ -1,10 +1,11 @@
+using NUnit.Framework;
 using UnityEngine;
 
 public class PauseManager : MonoBehaviour
 {
     private float RecordedTimeScale = 1f;
 
-    private GameObject PauseMenuInstance;
+    private GameObject PauseMenuInstance = null;
 
     public GameObject PauseMenuPrefab;
 
@@ -15,6 +16,8 @@ public class PauseManager : MonoBehaviour
 
     private void Update()
     {
+
+        Debug.Log(Time.timeScale);
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (Time.timeScale != 0)
@@ -37,7 +40,8 @@ public class PauseManager : MonoBehaviour
 
     public void Unpause()
     {
-        Destroy(PauseMenuInstance);
         Time.timeScale = RecordedTimeScale;
+        PauseMenuInstance.GetComponent<PauseMenu>().DestroySubmenus();
+        Destroy(PauseMenuInstance);
     }
 }

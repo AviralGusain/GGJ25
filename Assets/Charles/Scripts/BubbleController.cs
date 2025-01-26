@@ -6,18 +6,21 @@ public class BubbleController : MonoBehaviour
 {
   public Rigidbody bubble;
   private GameObject bouncer;
+  private GameObject fan;
 
-  public Vector3 input;
+  private Vector3 input;
   public float moveSpeed = 7.5f;
 
   public Vector3 direction = Vector3.left;
 
   public bool freeMovement = true;
 
-  public float timer = 0.0f;
+  private float timer = 0.0f;
 
   private bool lerp = false;
   private Vector3 finalPos;
+
+  public bool reset = false;
 
   // Start is called once before the first execution of Update after the MonoBehaviour is created
   void Start()
@@ -32,6 +35,14 @@ public class BubbleController : MonoBehaviour
 
 
     if (!freeMovement) BouncerTest(Time.deltaTime);
+
+    // STRICTLY FOR TESTING PURPOSES
+    if (reset)
+    {
+      bubble.transform.position = new Vector3(3, 1, 0);
+      direction = Vector3.left;
+      reset = false;
+    }
   }
 
   private void FixedUpdate()
@@ -44,9 +55,8 @@ public class BubbleController : MonoBehaviour
     {
       bubble.MovePosition(bubble.position + direction * Time.deltaTime * moveSpeed);
     }
-    else 
-    {
-    }
+
+    // Raycast to check if the bubble is in line with a fan
   }
 
   private void GenericSwap<T>(ref T a, ref T b)
@@ -58,30 +68,31 @@ public class BubbleController : MonoBehaviour
 
   private void OnTriggerEnter(Collider collision)
   {
-    if (collision.TryGetComponent(out BouncerController bouncerController) && !lerp)
+    // Collision with a bouncer, pass the bouncer controller to the bouncer collision method
+    if (collision.TryGetComponent(out BouncerController bouncerController) )
     {
-      // Retrieve the gameobject attached to the bouncer
-      bouncer = bouncerController.gameObject;
-
-      // Should reflect the bubble depending on orientation of the bouncer
-      int plane = bouncerController.GetReflectionPlane(direction);
-
-      Debug.Log("Plane: " + plane);
-
-      // Swap the x and z values of the direction vector
-      GenericSwap<float>(ref direction.x, ref direction.z);
-
-      if (plane % 2 != 0) direction *= -1;
-
-      Debug.Log("New Direction: " + direction);
-
-      // Move in the direction by one tile using the bouncer transform
-      finalPos = new Vector3(bouncer.transform.position.x + direction.x, 1.0f, bouncer.transform.position.z + direction.z);
-      lerp = true;
-
-      // Calculate time it should take to move to the next tile
-      StartCoroutine(MoveOverTime(bubble.transform, bubble.position, finalPos, moveSpeed));
+      BouncerCollision(bouncerController);
     }
+
+    //if (collision.TryGetComponent(out FanController fanController))
+    //{
+    //  // Collision with a fan, pass the fan controller to the fan collision method
+    //  FanCollision(fanController);
+    //}
+
+    //if (collision.TryGetComponent(out ) && !lerp)
+    //{
+    //  // Should reflect the bubble depending on orientation of the wall
+    //  int plane = wallController.GetReflectionPlane(direction);
+    //  // Swap the x and z values of the direction vector
+    //  GenericSwap<float>(ref direction.x, ref direction.z);
+    //  if (plane % 2 != 0) direction *= -1;
+    //  // Move in the direction by one tile using the wall transform
+    //  finalPos = new Vector3(bubble.transform.position.x + direction.x, 1.0f, bubble.transform.position.z + direction.z);
+    //  lerp = true;
+    //  // Calculate time it should take to move to the next tile
+    //  StartCoroutine(MoveOverTime(bubble.transform, bubble.position, finalPos, moveSpeed));
+    //}
   }
 
   IEnumerator MoveOverTime(Transform obj, Vector3 startPos, Vector3 endPos, float speed)
@@ -98,6 +109,37 @@ public class BubbleController : MonoBehaviour
 
     obj.position = endPos; // Ensure it reaches the exact position
     lerp = false;
+  }
+
+  void BouncerCollision(BouncerController bouncerController)
+  {
+    // Retrieve the gameobject attached to the bouncer
+    bouncer = bouncerController.gameObject;
+
+    bool possible = true;
+
+    // Should reflect the bubble depending on orientation of the bouncer
+    int plane = bouncerController.GetReflectionPlane(direction, ref possible);
+
+    if (!possible)
+    {
+      Destroy(gameObject);
+      return;
+    }
+
+    Debug.Log("Plane: " + plane);
+
+    // Swap the x and z values of the direction vector
+    GenericSwap<float>(ref direction.x, ref direction.z);
+
+    if (plane % 2 != 0) direction *= -1;
+
+    // Move in the direction by one tile using the bouncer transform
+    finalPos = new Vector3(bouncer.transform.position.x + direction.x, 1.0f, bouncer.transform.position.z + direction.z);
+    lerp = true;
+
+    // Calculate time it should take to move to the next tile
+    StartCoroutine(MoveOverTime(bubble.transform, bubble.position, finalPos, moveSpeed));
   }
 
   private bool test1 = false;
