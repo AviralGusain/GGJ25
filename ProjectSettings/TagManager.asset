@@ -12,6 +12,7 @@ TagManager:
   - BaseGoal
   - Tile
   - Launcher
+  - Ghost_Fan
   layers:
   - Default
   - TransparentFX

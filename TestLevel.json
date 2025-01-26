@@ -32,21 +32,6 @@
         }
     ],
     "levelSaveData": {
-        "mItems": [
-            {
-                "prefabName": "",
-                "position": {
-                    "x": -2.5,
-                    "y": 0.0,
-                    "z": -5.5
-                },
-                "rotation": {
-                    "x": 0.0,
-                    "y": 0.0,
-                    "z": 0.0,
-                    "w": 1.0
-                }
-            }
-        ]
+        "mItems": []
     }
 }

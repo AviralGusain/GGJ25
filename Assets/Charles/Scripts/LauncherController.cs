@@ -6,8 +6,13 @@ public class LauncherController : MonoBehaviour
 {
   public float distanceTraveled = 0.0f;
   public Vector3 originalPosition = Vector3.zero;
+
+  public float time = 0.0f;
+
   public Vector3 LaunchBubble(GameObject bubble, Vector3 dir, float moveSpeed, float dt, ref bool launching)
   {
+    time += dt;
+
     if (distanceTraveled == 0)
     {
       originalPosition = bubble.transform.position;
@@ -33,7 +38,7 @@ public class LauncherController : MonoBehaviour
       y = ParabolicArc(x);
       Debug.Log("Y: " + y);
     }
-    distanceTraveled += moveSpeed * Time.deltaTime;
+    distanceTraveled += moveSpeed * dt;
 
     Vector3 newPos = originalPosition + dir * distanceTraveled;
     newPos.y = y;
@@ -43,6 +48,7 @@ public class LauncherController : MonoBehaviour
     {
       launching = false;
       distanceTraveled = 0;
+      Debug.Log("Time: " + time);
       return transform.GetChild(0).position;
     }
 
