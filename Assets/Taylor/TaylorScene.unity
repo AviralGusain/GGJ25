@@ -715,9 +715,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9d3c876efad0624f9b6c90f5e304135, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gridWidth: 10
-  gridHeight: 10
-  cellSize: 1
+  gridWidth: 15
+  gridHeight: 15
+  cellSize: 2
   bouncerPrefab: {fileID: 436551080071988558, guid: b75f32d5c1966104a8b127f64dfe7335, type: 3}
   fanPrefab: {fileID: 2220373139892368732, guid: cba294aaddd4c374c9fe9f3630013eb5, type: 3}
   highlight: {fileID: 1999664650808245876, guid: ceaba1bd326570648b4d94f1664a516b, type: 3}

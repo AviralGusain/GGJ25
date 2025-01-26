@@ -2,19 +2,21 @@ using UnityEngine;
 
 public class GridManager : MonoBehaviour
 {
-    public int gridWidth = 10;
-    public int gridHeight = 10;
-    public float cellSize = 1f;
-    public GameObject bouncerPrefab;
-    public GameObject fanPrefab;
-    public GameObject highlight;
+    public int gridWidth = 10; // Number of cells in the X direction
+    public int gridHeight = 10; // Number of cells in the Z direction
+    public float cellSize = 1f; // Size of each cell
+    public GameObject bouncerPrefab; // Bouncer prefab
+    public GameObject fanPrefab; // Fan prefab
+    public GameObject highlight; // Highlight object for mouse hover
 
-    private GameObject[,] grid;
+    private GameObject[,] grid; // 2D array to store grid objects
+    public GameObject tempTilePrefab; // Temporary tile prefab for visualization
 
-    public GameObject tempTilePrefab;
+    private Vector3 gridOrigin; // The starting point of the grid
 
     void Start()
     {
+        gridOrigin = transform.position; // Set the grid origin to the GridManager's position
         grid = new GameObject[gridWidth, gridHeight];
         DrawGrid();
     }
@@ -24,70 +26,49 @@ public class GridManager : MonoBehaviour
         HighlightCell();
     }
 
-    //void DrawGrid()
-    //{
-    //    // Draw grid lines for visualization
-    //    for (int x = 0; x <= gridWidth; x++)
-    //    {
-    //        for (int y = 0; y <= gridHeight; y++)
-    //        {
-    //            Vector3 position = new Vector3(x * cellSize, y * cellSize, 0);
-    //            Debug.DrawLine(position, position + Vector3.right * cellSize, Color.gray, 100f);
-    //            Debug.DrawLine(position, position + Vector3.up * cellSize, Color.gray, 100f);
-    //        }
-    //    }
-    //}
-
     void DrawGrid()
     {
+        // Draw the grid starting from the gridOrigin position
         for (int x = 0; x <= gridWidth; x++)
         {
             for (int z = 0; z <= gridHeight; z++)
             {
-                Vector3 start = new Vector3(x * cellSize, 0, z * cellSize); // X-Z plane
-                Vector3 endX = start + new Vector3(0, 0, cellSize);         // Forward line
-                Vector3 endZ = start + new Vector3(cellSize, 0, 0);         // Right line
+                // Calculate the start and end positions for grid lines
+                Vector3 start = gridOrigin + new Vector3(x * cellSize, 0, z * cellSize); // X-Z plane
+                Vector3 endX = start + new Vector3(0, 0, cellSize); // Vertical grid line
+                Vector3 endZ = start + new Vector3(cellSize, 0, 0); // Horizontal grid line
 
-                if (tempTilePrefab != null)
-                    Instantiate(tempTilePrefab, new Vector3(x + cellSize / 2, 0, z + cellSize / 2), Quaternion.identity);
+                // Optionally instantiate tiles for grid visualization
+                if (tempTilePrefab != null && x < gridWidth && z < gridHeight)
+                {
+                    Instantiate(
+                        tempTilePrefab,
+                        gridOrigin + new Vector3(x * cellSize + cellSize / 2, 0, z * cellSize + cellSize / 2),
+                        Quaternion.identity
+                    );
+                }
 
+                // Draw grid lines for debugging
                 Debug.DrawLine(start, endX, Color.gray, 100f);
                 Debug.DrawLine(start, endZ, Color.gray, 100f);
             }
         }
     }
 
-
-    //Draw in game
-    //void DrawGrid()
-    //{
-    //    for (int x = 0; x < gridWidth; x++)
-    //    {
-    //        for (int y = 0; y < gridHeight; y++)
-    //        {
-    //            Vector3 position = new Vector3(x * cellSize, y * cellSize, 0);
-    //            GameObject cell = GameObject.CreatePrimitive(PrimitiveType.Quad); // Use a Quad or Plane
-    //            cell.transform.position = position + new Vector3(cellSize / 2, cellSize / 2, 0); // Center cells
-    //            cell.transform.localScale = Vector3.one * cellSize; // Scale to match cell size
-    //            cell.GetComponent<Renderer>().material.color = new Color(0.8f, 0.8f, 0.8f, 0.5f); // Light transparent color
-    //        }
-    //    }
-    //}
-
-
     public Vector3 GetCellCenter(Vector3 worldPosition)
     {
-        // Convert world position to grid indices (X-Z plane)
-        int x = Mathf.FloorToInt(worldPosition.x / cellSize);
-        int z = Mathf.FloorToInt(worldPosition.z / cellSize);
+        // Convert the world position to local grid indices based on the gridOrigin
+        Vector3 localPosition = worldPosition - gridOrigin; // Offset by the grid's origin
+        int x = Mathf.FloorToInt(localPosition.x / cellSize);
+        int z = Mathf.FloorToInt(localPosition.z / cellSize);
 
-        // Clamp indices to stay within the grid
+        // Clamp indices to ensure they're within grid bounds
         x = Mathf.Clamp(x, 0, gridWidth - 1);
         z = Mathf.Clamp(z, 0, gridHeight - 1);
 
-        return new Vector3(x * cellSize + cellSize / 2, 0, z * cellSize + cellSize / 2);
+        // Return the world position of the center of the cell
+        return gridOrigin + new Vector3(x * cellSize + cellSize / 2, 0, z * cellSize + cellSize / 2);
     }
-
 
     public void PlaceObject(Vector3 worldPosition, GameObject prefab)
     {
@@ -98,9 +79,10 @@ public class GridManager : MonoBehaviour
             // Snap the hit point to the nearest cell center
             Vector3 cellCenter = GetCellCenter(hit.point);
 
-            // Calculate grid indices
-            int x = Mathf.FloorToInt(cellCenter.x / cellSize);
-            int z = Mathf.FloorToInt(cellCenter.z / cellSize);
+            // Convert the world position to grid indices
+            Vector3 localPosition = cellCenter - gridOrigin;
+            int x = Mathf.FloorToInt(localPosition.x / cellSize);
+            int z = Mathf.FloorToInt(localPosition.z / cellSize);
 
             // Check if the cell is empty
             if (grid[x, z] == null)
@@ -116,7 +98,6 @@ public class GridManager : MonoBehaviour
         }
     }
 
-
     void HighlightCell()
     {
         // Create a ray from the camera through the mouse position
@@ -125,9 +106,7 @@ public class GridManager : MonoBehaviour
         // Check if the ray hits the grid plane
         if (Physics.Raycast(ray, out RaycastHit hit))
         {
-            //Debug.Log($"Raycast Hit: {hit.point}"); // Log where the ray hits
-
-            // Snap the hit point to the nearest grid cell center
+            // Snap the hit point to the nearest cell center
             Vector3 cellCenter = GetCellCenter(hit.point);
 
             // Move the highlight object to the cell center
@@ -139,8 +118,6 @@ public class GridManager : MonoBehaviour
         }
         else
         {
-            //Debug.Log("Raycast Missed"); // Log if the raycast doesn't hit anything
-
             // Hide the highlight if the mouse is not over the grid
             if (highlight != null)
             {
@@ -148,6 +125,4 @@ public class GridManager : MonoBehaviour
             }
         }
     }
-
-
 }
