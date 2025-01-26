@@ -165,7 +165,7 @@ public class BubbleController : MonoBehaviour
     if (plane % 2 != 0) direction *= -1;
 
     // Move in the direction by one tile using the bouncer transform
-    finalPos = new Vector3(bouncer.transform.position.x + direction.x, 1.0f, bouncer.transform.position.z + direction.z);
+    finalPos = new Vector3(bouncer.transform.position.x + direction.x, bouncer.transform.position.y, bouncer.transform.position.z + direction.z);
     lerp = true;
 
         // Calculate time it should take to move to the next tile
@@ -183,8 +183,8 @@ public class BubbleController : MonoBehaviour
     // Swap the x and z values of the direction vector
     direction = fan.transform.right;
 
-    // Move in the direction by one tile using the bouncer transform
-    finalPos = (direction.z == 0) ? new Vector3(bubble.transform.position.x + direction.x, 1.0f, fan.transform.position.z) : new Vector3(fan.transform.position.x, 1.0f, bubble.transform.position.z + direction.z);
+    // Move in the direction by one tile using the fan transform
+    finalPos = (direction.z == 0) ? new Vector3(bubble.transform.position.x + direction.x, fan.transform.position.y, fan.transform.position.z) : new Vector3(fan.transform.position.x, fan.transform.position.y, bubble.transform.position.z + direction.z);
     lerp = true;
 
     Debug.Log(finalPos);

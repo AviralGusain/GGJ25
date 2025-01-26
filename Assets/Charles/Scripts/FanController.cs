@@ -12,77 +12,75 @@ public class FanController : MonoBehaviour
   public bool first = true;
 
   private Transform airChild;
-  private Transform colliderChild;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+  // Start is called once before the first execution of Update after the MonoBehaviour is created
+  void Start()
+  {
+    airChild = fan.transform.GetChild(1);
+
+    FindFirstObjectByType<LevelStateManager>().mOnObjectPlaced += RecastFan;
+  }
+
+  // Update is called once per frame
+  void Update()
+  {
+    if (first)
     {
-        airChild = fan.transform.GetChild(1);
-        colliderChild = airChild.GetChild(0);
+      Vector3 distance = Vector3.zero;
 
-        FindFirstObjectByType<LevelStateManager>().mOnObjectPlaced += RecastFan;
+      // Perform a ray cast to check if any objects are hit
+      RaycastHit hit;
+      // Send the raycast from the edge of the fan geometry
+      Vector3 startPosition = /*fan.transform.position + */airChild.position;
+      Debug.Log("Start position: " + startPosition);
+      Debug.Log("Fan right: " + fan.transform.right);
+
+      if (Physics.Raycast(startPosition, fan.transform.right, out hit, castDistance))
+      {
+        // Calculate the distance from the edge of the fan to the object hit
+        Vector3 test = Vector3.Scale(hit.transform.localScale, fan.transform.right);
+        Debug.Log("Test: " + test);
+
+        distance = hit.point - startPosition;
+
+        Debug.Log("Hit: " + hit.transform.name);
+      }
+      else
+      {
+        distance = (fan.transform.right * castDistance);
+      }
+
+      Debug.Log("Distance of raycast: " + distance);
+
+      // Set the scale of the air child to the distance of the raycast
+      Vector3 scale = new Vector3(distance.magnitude, 0, 1);
+      airChild.localScale = scale;
+
+      first = false;
     }
+  }
 
-    // Update is called once per frame
-    void Update()
+  private void OnDestroy()
+  {
+    LevelStateManager levelManager = FindFirstObjectByType<LevelStateManager>();
+    if (levelManager != null)
     {
-        if (first)
-        {
-            Vector3 distance = Vector3.zero;
-
-            // Perform a ray cast to check if any objects are hit
-            RaycastHit hit;
-            // Send the raycast from the edge of the fan geometry
-            Vector3 startPosition = /*fan.transform.position + */airChild.position;
-            Debug.Log("Start position: " + startPosition);
-            Debug.Log("Fan right: " + fan.transform.right);
-
-            if (Physics.Raycast(startPosition, fan.transform.right, out hit, castDistance))
-            {
-                // Calculate the distance from the edge of the fan to the object hit
-                Vector3 test = Vector3.Scale(hit.transform.localScale, fan.transform.right);
-                Debug.Log("Test: " + test);
-
-                distance = hit.point - startPosition;
-
-                Debug.Log("Hit: " + hit.transform.name);
-            }
-            else
-            {
-                distance = (fan.transform.right * castDistance);
-            }
-
-            Debug.Log("Distance of raycast: " + distance);
-
-            // Set the scale of the air child to the distance of the raycast
-            Vector3 scale = new Vector3(distance.magnitude, 1, 1);
-            airChild.localScale = scale;
-
-            first = false;
-        }
+      levelManager.mOnObjectPlaced -= RecastFan;
     }
+  }
 
-    private void OnDestroy()
+  private void OnTriggerEnter(Collider other)
+  {
+
+    if (other.CompareTag("Bubble"))
     {
-        LevelStateManager levelManager = FindFirstObjectByType<LevelStateManager>();
-        if (levelManager != null)
-        {
-            levelManager.mOnObjectPlaced -= RecastFan;
-        }
+      Destroy(other.transform.gameObject);
     }
+  }
 
-    private void OnTriggerEnter(Collider other)
-    {
-
-        if (other.CompareTag("Bubble"))
-        {
-            Destroy(other.transform.gameObject);
-        }
-    }
-
-    public void RecastFan()
-    {
-        first = true;
-    }
+  public void RecastFan()
+  {
+    first = true;
+  }
 
 }
