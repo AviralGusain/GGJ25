@@ -21,14 +21,19 @@ public class BubbleAnim_Test : MonoBehaviour
     {
         if (finishedSpawning) return;
 
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            animator.SetTrigger("Bounce");
-        }
+        //if (Input.GetKeyDown(KeyCode.Alpha1))
+        //{
+        //    animator.SetTrigger("Launch");
+        //}
 
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            animator.SetTrigger("Exit");
-        }
+        //if (Input.GetKeyDown(KeyCode.Alpha2))
+        //{
+        //    animator.SetTrigger("Exit");
+        //}
+
+        //if (Input.GetKeyDown(KeyCode.Alpha3))
+        //{
+        //    animator.SetTrigger("Bounce");
+        //}
     }
 }
