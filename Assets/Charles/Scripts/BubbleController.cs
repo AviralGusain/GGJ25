@@ -7,18 +7,20 @@ public class BubbleController : MonoBehaviour
 {
   public Rigidbody bubble;
   private GameObject bouncer;
+  private GameObject launcher;
 
   private Vector3 input;
-  public float moveSpeed = 0.0f;
+  private float moveSpeed = 0.0f;
 
-  public float defaultSpeed = 6f;
-  public float speedMultiplier = 2.0f;
+  private float defaultSpeed = 6f;
+  private float speedMultiplier = 2.0f;
 
   public Vector3 direction = Vector3.left;
 
   public bool freeMovement = true;
 
   private bool lerp = false;
+  private bool launching = false;
   private Vector3 finalPos;
 
   public bool reset = false;
@@ -48,16 +50,27 @@ public class BubbleController : MonoBehaviour
 
   private void FixedUpdate()
   {
+    // REMOVE WHEN FINISHED
     if (freeMovement)
     {
       bubble.MovePosition(bubble.position + input * Time.deltaTime * moveSpeed);
     }
-    else if (!lerp)
+
+    if (launching && !lerp)
     {
-      bubble.MovePosition(bubble.position + direction * Time.deltaTime * moveSpeed);
+      LauncherController launchController = launcher.GetComponent<LauncherController>();
+
+      // Function will return bool that determines if position was reached
+      // LauncherController.
+
+      return;
     }
 
     // Raycast to check if the bubble is in line with a fan
+    else if (!lerp)
+    {
+      bubble.MovePosition(bubble.position + moveSpeed * Time.deltaTime * direction);
+    }
   }
 
   private void GenericSwap<T>(ref T a, ref T b)
@@ -85,6 +98,16 @@ public class BubbleController : MonoBehaviour
 
       FanCollision(parent);
     }
+
+    if (collider.TryGetComponent(out LauncherController launchController))
+    {
+      LauncherCollision(launchController);
+    }
+
+    //if (collider.CompareTag("Wall"))
+    //{
+    //  Debug.Log("Bubble should go poppy");
+    //}
   }
 
   IEnumerator MoveOverTime(Transform obj, Vector3 startPos, Vector3 endPos, float speed)
@@ -148,6 +171,26 @@ public class BubbleController : MonoBehaviour
     Debug.Log(finalPos);
 
     moveSpeed *= speedMultiplier;
+
+    // Calculate time it should take to move to the next tile
+    StartCoroutine(MoveOverTime(bubble.transform, bubble.position, finalPos, moveSpeed));
+  }
+
+  void LauncherCollision(LauncherController launcherController)
+  {
+    Debug.Log("Launcher collision");
+
+    launcher = launcherController.gameObject;
+
+    // Swap the x and z values of the direction vector
+    direction = launcher.transform.right;
+
+    // Move in the direction by one tile using the bouncer transform
+    finalPos = launcher.transform.position;
+    lerp = true;
+    launching = true;
+
+    Debug.Log(finalPos);
 
     // Calculate time it should take to move to the next tile
     StartCoroutine(MoveOverTime(bubble.transform, bubble.position, finalPos, moveSpeed));

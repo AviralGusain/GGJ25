@@ -11,6 +11,7 @@ TagManager:
   - Wall
   - BaseGoal
   - Tile
+  - Launcher
   layers:
   - Default
   - TransparentFX
