@@ -94,9 +94,9 @@ public class GridManager : MonoBehaviour
                         Quaternion.Euler(0, randomRotationY, 0) // Apply random Y-axis rotation
                     );
 
-                    // Draw grid lines for debugging
-                    Debug.DrawLine(start, endX, Color.gray, 100f);
-                    Debug.DrawLine(start, endZ, Color.gray, 100f);
+                    //// Draw grid lines for debugging
+                    //Debug.DrawLine(start, endX, Color.gray, 100f);
+                    //Debug.DrawLine(start, endZ, Color.gray, 100f);
                 }
             }
         }

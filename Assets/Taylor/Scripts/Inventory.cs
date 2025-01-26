@@ -134,7 +134,10 @@ public class Inventory : MonoBehaviour
 
         if (realPrefab != null)
         {
-            Instantiate(realPrefab, position, rotation); // Place the real object
+            GameObject placedObject = FindFirstObjectByType<GridManager>().PlaceObjectAtPosition(position, realPrefab);
+            placedObject.transform.rotation = rotation;
+
+            FindFirstObjectByType<LevelStateManager>().mOnObjectPlaced.Invoke();
         }
 
         // Reset hover item state
@@ -186,5 +189,17 @@ public class Inventory : MonoBehaviour
 
         bouncerButton.interactable = bouncerInvCount > 0;
         fanButton.interactable = fanInvCount > 0;
+    }
+
+    public void SetNumBouncers(int numBouncers)
+    {
+        bouncerInvCount = numBouncers;
+        UpdateCounterDisplays();
+    }
+
+    public void SetNumFans(int numFans)
+    {
+        fanInvCount = numFans;
+        UpdateCounterDisplays();
     }
 }
