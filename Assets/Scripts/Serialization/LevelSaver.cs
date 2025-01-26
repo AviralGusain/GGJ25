@@ -3,9 +3,11 @@ using System.IO;
 using System.Runtime.Serialization.Json;
 using Unity.VisualScripting;
 using Unity.VisualScripting.FullSerializer;
+using UnityEditor.Overlays;
 using UnityEditor.Playables;
 using UnityEditor.ShaderGraph.Serialization;
 using UnityEngine;
+using static FileHandler;
 
 [System.Serializable]
 public struct LevelItemPackage
@@ -14,6 +16,19 @@ public struct LevelItemPackage
     public Vector3 position;
     public Quaternion rotation;
 }
+
+[System.Serializable]
+public class LevelStatData
+{
+    public int numStartingBouncers = 5;
+    public int numStartingFans = 5;
+    public int numStartingLaunchers = 5;
+
+    public ArraySerializeWrapper<int> mBubbleScoreTargets = new ArraySerializeWrapper<int>();
+
+    public ArraySerializeWrapper<LevelItemPackage> mLevelObjects = new ArraySerializeWrapper<LevelItemPackage>();
+}
+
 
 
 public class FileHandler
@@ -43,7 +58,7 @@ public class FileHandler
 public class LevelSaver : ScriptableObject
 {
 
-    public static void SaveCurrentLevel(GridManager grid)
+    public static void SaveCurrentLevel(GridManager grid, LevelStateManager levelManager)
     {
         // scratch variables for looping through items
         LevelItemPackage currItem = new LevelItemPackage();
@@ -95,17 +110,31 @@ public class LevelSaver : ScriptableObject
             }
         }
 
-        // Make a list of all objects
-        grid.SetLevelSaveData(levelItemsList);
+        
+        LevelStatData saveData = new LevelStatData();
+        // Save starting resources
+        saveData.numStartingBouncers = levelManager.mNumStartingBouncers;
+        saveData.numStartingFans = levelManager.mNumStartingFans;
+        saveData.numStartingLaunchers = levelManager.mNumStartingLaunchers;
 
-        Debug.Log("LevelSaver:SaveLevel: Level saved as \"Test Level\"");
+        // Save goal types
+        saveData.mBubbleScoreTargets.mItems = levelManager.mBubbleScoreTargets.ToArray();
+
+        saveData.mLevelObjects.mItems = levelItemsList.ToArray();
+
+
+        // Make a list of all objects
+        //grid.SetLevelSaveData(levelItemsList);
+
+        Debug.Log("LevelSaver:SaveLevel: Level saved as \"Test Level2\"");
 
         // Convert grid class to json
-        string gridJson = JsonUtility.ToJson(grid, true);
+        //string gridJson = JsonUtility.ToJson(grid, true);
+        string levelSaveJson = JsonUtility.ToJson(saveData, true);
 
         // Write json to file
-        StreamWriter writer = new StreamWriter("TestLevel.json", false);
-        writer.WriteLine(gridJson);
+        StreamWriter writer = new StreamWriter("TestLevel2.json", false);
+        writer.WriteLine(levelSaveJson);
         writer.Close();
     }
 
@@ -116,14 +145,38 @@ public class LevelSaver : ScriptableObject
 
         grid.RebuildGrid();
 
+        
+
         string levelJson = File.ReadAllText(levelName + ".json");
 
-        JsonUtility.FromJsonOverwrite(levelJson, grid); // Load in grid data
 
-        List<LevelItemPackage> levelObjects = grid.GetLevelSaveData(); // load in data for level objects to spawn
+
+        //GridManager tempGridManager = JsonUtility.FromJson<GridManager>(levelJson);
+        //JsonUtility.FromJsonOverwrite(levelJson, grid); // Load in grid data
+        LevelStatData loadedData = new LevelStatData();
+        JsonUtility.FromJsonOverwrite(levelJson, loadedData); // Load in level grid data
+
+        //ArraySerializeWrapper<LevelItemPackage> testList = new ArraySerializeWrapper<LevelItemPackage>();
+        //JsonUtility.FromJsonOverwrite(levelJson, testList); // Load in grid data
+
+
+        //List<LevelItemPackage> levelObjects = grid.GetLevelSaveData(); // load in data for level objects to spawn
+        //List<LevelItemPackage> levelObjects = grid.GetLevelSaveData(); // load in data for level objects to spawn
+
+        // Load in level stats
+        levelState.mBubbleScoreTargets = new List<int>(loadedData.mBubbleScoreTargets.mItems); // Load in score targets
+
+        // Load in resources
+        levelState.mNumStartingBouncers = loadedData.numStartingBouncers;
+        levelState.mNumStartingFans = loadedData.numStartingFans;
+        levelState.mNumStartingLaunchers = loadedData.numStartingLaunchers;
+
+        // Set inventory based on loaded info (make sure to use set function)
+        FindFirstObjectByType<Inventory>().SetNumBouncers(levelState.mNumStartingBouncers);
+        FindFirstObjectByType<Inventory>().SetNumFans(levelState.mNumStartingFans);
 
         // Spawn each saved object
-        foreach (LevelItemPackage levelObjectData in levelObjects)
+        foreach (LevelItemPackage levelObjectData in loadedData.mLevelObjects.mItems)
         {
             GameObject prefabToUse = grid.GetPrefabByTagName(levelObjectData.prefabName);
             if (prefabToUse == null)
