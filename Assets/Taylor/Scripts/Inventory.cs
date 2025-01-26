@@ -136,6 +136,8 @@ public class Inventory : MonoBehaviour
         {
             GameObject placedObject = FindFirstObjectByType<GridManager>().PlaceObjectAtPosition(position, realPrefab);
             placedObject.transform.rotation = rotation;
+
+            FindFirstObjectByType<LevelStateManager>().mOnObjectPlaced.Invoke();
         }
 
         // Reset hover item state

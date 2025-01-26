@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using UnityEngine;
@@ -36,8 +37,10 @@ public class LevelStateManager : MonoBehaviour
     // Public variables
     public List<int> mBubbleScoreTargets = new List<int>(); // target score of each bubble type
 
-    // private variables
     public List<int> mCurrBubbleScores = new List<int>();
+
+    public Action mOnObjectPlaced;
+    // private variables
 
     public int mNumStartingBouncers;
     public int mNumStartingFans;
@@ -53,7 +56,7 @@ public class LevelStateManager : MonoBehaviour
     void Start()
     {
         InitLevel();
-
+        mOnObjectPlaced += ObjectPlaced;
     }
 
     // Update is called once per frame
@@ -63,6 +66,7 @@ public class LevelStateManager : MonoBehaviour
         if (mHasLoadedTestLevel == false)
         {
             LevelSaver.LoadLevel("TestLevel2", FindFirstObjectByType<GridManager>(), this); // RILEY NOTE: Start with test level, for testing. Change this when loading actual levels
+            mOnObjectPlaced.Invoke();
             mHasLoadedTestLevel = true;
         }
 
@@ -76,6 +80,8 @@ public class LevelStateManager : MonoBehaviour
             GridManager grid = FindFirstObjectByType<GridManager>();
 
             LevelSaver.LoadLevel("TestLevel2", grid, FindFirstObjectByType<LevelStateManager>());
+            mOnObjectPlaced.Invoke();
+
         }
     }
 
@@ -137,5 +143,14 @@ public class LevelStateManager : MonoBehaviour
     public bool IsInDebug()
     {
         return mInDebug;
+    }
+
+    public void ObjectPlaced()
+    {
+        FanController[] fans = FindObjectsByType<FanController>(FindObjectsSortMode.None);
+        foreach (var fan in fans)
+        {
+            fan.RecastFan();
+        }
     }
 }
