@@ -31,7 +31,7 @@ public class FanController : MonoBehaviour
       // Perform a ray cast to check if any objects are hit
       RaycastHit hit;
       // Send the raycast from the edge of the fan geometry
-      Vector3 startPosition = fan.transform.position + airChild.localPosition;
+      Vector3 startPosition = /*fan.transform.position + */airChild.position;
       Debug.Log("Start position: " + startPosition);
       Debug.Log("Fan right: " + fan.transform.right);
 
@@ -57,6 +57,15 @@ public class FanController : MonoBehaviour
       airChild.localScale = scale;
 
       first = false;
+    }
+  }
+
+  private void OnTriggerEnter(Collider other)
+  {
+
+    if (other.CompareTag("Fan"))
+    {
+      Destroy(other.transform.gameObject);
     }
   }
 
