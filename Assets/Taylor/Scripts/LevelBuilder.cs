@@ -55,7 +55,9 @@ public class LevelBuilder : MonoBehaviour
 
         if (realPrefab != null)
         {
-            Instantiate(realPrefab, position, rotation); // Place the real object
+            GameObject placedObject = FindFirstObjectByType<GridManager>().PlaceObjectAtPosition(position, realPrefab); // Place Object in grid
+            placedObject.transform.rotation = rotation; // update rotation
+
         }
 
         hoverObject = null;
