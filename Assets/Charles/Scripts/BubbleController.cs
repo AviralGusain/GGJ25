@@ -9,7 +9,6 @@ public class BubbleController : MonoBehaviour
   private GameObject bouncer;
   private GameObject launcher;
 
-  private Vector3 input;
   private float moveSpeed = 0.0f;
 
   private float defaultSpeed = 5f;
@@ -17,48 +16,28 @@ public class BubbleController : MonoBehaviour
 
   public Vector3 direction = Vector3.left;
 
-  private bool freeMovement = false;
-
   private bool lerp = false;
   private bool launching = false;
   private Vector3 finalPos;
 
   public bool reset = false;
 
-    public Animator bubbleAnimator;
+  public Animator bubbleAnimator;
 
   // Start is called once before the first execution of Update after the MonoBehaviour is created
   void Start()
   {
-        bubbleAnimator = GetComponentInChildren<Animator>();
+    bubbleAnimator = GetComponentInChildren<Animator>();
     moveSpeed = defaultSpeed;
   }
 
   // Update is called once per frame
   void Update()
   {
-    input = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-
-
-    // if (!freeMovement) BouncerTest(Time.deltaTime);
-
-    // STRICTLY FOR TESTING PURPOSES
-    if (reset)
-    {
-      bubble.transform.position = new Vector3(3, 1, 0);
-      direction = Vector3.left;
-      reset = false;
-    }
   }
 
   private void FixedUpdate()
   {
-    // REMOVE WHEN FINISHED
-    if (freeMovement)
-    {
-      bubble.MovePosition(bubble.position + input * Time.deltaTime * moveSpeed);
-    }
-
     if (launching && !lerp)
     {
       LauncherController launchController = launcher.GetComponent<LauncherController>();
@@ -86,7 +65,7 @@ public class BubbleController : MonoBehaviour
 
   private void OnTriggerEnter(Collider collider)
   {
-        moveSpeed = defaultSpeed;
+    moveSpeed = defaultSpeed;
 
     // Collision with a bouncer, pass the bouncer controller to the bouncer collision method
     if (collider.TryGetComponent(out BouncerController bouncerController) && !launching)
@@ -119,7 +98,7 @@ public class BubbleController : MonoBehaviour
     //        Debug.Log("Bubble should go poppy");
     //        Destroy(gameObject);
     //    }
-    }
+  }
 
   IEnumerator MoveOverTime(Transform obj, Vector3 startPos, Vector3 endPos, float speed)
   {
@@ -139,11 +118,12 @@ public class BubbleController : MonoBehaviour
 
   void BouncerCollision(BouncerController bouncerController)
   {
-        
-        //AUDIO
 
-        // Retrieve the gameobject attached to the bouncer
-        bouncer = bouncerController.gameObject;
+    //AUDIO
+
+
+    // Retrieve the gameobject attached to the bouncer
+    bouncer = bouncerController.gameObject;
 
     bool possible = true;
 
@@ -168,12 +148,12 @@ public class BubbleController : MonoBehaviour
     finalPos = new Vector3(bouncer.transform.position.x + direction.x, bouncer.transform.position.y, bouncer.transform.position.z + direction.z);
     lerp = true;
 
-        // Calculate time it should take to move to the next tile
+    // Calculate time it should take to move to the next tile
 
-        //AUDIO
-        bubbleAnimator.SetTrigger("Bounce");
+    //AUDIO
+    bubbleAnimator.SetTrigger("Bounce");
 
-        StartCoroutine(MoveOverTime(bubble.transform, bubble.position, finalPos, moveSpeed));
+    StartCoroutine(MoveOverTime(bubble.transform, bubble.position, finalPos, moveSpeed));
   }
 
   void FanCollision(GameObject fan)
@@ -191,11 +171,11 @@ public class BubbleController : MonoBehaviour
 
     moveSpeed *= speedMultiplier;
 
-        // Calculate time it should take to move to the next tile
-        //AUDIO
-        bubbleAnimator.SetTrigger("Bounce");
+    // Calculate time it should take to move to the next tile
+    //AUDIO
+    bubbleAnimator.SetTrigger("Bounce");
 
-        StartCoroutine(MoveOverTime(bubble.transform, bubble.position, finalPos, moveSpeed));
+    StartCoroutine(MoveOverTime(bubble.transform, bubble.position, finalPos, moveSpeed));
   }
 
   void LauncherCollision(LauncherController launcherController)
@@ -214,10 +194,10 @@ public class BubbleController : MonoBehaviour
 
     Debug.Log("Launcher Position: " + finalPos);
 
-        // Calculate time it should take to move to the next tile
-        //AUDIO
-        bubbleAnimator.SetTrigger("Bounce");
+    // Calculate time it should take to move to the next tile
+    //AUDIO
+    bubbleAnimator.SetTrigger("Bounce");
 
-        StartCoroutine(MoveOverTime(bubble.transform, bubble.position, finalPos, moveSpeed));
+    StartCoroutine(MoveOverTime(bubble.transform, bubble.position, finalPos, moveSpeed));
   }
 }
