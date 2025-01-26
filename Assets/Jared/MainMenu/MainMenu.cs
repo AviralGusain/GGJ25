@@ -36,7 +36,7 @@ public class MainMenu : MonoBehaviour
 
     public void Play()
     {
-        SceneManager.LoadScene("AviScene");
+        SceneManager.LoadScene("LevelScene");
     }
 
     public void Options()
