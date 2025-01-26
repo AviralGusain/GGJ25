@@ -3,7 +3,7 @@ using UnityEngine;
 public class Object : MonoBehaviour
 {
     private Camera cam;
-    private bool hoverMode = false;
+    public bool hoverMode = false;
     private Inventory inventory;
     private int currentRotation = 0; // Track the current rotation on the Y-axis
 
@@ -54,11 +54,11 @@ public class Object : MonoBehaviour
             // Cancel placement (return to inventory)
             if (Input.GetMouseButtonDown(1))
             {
-                Destroy(gameObject);
-                inventory.DestroyItem(tag);
+                inventory.CancelPlacement();
             }
         }
     }
+
 
     private void HandleRotationInput()
     {

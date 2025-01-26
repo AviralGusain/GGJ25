@@ -25,13 +25,23 @@ public class MainMenuConfirmation : MonoBehaviour
 
     public void Yes()
     {
-        FindAnyObjectByType<PauseManager>().Unpause();
+        Time.timeScale = 1f;
         SceneManager.LoadScene("MainMenu");
+
+        if (FindAnyObjectByType<WinScreen>() != null)
+        {
+            Destroy(this.gameObject);
+        }
     }
 
     public void No()
     {
         if (PM != null)
             PM.DestroySubmenus();
+
+        if (FindAnyObjectByType<WinScreen>() != null)
+        {
+            Destroy(this.gameObject);
+        }  
     }
 }

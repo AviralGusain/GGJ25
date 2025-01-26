@@ -13,6 +13,7 @@ TagManager:
   - Tile
   - Launcher
   - Ghost_Fan
+  - Wand
   layers:
   - Default
   - TransparentFX

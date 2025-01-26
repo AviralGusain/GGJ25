@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class PauseManager : MonoBehaviour
 {
-    private float RecordedTimeScale = 1f;
+    public float RecordedTimeScale = 1f;
 
     private GameObject PauseMenuInstance = null;
 
@@ -16,8 +16,6 @@ public class PauseManager : MonoBehaviour
 
     private void Update()
     {
-
-        //Debug.Log(Time.timeScale);
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (Time.timeScale != 0)
