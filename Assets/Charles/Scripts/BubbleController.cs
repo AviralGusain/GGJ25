@@ -17,7 +17,7 @@ public class BubbleController : MonoBehaviour
 
   public Vector3 direction = Vector3.left;
 
-  public bool freeMovement = true;
+  private bool freeMovement = false;
 
   private bool lerp = false;
   private bool launching = false;
@@ -61,13 +61,14 @@ public class BubbleController : MonoBehaviour
       LauncherController launchController = launcher.GetComponent<LauncherController>();
 
       // Function will return bool that determines if position was reached
-      // LauncherController.
+      Vector3 newPos = launchController.LaunchBubble(bubble.gameObject, direction, moveSpeed, Time.deltaTime, ref launching);
+      bubble.MovePosition(newPos);
 
       return;
     }
 
     // Raycast to check if the bubble is in line with a fan
-    else if (!lerp)
+    if (!lerp && !launching)
     {
       bubble.MovePosition(bubble.position + moveSpeed * Time.deltaTime * direction);
     }
@@ -85,13 +86,13 @@ public class BubbleController : MonoBehaviour
     moveSpeed = defaultSpeed;
 
     // Collision with a bouncer, pass the bouncer controller to the bouncer collision method
-    if (collider.TryGetComponent(out BouncerController bouncerController) )
+    if (collider.TryGetComponent(out BouncerController bouncerController) && !launching)
     {
       BouncerCollision(bouncerController);
     }
 
     // If colliding with a wind object, pass the wind object to the fan collision method
-    if (collider.CompareTag("Wind"))
+    if (collider.CompareTag("Wind") && !launching)
     {
       GameObject parent = collider.transform.parent.gameObject;
       Debug.Log("Parent tag: " + parent.tag);
@@ -190,7 +191,7 @@ public class BubbleController : MonoBehaviour
     lerp = true;
     launching = true;
 
-    Debug.Log(finalPos);
+    Debug.Log("Launcher Position: " + finalPos);
 
     // Calculate time it should take to move to the next tile
     StartCoroutine(MoveOverTime(bubble.transform, bubble.position, finalPos, moveSpeed));
