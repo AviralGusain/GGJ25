@@ -1,12 +1,12 @@
 using Unity.VisualScripting;
 using UnityEngine;
 using System.Collections;
+using JetBrains.Annotations;
 
 public class BubbleController : MonoBehaviour
 {
   public Rigidbody bubble;
   private GameObject bouncer;
-  private GameObject fan;
 
   private Vector3 input;
   public float moveSpeed = 7.5f;
@@ -14,8 +14,6 @@ public class BubbleController : MonoBehaviour
   public Vector3 direction = Vector3.left;
 
   public bool freeMovement = true;
-
-  private float timer = 0.0f;
 
   private bool lerp = false;
   private Vector3 finalPos;
@@ -34,7 +32,7 @@ public class BubbleController : MonoBehaviour
     input = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
 
 
-    if (!freeMovement) BouncerTest(Time.deltaTime);
+    // if (!freeMovement) BouncerTest(Time.deltaTime);
 
     // STRICTLY FOR TESTING PURPOSES
     if (reset)
@@ -68,10 +66,26 @@ public class BubbleController : MonoBehaviour
 
   private void OnTriggerEnter(Collider collision)
   {
+
     // Collision with a bouncer, pass the bouncer controller to the bouncer collision method
     if (collision.TryGetComponent(out BouncerController bouncerController) )
     {
       BouncerCollision(bouncerController);
+    }
+
+    // If colliding with a wind object, pass the wind object to the fan collision method
+    if (collision.CompareTag("Wind"))
+    {
+      GameObject parent = collision.transform.parent.gameObject;
+      Debug.Log("Parent tag: " + parent.tag);
+
+      FanCollision(parent);
+    }
+
+    // Destroy the bubble if it collides with a fan
+    if (collision.CompareTag("Fan"))
+    {
+      Destroy(gameObject);
     }
 
     //if (collision.TryGetComponent(out FanController fanController))
@@ -142,166 +156,183 @@ public class BubbleController : MonoBehaviour
     StartCoroutine(MoveOverTime(bubble.transform, bubble.position, finalPos, moveSpeed));
   }
 
-  private bool test1 = false;
-  private bool test1_2 = true;
-  private bool test2 = true;
-  private bool test2_2 = true;
-  private bool test3 = true;
-  private bool test3_2 = true;
-  private bool test4 = true;
-  private bool test4_2 = true;
-
-
-  private void BouncerTest(float dt)
+  void FanCollision(GameObject fan)
   {
-    timer += dt;
+    Debug.Log("Wind collision");
 
-    if (!test1)
-    {
-      // Test 1
-      Test1(true);
-      test1 = true;
-    }
+    // Swap the x and z values of the direction vector
+    direction = fan.transform.right;
 
-    if (timer > 2.0f && !test1_2)
-    {
-      // Test 1
-      Test1(false);
-      test1_2 = true;
-    }
+    // Move in the direction by one tile using the bouncer transform
+    finalPos = /*(direction.z == 0) ?*/ new Vector3(bubble.transform.position.x + direction.x, 1.0f, fan.transform.position.z);
+    lerp = true;
 
-    if (timer > 4.0f && !test2)
-    {
-      // Test 2
-      Test2(true);
-      test2 = true;
-    }
-    if (timer > 6.0f && !test2_2)
-    {
-      // Test 1
-      Test2(false);
-      test2_2 = true;
-    }
+    Debug.Log(finalPos);
 
-    if (timer > 8.0f && !test3)
-    {
-      // Test 2
-      Test3(true);
-      test3 = true;
-    }
-    if (timer > 10.0f && !test3_2)
-    {
-      // Test 1
-      Test3(false);
-      test3_2 = true;
-    }
-
-    if (timer > 12.0f && !test4)
-    {
-      // Test 2
-      Test4(true);
-      test4 = true;
-    }
-    if (timer > 14.0f && !test4_2)
-    {
-      // Test 1
-      Test4(false);
-      test4_2 = true;
-    }
+    // Calculate time it should take to move to the next tile
+    StartCoroutine(MoveOverTime(bubble.transform, bubble.position, finalPos, moveSpeed));
   }
 
-  private void Test1(bool first)
-  {
-    // Move bouncer to the center of the screen
-    bouncer.transform.position = new Vector3(0, 1, 0);
+  //private bool test1 = false;
+  //private bool test1_2 = true;
+  //private bool test2 = true;
+  //private bool test2_2 = true;
+  //private bool test3 = true;
+  //private bool test3_2 = true;
+  //private bool test4 = true;
+  //private bool test4_2 = true;
 
-    // Set the orientation of the bouncer to 0
-    bouncer.transform.rotation = Quaternion.Euler(0, 0, 0);
 
-    if (first)
-    {
-      // set the ball to the right of the bouncer
-      bubble.transform.position = new Vector3(3, 1, 0);
+  //private void BouncerTest(float dt)
+  //{
+  //  timer += dt;
 
-      // Set the direction of the ball to the left
-      direction = Vector3.left;
-    }
-    else
-    {
-      // set the ball to the left of the bouncer
-      bubble.transform.position = new Vector3(0, 1, -5);
+  //  if (!test1)
+  //  {
+  //    // Test 1
+  //    Test1(true);
+  //    test1 = true;
+  //  }
 
-      // Set the direction of the ball to the right
-      direction = Vector3.forward;
-    }
-  }
+  //  if (timer > 2.0f && !test1_2)
+  //  {
+  //    // Test 1
+  //    Test1(false);
+  //    test1_2 = true;
+  //  }
 
-  private void Test2(bool first)
-  {
-    // Set the orientation of the bouncer to 0
-    bouncer.transform.rotation = Quaternion.Euler(0, 270, 0);
+  //  if (timer > 4.0f && !test2)
+  //  {
+  //    // Test 2
+  //    Test2(true);
+  //    test2 = true;
+  //  }
+  //  if (timer > 6.0f && !test2_2)
+  //  {
+  //    // Test 1
+  //    Test2(false);
+  //    test2_2 = true;
+  //  }
 
-    if (first)
-    {
-      // set the ball to the right of the bouncer
-      bubble.transform.position = new Vector3(5, 1, 0);
+  //  if (timer > 8.0f && !test3)
+  //  {
+  //    // Test 2
+  //    Test3(true);
+  //    test3 = true;
+  //  }
+  //  if (timer > 10.0f && !test3_2)
+  //  {
+  //    // Test 1
+  //    Test3(false);
+  //    test3_2 = true;
+  //  }
 
-      // Set the direction of the ball to the left
-      direction = Vector3.left;
-    }
-    else
-    {
-      // set the ball to the left of the bouncer
-      bubble.transform.position = new Vector3(0, 1, 5);
+  //  if (timer > 12.0f && !test4)
+  //  {
+  //    // Test 2
+  //    Test4(true);
+  //    test4 = true;
+  //  }
+  //  if (timer > 14.0f && !test4_2)
+  //  {
+  //    // Test 1
+  //    Test4(false);
+  //    test4_2 = true;
+  //  }
+  //}
 
-      // Set the direction of the ball to the right
-      direction = Vector3.back;
-    }
-  }
+  //private void Test1(bool first)
+  //{
+  //  // Move bouncer to the center of the screen
+  //  bouncer.transform.position = new Vector3(0, 1, 0);
 
-  private void Test3(bool first)
-  {
-    // Set the orientation of the bouncer to 0
-    bouncer.transform.rotation = Quaternion.Euler(0, 180, 0);
+  //  // Set the orientation of the bouncer to 0
+  //  bouncer.transform.rotation = Quaternion.Euler(0, 0, 0);
 
-    if (first)
-    {
-      // set the ball to the right of the bouncer
-      bubble.transform.position = new Vector3(0, 1, 5);
+  //  if (first)
+  //  {
+  //    // set the ball to the right of the bouncer
+  //    bubble.transform.position = new Vector3(3, 1, 0);
 
-      // Set the direction of the ball to the left
-      direction = Vector3.back;
-    }
-    else
-    {
-      // set the ball to the left of the bouncer
-      bubble.transform.position = new Vector3(-5, 1, 0);
+  //    // Set the direction of the ball to the left
+  //    direction = Vector3.left;
+  //  }
+  //  else
+  //  {
+  //    // set the ball to the left of the bouncer
+  //    bubble.transform.position = new Vector3(0, 1, -5);
 
-      // Set the direction of the ball to the right
-      direction = Vector3.right;
-    }
-  }
+  //    // Set the direction of the ball to the right
+  //    direction = Vector3.forward;
+  //  }
+  //}
 
-  private void Test4(bool first)
-  {
-    // Set the orientation of the bouncer to 0
-    bouncer.transform.rotation = Quaternion.Euler(0, 90, 0);
+  //private void Test2(bool first)
+  //{
+  //  // Set the orientation of the bouncer to 0
+  //  bouncer.transform.rotation = Quaternion.Euler(0, 270, 0);
 
-    if (first)
-    {
-      // set the ball to the right of the bouncer
-      bubble.transform.position = new Vector3(-5, 1, 0);
+  //  if (first)
+  //  {
+  //    // set the ball to the right of the bouncer
+  //    bubble.transform.position = new Vector3(5, 1, 0);
 
-      // Set the direction of the ball to the left
-      direction = Vector3.right;
-    }
-    else
-    {
-      // set the ball to the left of the bouncer
-      bubble.transform.position = new Vector3(0, 1, -5);
+  //    // Set the direction of the ball to the left
+  //    direction = Vector3.left;
+  //  }
+  //  else
+  //  {
+  //    // set the ball to the left of the bouncer
+  //    bubble.transform.position = new Vector3(0, 1, 5);
 
-      // Set the direction of the ball to the right
-      direction = Vector3.forward;
-    }
-  }
+  //    // Set the direction of the ball to the right
+  //    direction = Vector3.back;
+  //  }
+  //}
+
+  //private void Test3(bool first)
+  //{
+  //  // Set the orientation of the bouncer to 0
+  //  bouncer.transform.rotation = Quaternion.Euler(0, 180, 0);
+
+  //  if (first)
+  //  {
+  //    // set the ball to the right of the bouncer
+  //    bubble.transform.position = new Vector3(0, 1, 5);
+
+  //    // Set the direction of the ball to the left
+  //    direction = Vector3.back;
+  //  }
+  //  else
+  //  {
+  //    // set the ball to the left of the bouncer
+  //    bubble.transform.position = new Vector3(-5, 1, 0);
+
+  //    // Set the direction of the ball to the right
+  //    direction = Vector3.right;
+  //  }
+  //}
+
+  //private void Test4(bool first)
+  //{
+  //  // Set the orientation of the bouncer to 0
+  //  bouncer.transform.rotation = Quaternion.Euler(0, 90, 0);
+
+  //  if (first)
+  //  {
+  //    // set the ball to the right of the bouncer
+  //    bubble.transform.position = new Vector3(-5, 1, 0);
+
+  //    // Set the direction of the ball to the left
+  //    direction = Vector3.right;
+  //  }
+  //  else
+  //  {
+  //    // set the ball to the left of the bouncer
+  //    bubble.transform.position = new Vector3(0, 1, -5);
+
+  //    // Set the direction of the ball to the right
+  //    direction = Vector3.forward;
+  //  }
+  //}
 }
