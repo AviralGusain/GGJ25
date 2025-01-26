@@ -30,7 +30,7 @@ public class BubbleGoal : MonoBehaviour
             }
 
             // Destroy bubble
-            Destroy(other);
+            Destroy(other.gameObject);
         }
     }
 }
