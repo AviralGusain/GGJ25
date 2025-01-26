@@ -2,15 +2,16 @@ using UnityEngine;
 
 public class GridManager : MonoBehaviour
 {
-    public int gridWidth = 10; // Number of cells in the X direction
-    public int gridHeight = 10; // Number of cells in the Z direction
-    public float cellSize = 1f; // Size of each cell
-    public GameObject bouncerPrefab; // Bouncer prefab
-    public GameObject fanPrefab; // Fan prefab
-    public GameObject highlight; // Highlight object for mouse hover
+    public int gridWidth = 10;        // Number of cells in the X direction
+    public int gridHeight = 10;       // Number of cells in the Z direction
+    public float cellSize = 1f;       // Size of each cell
+    public GameObject bouncerPrefab;  // Bouncer prefab
+    public GameObject fanPrefab;      // Fan prefab
+    public GameObject highlight;      // Highlight object for mouse hover
 
-    private GameObject[,] grid; // 2D array to store grid objects
+    private GameObject[,] grid;       // 2D array to store grid objects
     public GameObject tempTilePrefab; // Temporary tile prefab for visualization
+    public GameObject[] tilePrefabs;  // Array of tile prefabs
 
     private Vector3 gridOrigin; // The starting point of the grid
 
@@ -29,30 +30,49 @@ public class GridManager : MonoBehaviour
     void DrawGrid()
     {
         // Draw the grid starting from the gridOrigin position
-        for (int x = 0; x <= gridWidth; x++)
+        for (int x = 0; x < gridWidth; x++)
         {
-            for (int z = 0; z <= gridHeight; z++)
+            for (int z = 0; z < gridHeight; z++)
             {
                 // Calculate the start and end positions for grid lines
                 Vector3 start = gridOrigin + new Vector3(x * cellSize, 0, z * cellSize); // X-Z plane
                 Vector3 endX = start + new Vector3(0, 0, cellSize); // Vertical grid line
                 Vector3 endZ = start + new Vector3(cellSize, 0, 0); // Horizontal grid line
 
-                // Optionally instantiate tiles for grid visualization
-                if (tempTilePrefab != null && x < gridWidth && z < gridHeight)
+                // Calculate the position for the tile
+                Vector3 tilePosition = gridOrigin + new Vector3(x * cellSize, 0, z * cellSize);
+
+                // Choose a random tile prefab
+                GameObject randomTilePrefab = GetRandomTilePrefab();
+
+                // Instantiate the tile
+                if (randomTilePrefab != null)
                 {
                     Instantiate(
-                        tempTilePrefab,
-                        gridOrigin + new Vector3(x * cellSize + cellSize / 2, 0, z * cellSize + cellSize / 2),
+                        randomTilePrefab,
+                        tilePosition + new Vector3(cellSize / 2, 0, cellSize / 2), // Center the tile
                         Quaternion.identity
                     );
-                }
 
-                // Draw grid lines for debugging
-                Debug.DrawLine(start, endX, Color.gray, 100f);
-                Debug.DrawLine(start, endZ, Color.gray, 100f);
+                    // Draw grid lines for debugging
+                    Debug.DrawLine(start, endX, Color.gray, 100f);
+                    Debug.DrawLine(start, endZ, Color.gray, 100f);
+                }
             }
         }
+    }
+
+    private GameObject GetRandomTilePrefab()
+    {
+        // Return a random prefab from the tilePrefabs array
+        if (tilePrefabs != null && tilePrefabs.Length > 0)
+        {
+            int randomIndex = Random.Range(0, tilePrefabs.Length);
+            return tilePrefabs[randomIndex];
+        }
+
+        Debug.LogError("Tile prefabs array is empty or not assigned!");
+        return null;
     }
 
     public Vector3 GetCellCenter(Vector3 worldPosition)
