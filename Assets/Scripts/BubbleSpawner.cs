@@ -1,3 +1,4 @@
+using UnityEditor.Animations;
 using UnityEngine;
 
 public class BubbleSpawner : MonoBehaviour
@@ -9,6 +10,13 @@ public class BubbleSpawner : MonoBehaviour
     public bool limitTravelDistance = true; // Whether bubbles have a limited travel distance
 
     private float spawnTimer;
+
+    private Animator anim;
+
+    private void Start()
+    {
+        anim = GetComponentInChildren<Animator>();
+    }
 
     void Update()
     {
@@ -22,6 +30,8 @@ public class BubbleSpawner : MonoBehaviour
 
     void SpawnBubble()
     {
+        anim.SetTrigger("Spawn");
+
         GameObject bubble = Instantiate(bubblePrefab, spawnPoint.position, Quaternion.identity);
 
         // Configure the bubble's travel settings
