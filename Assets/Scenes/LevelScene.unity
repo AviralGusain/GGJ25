@@ -1414,6 +1414,7 @@ MonoBehaviour:
   cellSize: 1
   bouncerPrefab: {fileID: 118669754924287851, guid: 7699ddd373792c241bfa4e4f10d6cb14, type: 3}
   fanPrefab: {fileID: 7960533863981271153, guid: 78cafc91753ee3d478bae4e26d8ee029, type: 3}
+  baseGoalPrefab: {fileID: 4847660675711591734, guid: c1bf677a68b7cc74bbad3b9705c6542a, type: 3}
   highlight: {fileID: 1999664650808245876, guid: ceaba1bd326570648b4d94f1664a516b, type: 3}
   tempTilePrefab: {fileID: 1351479909620318801, guid: 4f6da876bd7d3e54391e46d56b5aa737, type: 3}
   tilePrefabs:
@@ -1421,6 +1422,8 @@ MonoBehaviour:
   - {fileID: 7038368997947603971, guid: 9dd1647f3d0494141a063864759f5494, type: 3}
   - {fileID: 8114507362176516791, guid: b9afb4d34eb4a0e47bf5ca2cc348ce1a, type: 3}
   - {fileID: 5075466148546275575, guid: 30349efdf826fb34a966f830476c3128, type: 3}
+  levelSaveData:
+    mItems: []
 --- !u!4 &1516567547
 Transform:
   m_ObjectHideFlags: 0
@@ -2060,6 +2063,10 @@ PrefabInstance:
       propertyPath: bouncerPrefab
       value: 
       objectReference: {fileID: 118669754924287851, guid: 7699ddd373792c241bfa4e4f10d6cb14, type: 3}
+    - target: {fileID: 3914820491324946606, guid: abb1db3566fff7e49b6921f9a87f2b4b, type: 3}
+      propertyPath: baseGoalPrefab
+      value: 
+      objectReference: {fileID: 4847660675711591734, guid: c1bf677a68b7cc74bbad3b9705c6542a, type: 3}
     - target: {fileID: 6373536065418375371, guid: abb1db3566fff7e49b6921f9a87f2b4b, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 

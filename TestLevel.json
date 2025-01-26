@@ -34,11 +34,11 @@
     "levelSaveData": {
         "mItems": [
             {
-                "prefabName": "BaseGoal",
+                "prefabName": "",
                 "position": {
-                    "x": -7.5,
+                    "x": -2.5,
                     "y": 0.0,
-                    "z": -7.5
+                    "z": -5.5
                 },
                 "rotation": {
                     "x": 0.0,
