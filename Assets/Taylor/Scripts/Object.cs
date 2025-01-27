@@ -5,12 +5,26 @@ public class Object : MonoBehaviour
     private Camera cam;
     public bool hoverMode = false;
     private Inventory inventory;
-    private int currentRotation = 0; // Track the current rotation on the Y-axis
+    private int currentRotation = 0;        // Track the current rotation on the Y-axis
+    private GridManager gridManager;        // Reference to GridManager
+    private MeshRenderer blueprintRenderer; // Renderer for BlueprintLook's material
 
     void Start()
     {
         inventory = FindObjectOfType<Inventory>();
         cam = Camera.main;
+        gridManager = FindObjectOfType<GridManager>();
+
+        // Find the BlueprintLook's MeshRenderer
+        Transform blueprintLook = transform.Find("BlueprintLook");
+        if (blueprintLook != null)
+        {
+            blueprintRenderer = blueprintLook.GetComponent<MeshRenderer>();
+        }
+        else
+        {
+            Debug.LogError("ErrorLog: BlueprintLook GameObject not found in ghost prefab!");
+        }
     }
 
     void Update()
@@ -43,11 +57,23 @@ public class Object : MonoBehaviour
         if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity))
         {
             // Snap to the grid center
-            Vector3 cellCenter = FindObjectOfType<GridManager>().GetCellCenter(hit.point);
+            Vector3 cellCenter = gridManager.GetCellCenter(hit.point);
             transform.position = cellCenter;
 
+            // Check if the cell is occupied
+            if (gridManager.IsCellOccupied(cellCenter))
+            {
+                // Turn red for invalid placement
+                SetBlueprintColor(new Color(1f, 0f, 0f, 110 / 255f)); // Solid red
+            }
+            else
+            {
+                // Turn blue for valid placement
+                SetBlueprintColor(new Color(0f, 0f, 1f, 110 / 255f)); // Solid blue
+            }
+
             // Place the object
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(0) && !gridManager.IsCellOccupied(cellCenter))
             {
                 hoverMode = false;
                 if (GetComponent<Collider>() != null)
@@ -64,7 +90,6 @@ public class Object : MonoBehaviour
             }
         }
     }
-
 
     private void HandleRotationInput()
     {
@@ -91,13 +116,12 @@ public class Object : MonoBehaviour
         if (FindFirstObjectByType<LevelStateManager>().IsInDebug() || // can destroy everything in debug
             gameObject.CompareTag("Bouncer") == true ||
             gameObject.CompareTag("Fan") == true ||
-            gameObject.CompareTag("Launcher") == true
-            )
+            gameObject.CompareTag("Launcher") == true)
         {
             canDestroy = true;
         }
 
-        if ( canDestroy == false)
+        if (!canDestroy)
         {
             return; // No destruction possible, return early
         }
@@ -110,6 +134,18 @@ public class Object : MonoBehaviour
                 inventory.DestroyItem(tag);
                 FindFirstObjectByType<LevelStateManager>().mOnObjectPlaced.Invoke();
             }
+        }
+    }
+
+    private void SetBlueprintColor(Color color)
+    {
+        if (blueprintRenderer != null)
+        {
+            blueprintRenderer.material.SetColor("_BaseColor", color); // Update material color
+        }
+        else
+        {
+            Debug.LogError("Blueprint Renderer not assigned or missing!");
         }
     }
 }

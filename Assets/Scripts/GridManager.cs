@@ -241,6 +241,19 @@ public class GridManager : MonoBehaviour
         }
     }
 
+    public bool IsCellOccupied(Vector3 worldPosition)
+    {
+        Vector3 localPosition = worldPosition - gridOrigin;
+        int x = Mathf.FloorToInt(localPosition.x / cellSize);
+        int z = Mathf.FloorToInt(localPosition.z / cellSize);
+
+        x = Mathf.Clamp(x, 0, gridWidth - 1);
+        z = Mathf.Clamp(z, 0, gridHeight - 1);
+
+        return grid[x, z] != null; // Return true if the cell is occupied
+    }
+
+
 
     // Test serialization functions
     public GameObject GetLevelGridItem(int width, int height)
