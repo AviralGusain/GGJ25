@@ -7,8 +7,9 @@ public class Object : MonoBehaviour
     private Inventory inventory;
     private int currentRotation = 0;        // Track the current rotation on the Y-axis
     private GridManager gridManager;        // Reference to GridManager
-    private MeshRenderer blueprintRenderer; // Renderer for BlueprintLook's material'
+    private MeshRenderer blueprintRenderer; // Renderer for BlueprintLook's material
     private ScreenShake screenShake;        // Reference to ScreenShake
+    private Collider objectCollider;        // Reference to the collider of this object
 
     void Start()
     {
@@ -16,6 +17,7 @@ public class Object : MonoBehaviour
         cam = Camera.main;
         gridManager = FindObjectOfType<GridManager>();
         screenShake = Camera.main.GetComponent<ScreenShake>();
+        objectCollider = GetComponent<Collider>(); // Get the collider component
 
         // Find the BlueprintLook's MeshRenderer
         Transform blueprintLook = transform.Find("BlueprintLook");
@@ -25,7 +27,7 @@ public class Object : MonoBehaviour
         }
         else
         {
-            Debug.LogError("ErrorLog: BlueprintLook GameObject not found in ghost prefab!");
+            //Debug.LogError("ErrorLog: BlueprintLook GameObject not found in ghost prefab!"); // The coutertops dont need the BlueprintLook
         }
     }
 
@@ -45,10 +47,17 @@ public class Object : MonoBehaviour
     public void SetHoverMode(bool enable)
     {
         hoverMode = enable;
+
         if (GetComponent<Collider>() != null)
         {
             GetComponent<Collider>().enabled = !enable; // Disable collisions during hover
         }
+
+        //// Disable the collider while hovering to prevent raycast conflicts
+        //if (objectCollider != null)
+        //{
+        //    objectCollider.enabled = !enable;
+        //}
     }
 
     private void FollowMousePosition()
@@ -86,12 +95,21 @@ public class Object : MonoBehaviour
                 // Place the object
                 if (Input.GetMouseButtonDown(0))
                 {
+
                     hoverMode = false;
                     if (GetComponent<Collider>() != null)
                     {
                         GetComponent<Collider>().enabled = true;
                     }
                     inventory.PlaceItem();
+
+                    //hoverMode = false;
+                    //// Re-enable collider for the object after placement
+                    //if (objectCollider != null)
+                    //{
+                    //    objectCollider.enabled = true;
+                    //}
+                    //inventory.PlaceItem();
                 }
             }
 
