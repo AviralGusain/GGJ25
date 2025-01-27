@@ -10,11 +10,11 @@
     "mLevelObjects": {
         "mItems": [
             {
-                "prefabName": "Wall",
+                "prefabName": "Spawner",
                 "position": {
-                    "x": -9.5,
+                    "x": -16.5,
                     "y": 0.0,
-                    "z": -6.5
+                    "z": -11.5
                 },
                 "rotation": {
                     "x": 0.0,
@@ -26,7 +26,35 @@
             {
                 "prefabName": "Wall",
                 "position": {
+                    "x": -9.5,
+                    "y": 0.0,
+                    "z": -8.5
+                },
+                "rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 1.0
+                }
+            },
+            {
+                "prefabName": "BaseGoal",
+                "position": {
                     "x": -8.5,
+                    "y": 0.0,
+                    "z": -10.5
+                },
+                "rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 1.0
+                }
+            },
+            {
+                "prefabName": "Wall",
+                "position": {
+                    "x": -6.5,
                     "y": 0.0,
                     "z": -9.5
                 },
@@ -40,21 +68,7 @@
             {
                 "prefabName": "Wall",
                 "position": {
-                    "x": -7.5,
-                    "y": 0.0,
-                    "z": -7.5
-                },
-                "rotation": {
-                    "x": 0.0,
-                    "y": 0.0,
-                    "z": 0.0,
-                    "w": 1.0
-                }
-            },
-            {
-                "prefabName": "Wall",
-                "position": {
-                    "x": -5.5,
+                    "x": -3.5,
                     "y": 0.0,
                     "z": -7.5
                 },
