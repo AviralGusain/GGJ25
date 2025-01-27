@@ -26,6 +26,9 @@ public class MainMenu : MonoBehaviour
         OptionsButton.onClick.AddListener(Options);
         CreditsButton.onClick.AddListener(Credits);
         QuitButton.onClick.AddListener(Quit);
+
+        Submenus.Add(Instantiate(OptionsMenu, this.gameObject.transform));
+        DestroySubmenus();
     }
 
     private void Update()

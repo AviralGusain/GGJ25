@@ -12,6 +12,9 @@ public class OptionsMenu : MonoBehaviour
     public Button CloseButton;
     public TMP_Dropdown ResolutionDropdown;
     public Toggle FullscreenToggle;
+    public Slider MasterSlider;
+    public Slider MusicSlider;
+    public Slider SFXSlider;
 
     Resolution[] AllResolutions;
 
@@ -27,7 +30,7 @@ public class OptionsMenu : MonoBehaviour
         CloseButton.onClick.AddListener(Close);
 
         //Resolution Dropdown
-        AllResolutions = Screen.resolutions.Where(resolution => resolution.refreshRateRatio.numerator / resolution.refreshRateRatio.denominator == 60).ToArray();
+        AllResolutions = Screen.resolutions.Where(resolution => resolution.refreshRateRatio.numerator / resolution.refreshRateRatio.denominator >= 60).ToArray();
 
         ResolutionDropdown.ClearOptions();
 
@@ -36,7 +39,7 @@ public class OptionsMenu : MonoBehaviour
         int CurrentResolutionIndex = 0;
         for (int i = 0; i < AllResolutions.Length; i++)
         {
-            string Option = AllResolutions[i].width + " x " + AllResolutions[i].height; //+ " @" + AllResolutions[i].refreshRateRatio.numerator / AllResolutions[i].refreshRateRatio.denominator
+            string Option = AllResolutions[i].width + " x " + AllResolutions[i].height + " @" + AllResolutions[i].refreshRateRatio.numerator / AllResolutions[i].refreshRateRatio.denominator;
             Options.Add(Option);
 
             if (AllResolutions[i].width == Screen.width && AllResolutions[i].height == Screen.height)
@@ -58,6 +61,15 @@ public class OptionsMenu : MonoBehaviour
         {
             FullscreenToggle.isOn = false;
         }
+
+        //Master Slider
+        MasterSlider.value = PlayerPrefs.GetFloat("MasterVolume", 1f);
+
+        //Music Slider
+        MusicSlider.value = PlayerPrefs.GetFloat("MusicVolume", 1f);
+
+        //SFX Slider
+        SFXSlider.value = PlayerPrefs.GetFloat("SFXVolume", 1f);
     }
 
     private void Update()
@@ -76,19 +88,25 @@ public class OptionsMenu : MonoBehaviour
         Screen.fullScreen = IsFullscreen;
     }
 
-    public void MasterVolume(float volume)
+    public void MasterVolume()
     {
-        AudioMixer.SetFloat("MasterVolume", volume);
+        float sliderValue = MasterSlider.value;
+        AudioMixer.SetFloat("MasterVolume", Mathf.Log10(sliderValue) * 20);
+        PlayerPrefs.SetFloat("MasterVolume", sliderValue);
     }
 
-    public void MusicVolume(float volume)
+    public void MusicVolume()
     {
-        AudioMixer.SetFloat("MusicVolume", volume);
+        float sliderValue = MusicSlider.value;
+        AudioMixer.SetFloat("MusicVolume", Mathf.Log10(sliderValue) * 20);
+        PlayerPrefs.SetFloat("MusicVolume", sliderValue);
     }
 
-    public void SFXVolume(float volume)
+    public void SFXVolume()
     {
-        AudioMixer.SetFloat("SFXVolume", volume);
+        float sliderValue = SFXSlider.value;
+        AudioMixer.SetFloat("SFXVolume", Mathf.Log10(sliderValue) * 20);
+        PlayerPrefs.SetFloat("SFXVolume", sliderValue);
     }
 
     public void Close()
