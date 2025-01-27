@@ -17,8 +17,6 @@ public class LauncherController : MonoBehaviour
 
   public Vector3 LaunchBubble(GameObject bubble, Vector3 dir, float moveSpeed, float dt, ref bool launching, ref float distanceTraveled)
   {
-    animator.SetTrigger("Launch");
-
     time += dt;
 
     if (distanceTraveled == 0)
