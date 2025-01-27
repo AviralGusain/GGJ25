@@ -87,18 +87,18 @@ public class BubbleController : MonoBehaviour
       LauncherCollision(launchController);
     }
 
-    //if (collider.CompareTag("Wall"))
-    //{
-    //    Debug.Log("Bubble should go poppy");
-    //    Destroy(gameObject);
-    //}
+        if (collider.CompareTag("Wall"))
+        {
+            Debug.Log(collider.gameObject);
+            Destroy(gameObject);
+        }
 
-    //    if (collider.CompareTag("Fan"))
-    //    {
-    //        Debug.Log("Bubble should go poppy");
-    //        Destroy(gameObject);
-    //    }
-  }
+        //    if (collider.CompareTag("Fan"))
+        //    {
+        //        Debug.Log("Bubble should go poppy");
+        //        Destroy(gameObject);
+        //    }
+    }
 
   IEnumerator MoveOverTime(Transform obj, Vector3 startPos, Vector3 endPos, float speed)
   {
