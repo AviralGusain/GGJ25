@@ -48,7 +48,6 @@ public class BubbleController : MonoBehaviour
     {
       if (launcher == null)
       {
-        audioSources[0].Play();
         Destroy(gameObject);
         return;
       }
@@ -81,53 +80,37 @@ public class BubbleController : MonoBehaviour
   {
     moveSpeed = defaultSpeed;
 
-    Debug.Log("Disabled because Collided with: " + collider.transform.root.tag);
 
-    // If object is untagged, destroy it
-    if (collider.CompareTag("Undergrid"))
+    // If undergrid or spawn collision occurs, just ignore it
+    if (collider.CompareTag("Undergrid") || collider.CompareTag("Spawner"))
     {
-      Debug.Log("Grid collision");
       return;
     }
 
     gameObject.GetComponent<Collider>().enabled = false;
+    Debug.Log("Disabled because Collided with: " + collider.transform.root.tag);
 
     // Collision with a bouncer, pass the bouncer controller to the bouncer collision method
     if (collider.TryGetComponent(out BouncerController bouncerController) && !launching)
     {
       Debug.Log("Bouncer collision");
-      audioSources[1].Play();
+      audioSources[0].Play();
       BouncerCollision(bouncerController);
+    }
+
+    if (collider.TryGetComponent(out LauncherController launchController))
+    {
+      audioSources[1].Play();
+      LauncherCollision(launchController);
     }
 
     // If colliding with a wind object, pass the wind object to the fan collision method
     if (collider.CompareTag("Wind"))
     {
-      audioSources[3].Play();
+      audioSources[2].Play();
       GameObject parent = collider.transform.parent.gameObject;
-      //Debug.Log("Parent tag: " + parent.tag);
 
       FanCollision(parent);
-    }
-
-    if (collider.TryGetComponent(out LauncherController launchController))
-    {
-      audioSources[2].Play();
-      LauncherCollision(launchController);
-    }
-
-
-    //quickly make walls fucking work
-    if (collider.CompareTag("Wall"))
-    {
-      //gotta add particle effect, popping-like anim, and sfx
-      Destroy(gameObject);
-    }
-
-    // If the spawner, just ignore it
-    if (collider.CompareTag("Spawner"))
-    {
-      gameObject.GetComponent<Collider>().enabled = true;
     }
   }
 
