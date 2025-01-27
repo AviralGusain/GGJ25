@@ -1,11 +1,11 @@
 using System.Collections.Generic;
 using System.IO;
-using System.Runtime.Serialization.Json;
-using Unity.VisualScripting;
-using Unity.VisualScripting.FullSerializer;
-using UnityEditor.Overlays;
-using UnityEditor.Playables;
-using UnityEditor.ShaderGraph.Serialization;
+//using System.Runtime.Serialization.Json;
+//using Unity.VisualScripting;
+//using Unity.VisualScripting.FullSerializer;
+//using UnityEditor.Overlays;
+//using UnityEditor.Playables;
+//using UnityEditor.ShaderGraph.Serialization;
 using UnityEngine;
 using static FileHandler;
 
@@ -27,6 +27,13 @@ public class LevelStatData
     public ArraySerializeWrapper<int> mBubbleScoreTargets = new ArraySerializeWrapper<int>();
 
     public ArraySerializeWrapper<LevelItemPackage> mLevelObjects = new ArraySerializeWrapper<LevelItemPackage>();
+}
+
+[System.Serializable]
+public class PlayerLevelScoreData
+{
+    string levelName = "";
+    int numBubbles = 3;
 }
 
 
@@ -58,7 +65,7 @@ public class FileHandler
 public class LevelSaver : ScriptableObject
 {
 
-    public static void SaveCurrentLevel(GridManager grid, LevelStateManager levelManager, string levelName = "TestLevel2")
+    public static void SaveCurrentLevel(GridManager grid, LevelStateManager levelManager)
     {
         // scratch variables for looping through items
         LevelItemPackage currItem = new LevelItemPackage();
@@ -97,14 +104,8 @@ public class LevelSaver : ScriptableObject
                 {
                     currItem.prefabName = "BaseGoal";
                 }
-                else if (currLevelObject.CompareTag("Wall"))
-                {
-                    currItem.prefabName = "Wall";
-                }
-                else if (currLevelObject.CompareTag("Spawner"))
-                {
-                    currItem.prefabName = "Spawner";
-                }
+
+
 
                 // Save position
                 currItem.position = currLevelObject.transform.position;
@@ -132,14 +133,14 @@ public class LevelSaver : ScriptableObject
         // Make a list of all objects
         //grid.SetLevelSaveData(levelItemsList);
 
-        Debug.Log("LevelSaver:SaveLevel: Level saved as \"" + levelName + "\"");
+        Debug.Log("LevelSaver:SaveLevel: Level saved as \"Test Level2\"");
 
         // Convert grid class to json
         //string gridJson = JsonUtility.ToJson(grid, true);
         string levelSaveJson = JsonUtility.ToJson(saveData, true);
 
         // Write json to file
-        StreamWriter writer = new StreamWriter(levelName + ".json", false);
+        StreamWriter writer = new StreamWriter("TestLevel2.json", false);
         writer.WriteLine(levelSaveJson);
         writer.Close();
     }
@@ -152,11 +153,7 @@ public class LevelSaver : ScriptableObject
         grid.RebuildGrid();
 
         
-        if (File.Exists(levelName  + ".json") == false)
-        {
-            Debug.Log("Level of name " + levelName + " does not exist");
-            return;
-        }
+
         string levelJson = File.ReadAllText(levelName + ".json");
 
 
@@ -184,7 +181,6 @@ public class LevelSaver : ScriptableObject
         // Set inventory based on loaded info (make sure to use set function)
         FindFirstObjectByType<Inventory>().SetNumBouncers(levelState.mNumStartingBouncers);
         FindFirstObjectByType<Inventory>().SetNumFans(levelState.mNumStartingFans);
-        FindFirstObjectByType<Inventory>().SetNumLaunchers(levelState.mNumStartingFans);
 
         // Spawn each saved object
         foreach (LevelItemPackage levelObjectData in loadedData.mLevelObjects.mItems)
@@ -206,6 +202,31 @@ public class LevelSaver : ScriptableObject
     //    return rawJson;
     //}
 
+    public static void SaveCurrentPlayerScores()
+    {
+        ArraySerializeWrapper<PlayerLevelScoreData> mScores = new ArraySerializeWrapper<PlayerLevelScoreData>();
+        mScores.mItems = FindFirstObjectByType<PlayerScores>().mScores.ToArray();
+
+        string playerScoreString = JsonUtility.ToJson(mScores, true);
+
+
+        // Write json to file
+        StreamWriter writer = new StreamWriter("PlayerScores.json", false);
+        writer.WriteLine(playerScoreString);
+        writer.Close();
+    }
+
+    public static void LoadPlayerScores()
+    {
+        if (File.Exists("PlayerScores" + ".json") == false)
+        {
+            Debug.Log("Level of name PlayerScores does not exist");
+            return;
+        }
+        string levelJson = File.ReadAllText("PlayerScores.json");
+
+
+    }
     public static void SaveLevel(string levelName)
     {
         LevelSaver.SaveCurrentLevel(FindFirstObjectByType<GridManager>(), FindFirstObjectByType<LevelStateManager>(), levelName);

@@ -31,7 +31,7 @@ public class BouncerController : MonoBehaviour
     // Take rotation of the object along the y-axis
     orientation = (yAngle / 90);
 
-    //Debug.Log("Orientation: " + orientation);
+    Debug.Log("Orientation: " + orientation);
 
     possible = CollisionCheck(direction, orientation);
 
@@ -44,7 +44,7 @@ public class BouncerController : MonoBehaviour
         //AUDIO
 
     // Make sure the direction passed in valid with the specified orientation
-    //Debug.Log("Direction: " + direction);
+    Debug.Log("Direction: " + direction);
 
     switch (orientation)
     {
@@ -81,7 +81,7 @@ public class BouncerController : MonoBehaviour
         break;
 
       default:
-        //Debug.Log("Invalid orientation: " + orientation);
+        Debug.Log("Invalid orientation: " + orientation);
         break;
     }
 

@@ -52,10 +52,6 @@ public class LevelStateManager : MonoBehaviour
 
     bool mHasLoadedTestLevel = false;
 
-    string levelNameToSave = "";
-
-    
-
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -69,7 +65,7 @@ public class LevelStateManager : MonoBehaviour
          // RILEY NOTE: Load test level, just for now
         if (mHasLoadedTestLevel == false)
         {
-            LevelSaver.LoadLevel("TestLevel2", FindFirstObjectByType<GridManager>(), this); // RILEY NOTE: Start with test level, for testing. Change this when loading actual levels
+            LevelSaver.LoadLevel(FindFirstObjectByType<NextLevel>().nextLevel, FindFirstObjectByType<GridManager>(), this); // RILEY NOTE: Start with test level, for testing. Change this when loading actual levels
             mOnObjectPlaced.Invoke();
             mHasLoadedTestLevel = true;
         }
@@ -156,15 +152,5 @@ public class LevelStateManager : MonoBehaviour
         {
             fan.RecastFan();
         }
-    }
-
-    public void SaveLevel(string levelName)
-    {
-        LevelSaver.SaveCurrentLevel(FindFirstObjectByType<GridManager>(), this, levelName);
-    }
-
-    public void LoadLevel(string levelName)
-    {
-        LevelSaver.LoadLevel(levelName, FindFirstObjectByType<GridManager>(), this);
     }
 }
