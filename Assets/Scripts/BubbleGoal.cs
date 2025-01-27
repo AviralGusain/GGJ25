@@ -24,6 +24,8 @@ public class BubbleGoal : MonoBehaviour
         {
             // NOTE: Add check for being correct type of doing that. If doing that, if bubble is not of right type, pop it
 
+            other.GetComponent<BubbleController>().bubbleAnimator.SetTrigger("Exit");
+
             if (mOnBubbleReachedGoal != null)
             {
                 mOnBubbleReachedGoal.Invoke(new BubbleData());
