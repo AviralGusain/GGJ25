@@ -93,6 +93,12 @@ public class BubbleController : MonoBehaviour
       audioSources[2].Play();
       LauncherCollision(launchController);
     }
+
+    if (collider.CompareTag("Wall"))
+    {
+      Debug.Log(collider.gameObject);
+      Destroy(gameObject);
+    }
   }
 
   IEnumerator MoveOverTime(Transform obj, Vector3 startPos, Vector3 endPos, float speed)
