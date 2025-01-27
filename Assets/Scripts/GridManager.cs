@@ -8,10 +8,7 @@ public class GridManager : MonoBehaviour
     public float cellSize = 1f;       // Size of each cell
     public GameObject bouncerPrefab;  // Bouncer prefab
     public GameObject fanPrefab;      // Fan prefab
-    public GameObject launcherPrefab;
     public GameObject baseGoalPrefab; // base goal (will look into how we want to do colored goals later)
-    public GameObject wallPrefab;
-    public GameObject spawnerPrefab;
     public GameObject highlight;      // Highlight object for mouse hover
 
     private GameObject[,] grid;       // 2D array to store grid objects
@@ -270,21 +267,12 @@ public class GridManager : MonoBehaviour
         }
         else if (name == "Launcher")
         {
-            return launcherPrefab; // Add when we have it
+            return null; // Add when we have it
         }
         else if (name == "BaseGoal")
         {
             return baseGoalPrefab;
         }
-        else if (name == "Spawner")
-        {
-            return spawnerPrefab;
-        }
-        else if (name == "Wall")
-        {
-            return wallPrefab;
-        }
-
 
         print("GridManager:GetPrefabByTagName: Tag of name " + name + " did not correspond to a prefab in the grid manager");
 

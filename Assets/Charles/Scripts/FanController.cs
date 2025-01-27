@@ -1,5 +1,7 @@
+using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
+using static UnityEditor.Experimental.AssetDatabaseExperimental.AssetDatabaseCounters;
 
 public class FanController : MonoBehaviour
 {
@@ -30,25 +32,25 @@ public class FanController : MonoBehaviour
       RaycastHit hit;
       // Send the raycast from the edge of the fan geometry
       Vector3 startPosition = /*fan.transform.position + */airChild.position;
-      //Debug.Log("Start position: " + startPosition);
-      //Debug.Log("Fan right: " + fan.transform.right);
+      Debug.Log("Start position: " + startPosition);
+      Debug.Log("Fan right: " + fan.transform.right);
 
       if (Physics.Raycast(startPosition, fan.transform.right, out hit, castDistance))
       {
         // Calculate the distance from the edge of the fan to the object hit
         Vector3 test = Vector3.Scale(hit.transform.localScale, fan.transform.right);
-        //Debug.Log("Test: " + test);
+        Debug.Log("Test: " + test);
 
         distance = hit.point - startPosition;
 
-        //Debug.Log("Hit: " + hit.transform.name);
+        Debug.Log("Hit: " + hit.transform.name);
       }
       else
       {
         distance = (fan.transform.right * castDistance);
       }
 
-      //Debug.Log("Distance of raycast: " + distance);
+      Debug.Log("Distance of raycast: " + distance);
 
       // Set the scale of the air child to the distance of the raycast
       Vector3 scale = new Vector3(distance.magnitude, 0, 1);

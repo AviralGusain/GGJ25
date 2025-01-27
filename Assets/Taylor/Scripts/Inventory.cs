@@ -46,14 +46,6 @@ public class Inventory : MonoBehaviour
         {
             SelectItem("BaseGoal");
         }
-        else if (FindFirstObjectByType<LevelStateManager>().IsInDebug() && Input.GetKeyUp(KeyCode.B))
-        {
-            SelectItem("Spawner");
-        }
-        else if (FindFirstObjectByType<LevelStateManager>().IsInDebug() && Input.GetKeyUp(KeyCode.W))
-        {
-            SelectItem("Wall");
-        }
     }
 
     public void SelectItem(string itemName)
@@ -61,10 +53,7 @@ public class Inventory : MonoBehaviour
         if ((itemName == "Bouncer" && bouncerInvCount > 0) ||
             (itemName == "Fan" && fanInvCount > 0) ||
             (itemName == "Launcher" && launcherInvCount > 0) ||  // Launcher selection
-            FindFirstObjectByType<LevelStateManager>().IsInDebug() && itemName == "BaseGoal" ||
-            FindFirstObjectByType<LevelStateManager>().IsInDebug() && itemName == "Wall" ||
-            FindFirstObjectByType<LevelStateManager>().IsInDebug() && itemName == "Spawner"
-            ) // Debug mode for placing other stuff
+            FindFirstObjectByType<LevelStateManager>().IsInDebug() && itemName == "BaseGoal") // Debug mode for goal
         {
             selectedItem = itemName;
 
@@ -114,12 +103,6 @@ public class Inventory : MonoBehaviour
             case "BaseGoal":
                 prefab = baseGoalPrefab;
                 break;
-            case "Spawner":
-                prefab = FindFirstObjectByType<GridManager>().spawnerPrefab;
-                break;
-            case "Wall":
-                prefab = FindFirstObjectByType<GridManager>().wallPrefab;
-                break;
         }
 
         if (prefab == null)
@@ -163,15 +146,6 @@ public class Inventory : MonoBehaviour
                 break;
             case "Launcher":
                 realPrefab = launcherPrefab;
-                break;
-            case "Wall":
-                realPrefab = FindFirstObjectByType<GridManager>().wallPrefab;
-                break;
-            case "Spawner":
-                realPrefab = FindFirstObjectByType<GridManager>().spawnerPrefab;
-                break;
-            case "BaseGoal":
-                realPrefab = FindFirstObjectByType<GridManager>().baseGoalPrefab;
                 break;
         }
 

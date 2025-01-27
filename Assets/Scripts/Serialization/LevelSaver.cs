@@ -65,7 +65,7 @@ public class FileHandler
 public class LevelSaver : ScriptableObject
 {
 
-    public static void SaveCurrentLevel(GridManager grid, LevelStateManager levelManager, string levelName = "TestLevel2")
+    public static void SaveCurrentLevel(GridManager grid, LevelStateManager levelManager)
     {
         // scratch variables for looping through items
         LevelItemPackage currItem = new LevelItemPackage();
@@ -104,14 +104,8 @@ public class LevelSaver : ScriptableObject
                 {
                     currItem.prefabName = "BaseGoal";
                 }
-                else if (currLevelObject.CompareTag("Wall"))
-                {
-                    currItem.prefabName = "Wall";
-                }
-                else if (currLevelObject.CompareTag("Spawner"))
-                {
-                    currItem.prefabName = "Spawner";
-                }
+
+
 
                 // Save position
                 currItem.position = currLevelObject.transform.position;
@@ -139,14 +133,14 @@ public class LevelSaver : ScriptableObject
         // Make a list of all objects
         //grid.SetLevelSaveData(levelItemsList);
 
-        Debug.Log("LevelSaver:SaveLevel: Level saved as \"" + levelName + "\"");
+        Debug.Log("LevelSaver:SaveLevel: Level saved as \"Test Level2\"");
 
         // Convert grid class to json
         //string gridJson = JsonUtility.ToJson(grid, true);
         string levelSaveJson = JsonUtility.ToJson(saveData, true);
 
         // Write json to file
-        StreamWriter writer = new StreamWriter(levelName + ".json", false);
+        StreamWriter writer = new StreamWriter("TestLevel2.json", false);
         writer.WriteLine(levelSaveJson);
         writer.Close();
     }
@@ -159,11 +153,7 @@ public class LevelSaver : ScriptableObject
         grid.RebuildGrid();
 
         
-        if (File.Exists(levelName  + ".json") == false)
-        {
-            Debug.Log("Level of name " + levelName + " does not exist");
-            return;
-        }
+
         string levelJson = File.ReadAllText(levelName + ".json");
 
 
@@ -191,7 +181,6 @@ public class LevelSaver : ScriptableObject
         // Set inventory based on loaded info (make sure to use set function)
         FindFirstObjectByType<Inventory>().SetNumBouncers(levelState.mNumStartingBouncers);
         FindFirstObjectByType<Inventory>().SetNumFans(levelState.mNumStartingFans);
-        FindFirstObjectByType<Inventory>().SetNumLaunchers(levelState.mNumStartingFans);
 
         // Spawn each saved object
         foreach (LevelItemPackage levelObjectData in loadedData.mLevelObjects.mItems)
