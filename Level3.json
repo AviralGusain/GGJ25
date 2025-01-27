@@ -1,7 +1,7 @@
 {
-    "numStartingBouncers": 5,
+    "numStartingBouncers": 4,
     "numStartingFans": 2,
-    "numStartingLaunchers": 1,
+    "numStartingLaunchers": 0,
     "mBubbleScoreTargets": {
         "mItems": [
             5
@@ -239,6 +239,20 @@
                     "x": -14.5,
                     "y": 0.0,
                     "z": -11.5
+                },
+                "rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 1.0
+                }
+            },
+            {
+                "prefabName": "Spawner",
+                "position": {
+                    "x": -14.5,
+                    "y": 0.0,
+                    "z": -10.5
                 },
                 "rotation": {
                     "x": 0.0,
