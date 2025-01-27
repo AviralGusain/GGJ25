@@ -53,7 +53,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bubble: {fileID: 723079552741143600}
-  direction: {x: 1, y: 0, z: 0}
+  direction: {x: 0, y: 0, z: 0}
   reset: 1
   bubbleAnimator: {fileID: 0}
 --- !u!114 &8470561530171180208

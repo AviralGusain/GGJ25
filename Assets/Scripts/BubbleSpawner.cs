@@ -32,7 +32,8 @@ public class BubbleSpawner : MonoBehaviour
     anim.SetTrigger("Spawn");
 
     GameObject bubble = Instantiate(bubblePrefab, spawnPoint.position, Quaternion.identity);
-    
+        bubble.GetComponent<BubbleController>().direction = transform.right;
+
     gameObject.GetComponent<AudioSource>().Play();
 
     // Configure the bubble's travel settings

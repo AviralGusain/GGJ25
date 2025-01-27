@@ -16,7 +16,7 @@ public class BubbleController : MonoBehaviour
   private float defaultSpeed = 5f;
   private float speedMultiplier = 2.0f;
 
-  public Vector3 direction = Vector3.left;
+  public Vector3 direction = Vector3.zero;
 
   private bool lerp = false;
   private bool launching = false;
@@ -93,6 +93,14 @@ public class BubbleController : MonoBehaviour
       audioSources[2].Play();
       LauncherCollision(launchController);
     }
+
+
+        //quickly make walls fucking work
+        if (collider.CompareTag("Wall"))
+        {
+            //gotta add particle effect, popping-like anim, and sfx
+            Destroy(gameObject);
+        }
   }
 
   IEnumerator MoveOverTime(Transform obj, Vector3 startPos, Vector3 endPos, float speed)
