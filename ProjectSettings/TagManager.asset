@@ -14,6 +14,7 @@ TagManager:
   - Launcher
   - Ghost_Fan
   - Wand
+  - Spawner
   layers:
   - Default
   - TransparentFX
