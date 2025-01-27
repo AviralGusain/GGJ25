@@ -139,7 +139,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_TargetDisplay: 0
 --- !u!114 &9217787664124797886
 MonoBehaviour:
@@ -199,6 +199,9 @@ MonoBehaviour:
   MainMenuConfirmation: {fileID: 1614872032534918642, guid: 08785764b3d61bd44982b4653ed4d672, type: 3}
   BackButton: {fileID: 8446475122001601163}
   NextButton: {fileID: 8718771626674276473}
+  BubblePause: 0.25
+  BubbleTimer: 0
+  TimerStart: 0
 --- !u!1 &1549818227751600709
 GameObject:
   m_ObjectHideFlags: 0
