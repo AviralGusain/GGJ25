@@ -8,8 +8,11 @@ public class LevelSelect : MonoBehaviour
     public Button CloseButton;
     private MainMenu MM;
 
+    private NextLevel nl;
+
     private void Start()
     {
+        nl = FindObjectOfType<NextLevel>();
         MM = FindAnyObjectByType<MainMenu>();
         CloseButton.onClick.AddListener(Close);
     }
@@ -21,6 +24,7 @@ public class LevelSelect : MonoBehaviour
 
     public void OpenLevel(string SceneName)
     {
-        SceneManager.LoadScene(SceneName);
+        nl.nextLevel = SceneName;
+        SceneManager.LoadScene("LevelScene");
     }
 }

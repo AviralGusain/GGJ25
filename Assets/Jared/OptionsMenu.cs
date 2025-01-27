@@ -78,17 +78,17 @@ public class OptionsMenu : MonoBehaviour
 
     public void MasterVolume(float volume)
     {
-        AudioMixer.SetFloat("MasterVolume", Mathf.Log10(volume) * 20);
+        AudioMixer.SetFloat("MasterVolume", volume);
     }
 
     public void MusicVolume(float volume)
     {
-        AudioMixer.SetFloat("MusicVolume", Mathf.Log10(volume) * 20);
+        AudioMixer.SetFloat("MusicVolume", volume);
     }
 
     public void SFXVolume(float volume)
     {
-        AudioMixer.SetFloat("SFXVolume", Mathf.Log10(volume) * 20);
+        AudioMixer.SetFloat("SFXVolume", volume);
     }
 
     public void Close()
