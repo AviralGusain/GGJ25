@@ -1,7 +1,5 @@
-using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
-using static UnityEditor.Experimental.AssetDatabaseExperimental.AssetDatabaseCounters;
 
 public class FanController : MonoBehaviour
 {
