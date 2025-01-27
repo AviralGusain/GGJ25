@@ -380,6 +380,7 @@ GameObject:
   - component: {fileID: 358945993}
   - component: {fileID: 358945996}
   - component: {fileID: 358945997}
+  - component: {fileID: 358945998}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -602,6 +603,20 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &358945998
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 358945992}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f4e1502461f38d49a38439afb52b504, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shakeDuration: 0.2
+  shakeMagnitude: 0.1
 --- !u!1001 &414938527
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1447,7 +1462,6 @@ MonoBehaviour:
   fanPrefab: {fileID: 7960533863981271153, guid: 78cafc91753ee3d478bae4e26d8ee029, type: 3}
   launcherPrefab: {fileID: 4909567520097722462, guid: 84cb0c756d9814e42b1286a8ddbfd6e3, type: 3}
   baseGoalPrefab: {fileID: 4847660675711591734, guid: c1bf677a68b7cc74bbad3b9705c6542a, type: 3}
-  wallPrefab: {fileID: 6585280917869247971, guid: 014ae09a23c04ea48811b1d0c73acd12, type: 3}
   wallPrefabs:
   - {fileID: 6585280917869247971, guid: 014ae09a23c04ea48811b1d0c73acd12, type: 3}
   - {fileID: 1546163405712835489, guid: 70b63178127bbf24e89ccb8ad7b3ff50, type: 3}
