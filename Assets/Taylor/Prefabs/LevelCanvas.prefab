@@ -198,15 +198,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9eab0f1ff3e76454390f42cdd5c14f93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bouncerPrefab: {fileID: 9035096753117864739, guid: f2da2fc126f9f1a43b8aa2030c22fb1b, type: 3}
-  fanPrefab: {fileID: 320275911033291390, guid: 7484879e32ed6f845a4406b32cab39df, type: 3}
-  ghostBouncerPrefab: {fileID: 0}
-  ghostFanPrefab: {fileID: 0}
-  baseGoalPrefab: {fileID: 0}
-  bouncerInvCount: 10
-  fanInvCount: 2
+  bouncerPrefab: {fileID: 118669754924287851, guid: 7699ddd373792c241bfa4e4f10d6cb14, type: 3}
+  fanPrefab: {fileID: 7960533863981271153, guid: 78cafc91753ee3d478bae4e26d8ee029, type: 3}
+  launcherPrefab: {fileID: 4909567520097722462, guid: 84cb0c756d9814e42b1286a8ddbfd6e3, type: 3}
+  ghostBouncerPrefab: {fileID: 118669754924287851, guid: e6ba7b834ba23ea489688da872a5edf4, type: 3}
+  ghostFanPrefab: {fileID: 7960533863981271153, guid: 57d331c630e23e74dac3282a0aef4fff, type: 3}
+  ghostLauncherPrefab: {fileID: 4909567520097722462, guid: 84cb0c756d9814e42b1286a8ddbfd6e3, type: 3}
+  baseGoalPrefab: {fileID: 4847660675711591734, guid: c1bf677a68b7cc74bbad3b9705c6542a, type: 3}
+  bouncerInvCount: 0
+  fanInvCount: 0
+  launcherInvCount: 0
   bouncerText: {fileID: 8071491808478382740}
   fanText: {fileID: 7358672399590979810}
+  launcherText: {fileID: 3494407931692221538}
 --- !u!114 &2229384531144407827
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -721,7 +725,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2553043016306715950}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3914820491324946606}
+        m_TargetAssemblyTypeName: Inventory, Assembly-CSharp
+        m_MethodName: SelectItem
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Fan
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &4570354545159112860
 GameObject:
   m_ObjectHideFlags: 0
@@ -734,7 +750,7 @@ GameObject:
   - component: {fileID: 6366039779074694412}
   - component: {fileID: 3494407931692221538}
   m_Layer: 5
-  m_Name: FanAmount
+  m_Name: LauncherAmount
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1204,7 +1220,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1666526568421924113}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3914820491324946606}
+        m_TargetAssemblyTypeName: Inventory, Assembly-CSharp
+        m_MethodName: SelectItem
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Bouncer
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &7496382488462979626
 GameObject:
   m_ObjectHideFlags: 0
@@ -1462,7 +1490,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 482796095040042418}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3914820491324946606}
+        m_TargetAssemblyTypeName: Inventory, Assembly-CSharp
+        m_MethodName: SelectItem
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Launcher
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &8441832252728573502
 GameObject:
   m_ObjectHideFlags: 0
