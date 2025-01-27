@@ -35,8 +35,6 @@ public class BouncerController : MonoBehaviour
 
     possible = CollisionCheck(direction, orientation);
 
-    if (!possible) gameObject.GetComponent<AudioSource>().Play();
-
     return orientation;
   }
 
