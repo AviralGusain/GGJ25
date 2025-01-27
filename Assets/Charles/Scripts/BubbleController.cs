@@ -74,8 +74,8 @@ public class BubbleController : MonoBehaviour
     // Collision with a bouncer, pass the bouncer controller to the bouncer collision method
     if (collider.TryGetComponent(out BouncerController bouncerController) && !launching)
     {
-      BouncerCollision(bouncerController);
-      audioSources[1].Play();
+        audioSources[1].Play();
+        BouncerCollision(bouncerController);
     }
 
     // If colliding with a wind object, pass the wind object to the fan collision method

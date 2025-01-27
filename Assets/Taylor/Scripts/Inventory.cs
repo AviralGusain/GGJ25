@@ -118,7 +118,7 @@ public class Inventory : MonoBehaviour
                 prefab = FindFirstObjectByType<GridManager>().spawnerPrefab;
                 break;
             case "Wall":
-                prefab = FindFirstObjectByType<GridManager>().wallPrefab;
+                prefab = FindFirstObjectByType<GridManager>().GetRandomWallPrefab();
                 break;
         }
 
@@ -165,7 +165,7 @@ public class Inventory : MonoBehaviour
                 realPrefab = launcherPrefab;
                 break;
             case "Wall":
-                realPrefab = FindFirstObjectByType<GridManager>().wallPrefab;
+                realPrefab = FindFirstObjectByType<GridManager>().GetRandomWallPrefab();
                 break;
             case "Spawner":
                 realPrefab = FindFirstObjectByType<GridManager>().spawnerPrefab;
@@ -178,7 +178,10 @@ public class Inventory : MonoBehaviour
         if (realPrefab != null)
         {
             GameObject placedObject = FindFirstObjectByType<GridManager>().PlaceObjectAtPosition(position, realPrefab);
-            placedObject.transform.rotation = rotation;
+            if (placedObject != null) // if object is bnull, likely tried to place over an existing object
+            {
+                placedObject.transform.rotation = rotation;
+            }
 
             FindFirstObjectByType<LevelStateManager>().mOnObjectPlaced.Invoke();
         }

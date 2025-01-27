@@ -1,0 +1,42 @@
+{
+    "numStartingBouncers": 0,
+    "numStartingFans": 0,
+    "numStartingLaunchers": 0,
+    "mBubbleScoreTargets": {
+        "mItems": [
+            5
+        ]
+    },
+    "mLevelObjects": {
+        "mItems": [
+            {
+                "prefabName": "Spawner",
+                "position": {
+                    "x": -16.5,
+                    "y": 0.0,
+                    "z": -11.5
+                },
+                "rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 1.0
+                }
+            },
+            {
+                "prefabName": "BaseGoal",
+                "position": {
+                    "x": -5.5,
+                    "y": 0.0,
+                    "z": -9.5
+                },
+                "rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 1.0
+                }
+            }
+        ]
+    }
+}

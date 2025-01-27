@@ -10,7 +10,7 @@ public class GridManager : MonoBehaviour
     public GameObject fanPrefab;      // Fan prefab
     public GameObject launcherPrefab;
     public GameObject baseGoalPrefab; // base goal (will look into how we want to do colored goals later)
-    public GameObject wallPrefab;
+    public GameObject[] wallPrefabs;
     public GameObject spawnerPrefab;
     public GameObject highlight;      // Highlight object for mouse hover
 
@@ -258,6 +258,17 @@ public class GridManager : MonoBehaviour
         return new List<LevelItemPackage>(levelSaveData.mItems);
     }
 
+    public GameObject GetRandomWallPrefab()
+    {
+        int i = Random.Range(0, wallPrefabs.Length);
+
+        if (wallPrefabs.Length == 0)
+        {
+            print("GridManager:GetRandomWallPrefab: No wall prefabs");
+        }
+        return wallPrefabs[i];
+    }
+
     public GameObject GetPrefabByTagName(string name)
     {
         if (name == "Bouncer")
@@ -282,7 +293,7 @@ public class GridManager : MonoBehaviour
         }
         else if (name == "Wall")
         {
-            return wallPrefab;
+            return GetRandomWallPrefab();
         }
 
 
