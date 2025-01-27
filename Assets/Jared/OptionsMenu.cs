@@ -27,7 +27,7 @@ public class OptionsMenu : MonoBehaviour
         CloseButton.onClick.AddListener(Close);
 
         //Resolution Dropdown
-        AllResolutions = Screen.resolutions; // Where(resolution => resolution.refreshRateRatio.numerator / resolution.refreshRateRatio.denominator == 60).ToArray();
+        AllResolutions = Screen.resolutions.Where(resolution => resolution.refreshRateRatio.numerator / resolution.refreshRateRatio.denominator == 60).ToArray();
 
         ResolutionDropdown.ClearOptions();
 
@@ -36,7 +36,7 @@ public class OptionsMenu : MonoBehaviour
         int CurrentResolutionIndex = 0;
         for (int i = 0; i < AllResolutions.Length; i++)
         {
-            string Option = AllResolutions[i].width + " x " + AllResolutions[i].height + " @" + AllResolutions[i].refreshRateRatio.numerator / AllResolutions[i].refreshRateRatio.denominator;
+            string Option = AllResolutions[i].width + " x " + AllResolutions[i].height; //+ " @" + AllResolutions[i].refreshRateRatio.numerator / AllResolutions[i].refreshRateRatio.denominator
             Options.Add(Option);
 
             if (AllResolutions[i].width == Screen.width && AllResolutions[i].height == Screen.height)

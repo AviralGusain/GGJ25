@@ -29,10 +29,7 @@ public class Object : MonoBehaviour
     public void SetHoverMode(bool enable)
     {
         hoverMode = enable;
-        if (GetComponent<Collider>() != null)
-        {
-            GetComponent<Collider>().enabled = !enable; // Disable collisions during hover
-        }
+        GetComponent<Collider>().enabled = !enable; // Disable collisions during hover
     }
 
     private void FollowMousePosition()
@@ -50,10 +47,7 @@ public class Object : MonoBehaviour
             if (Input.GetMouseButtonDown(0))
             {
                 hoverMode = false;
-                if (GetComponent<Collider>() != null)
-                {
-                    GetComponent<Collider>().enabled = true;
-                }
+                GetComponent<Collider>().enabled = true;
                 inventory.PlaceItem();
             }
 
@@ -87,28 +81,12 @@ public class Object : MonoBehaviour
         Vector3 mousePosition = Input.mousePosition;
         Ray ray = cam.ScreenPointToRay(mousePosition);
 
-        bool canDestroy = false;
-        if (FindFirstObjectByType<LevelStateManager>().IsInDebug() || // can destroy everything in debug
-            gameObject.CompareTag("Bouncer") == true ||
-            gameObject.CompareTag("Fan") == true ||
-            gameObject.CompareTag("Launcher") == true
-            )
-        {
-            canDestroy = true;
-        }
-
-        if ( canDestroy == false)
-        {
-            return; // No destruction possible, return early
-        }
-
         if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity) && Input.GetMouseButtonDown(1))
         {
             if (hit.transform == transform)
             {
                 Destroy(gameObject);
                 inventory.DestroyItem(tag);
-                FindFirstObjectByType<LevelStateManager>().mOnObjectPlaced.Invoke();
             }
         }
     }
