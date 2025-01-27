@@ -7,13 +7,15 @@ public class Object : MonoBehaviour
     private Inventory inventory;
     private int currentRotation = 0;        // Track the current rotation on the Y-axis
     private GridManager gridManager;        // Reference to GridManager
-    private MeshRenderer blueprintRenderer; // Renderer for BlueprintLook's material
+    private MeshRenderer blueprintRenderer; // Renderer for BlueprintLook's material'
+    private ScreenShake screenShake;        // Reference to ScreenShake
 
     void Start()
     {
         inventory = FindObjectOfType<Inventory>();
         cam = Camera.main;
         gridManager = FindObjectOfType<GridManager>();
+        screenShake = Camera.main.GetComponent<ScreenShake>();
 
         // Find the BlueprintLook's MeshRenderer
         Transform blueprintLook = transform.Find("BlueprintLook");
@@ -65,22 +67,32 @@ public class Object : MonoBehaviour
             {
                 // Turn red for invalid placement
                 SetBlueprintColor(new Color(1f, 0f, 0f, 110 / 255f)); // Solid red
+
+                // Try to place on an occupied cell
+                if (Input.GetMouseButtonDown(0))
+                {
+                    // Trigger screen shake for invalid placement
+                    if (screenShake != null)
+                    {
+                        screenShake.TriggerShake();
+                    }
+                }
             }
             else
             {
                 // Turn blue for valid placement
                 SetBlueprintColor(new Color(0f, 0f, 1f, 110 / 255f)); // Solid blue
-            }
 
-            // Place the object
-            if (Input.GetMouseButtonDown(0) && !gridManager.IsCellOccupied(cellCenter))
-            {
-                hoverMode = false;
-                if (GetComponent<Collider>() != null)
+                // Place the object
+                if (Input.GetMouseButtonDown(0))
                 {
-                    GetComponent<Collider>().enabled = true;
+                    hoverMode = false;
+                    if (GetComponent<Collider>() != null)
+                    {
+                        GetComponent<Collider>().enabled = true;
+                    }
+                    inventory.PlaceItem();
                 }
-                inventory.PlaceItem();
             }
 
             // Cancel placement (return to inventory)
