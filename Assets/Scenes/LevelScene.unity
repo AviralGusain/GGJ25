@@ -1935,7 +1935,7 @@ PrefabInstance:
     - target: {fileID: 3914820491324946606, guid: abb1db3566fff7e49b6921f9a87f2b4b, type: 3}
       propertyPath: ghostLauncherPrefab
       value: 
-      objectReference: {fileID: 4909567520097722462, guid: 84cb0c756d9814e42b1286a8ddbfd6e3, type: 3}
+      objectReference: {fileID: 4909567520097722462, guid: 98372f92d4773c84abac1033e7f4eddd, type: 3}
     - target: {fileID: 4570354545159112860, guid: abb1db3566fff7e49b6921f9a87f2b4b, type: 3}
       propertyPath: m_Name
       value: LauncherAmount
