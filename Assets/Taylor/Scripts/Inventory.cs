@@ -6,7 +6,7 @@ public class Inventory : MonoBehaviour
 {
     public GameObject bouncerPrefab;
     public GameObject fanPrefab;
-    public GameObject launcherPrefab;       // Launcher prefab
+    public GameObject launcherPrefab;        // Launcher prefab
     public GameObject ghostBouncerPrefab;   // Ghost version of Bouncer
     public GameObject ghostFanPrefab;       // Ghost version of Fan
     public GameObject ghostLauncherPrefab;  // Ghost version of Launcher
@@ -58,56 +58,38 @@ public class Inventory : MonoBehaviour
 
     public void SelectItem(string itemName)
     {
-        // If a different item is selected while another item is already selected
-        if (selectedItem != null && selectedItem != itemName)
+        // Avoid deducting inventory count if the same item is already selected and hover object exists
+        if (selectedItem == itemName && hoverObject != null)
         {
-            // Return the inventory count for the previously selected item
-            if (hoverItemDeducted)
-            {
-                if (selectedItem == "Bouncer") bouncerInvCount++;
-                else if (selectedItem == "Fan") fanInvCount++;
-                else if (selectedItem == "Launcher") launcherInvCount++;
-            }
-
-            // Destroy the current hover object
-            if (hoverObject != null)
-            {
-                Destroy(hoverObject);
-            }
-
-            // Reset the hover deduction flag
-            hoverItemDeducted = false;
+            Debug.Log($"Item '{itemName}' is already selected.");
+            return;
         }
 
-        // Proceed to select the new item
         if ((itemName == "Bouncer" && bouncerInvCount > 0) ||
             (itemName == "Fan" && fanInvCount > 0) ||
             (itemName == "Launcher" && launcherInvCount > 0) ||  // Launcher selection
             FindFirstObjectByType<LevelStateManager>().IsInDebug() && itemName == "BaseGoal" ||
             FindFirstObjectByType<LevelStateManager>().IsInDebug() && itemName == "Wall" ||
             FindFirstObjectByType<LevelStateManager>().IsInDebug() && itemName == "Spawner"
-        )
+            ) // Debug mode for placing other stuff
         {
             selectedItem = itemName;
 
             // Deduct inventory count for hover
-            if (hoverObject == null)
+            if (itemName == "Bouncer" && bouncerInvCount > 0)
             {
-                if (itemName == "Bouncer" && bouncerInvCount > 0)
-                {
-                    bouncerInvCount--;
-                    hoverItemDeducted = true; // Mark as deducted
-                }
-                else if (itemName == "Fan" && fanInvCount > 0)
-                {
-                    fanInvCount--;
-                    hoverItemDeducted = true; // Mark as deducted
-                }
-                else if (itemName == "Launcher" && launcherInvCount > 0)
-                {
-                    launcherInvCount--;
-                    hoverItemDeducted = true; // Mark as deducted
-                }
+                bouncerInvCount--;
+                hoverItemDeducted = true; // Mark as deducted
+            }
+            else if (itemName == "Fan" && fanInvCount > 0)
+            {
+                fanInvCount--;
+                hoverItemDeducted = true; // Mark as deducted
+            }
+            else if (itemName == "Launcher" && launcherInvCount > 0)
+            {
+                launcherInvCount--;
+                hoverItemDeducted = true; // Mark as deducted
             }
 
             UpdateCounterDisplays();
@@ -116,7 +98,6 @@ public class Inventory : MonoBehaviour
             SpawnHoverObject(itemName);
         }
     }
-
 
     private void SpawnHoverObject(string itemName)
     {

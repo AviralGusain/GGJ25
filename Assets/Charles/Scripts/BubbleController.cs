@@ -168,7 +168,7 @@ public class BubbleController : MonoBehaviour
 
   void FanCollision(GameObject fan)
   {
-    Debug.Log("Wind collision");
+    //Debug.Log("Wind collision");
 
     // Swap the x and z values of the direction vector
     direction = fan.transform.right;
@@ -176,6 +176,8 @@ public class BubbleController : MonoBehaviour
     // Move in the direction by one tile using the fan transform
     finalPos = (direction.z == 0) ? new Vector3(bubble.transform.position.x + direction.x, fan.transform.position.y, fan.transform.position.z) : new Vector3(fan.transform.position.x, fan.transform.position.y, bubble.transform.position.z + direction.z);
     lerp = true;
+
+    //Debug.Log(finalPos);
 
     moveSpeed *= speedMultiplier;
 
@@ -188,6 +190,8 @@ public class BubbleController : MonoBehaviour
 
   void LauncherCollision(LauncherController launcherController)
   {
+    //Debug.Log("Launcher collision");
+
     launcher = launcherController.gameObject;
 
     // Swap the x and z values of the direction vector
@@ -198,10 +202,10 @@ public class BubbleController : MonoBehaviour
     lerp = true;
     launching = true;
 
-    
-    // trigger animation of launcher
-    launcherController.animator.SetTrigger("Launch");
+    //Debug.Log("Launcher Position: " + finalPos);
 
+    // Calculate time it should take to move to the next tile
+    //AUDIO
     bubbleAnimator.SetTrigger("Bounce");
 
     StartCoroutine(MoveOverTime(bubble.transform, bubble.position, finalPos, moveSpeed));

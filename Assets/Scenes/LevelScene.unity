@@ -1115,7 +1115,6 @@ Transform:
   - {fileID: 1908465220}
   - {fileID: 235107912}
   - {fileID: 1124451559}
-  - {fileID: 1451499882}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1124451558
@@ -1129,10 +1128,6 @@ PrefabInstance:
     - target: {fileID: 5428899864535057833, guid: e89d1bbaac2847f48949f71fcb618da5, type: 3}
       propertyPath: m_Name
       value: Soap (Static)
-      objectReference: {fileID: 0}
-    - target: {fileID: 5428899864535057833, guid: e89d1bbaac2847f48949f71fcb618da5, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9196187770797329637, guid: e89d1bbaac2847f48949f71fcb618da5, type: 3}
       propertyPath: m_LocalScale.x
@@ -1245,11 +1240,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 904223202}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &1451499882 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4582573772942352023, guid: 0e4fbdf2f97128c44bfdfcf8904a80f2, type: 3}
-  m_PrefabInstance: {fileID: 385918658}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1470351178 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3914820491324946606, guid: abb1db3566fff7e49b6921f9a87f2b4b, type: 3}
