@@ -54,6 +54,8 @@ public class LevelStateManager : MonoBehaviour
 
     string levelNameToSave = "";
 
+
+
     
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -158,13 +160,5 @@ public class LevelStateManager : MonoBehaviour
         }
     }
 
-    public void SaveLevel(string levelName)
-    {
-        LevelSaver.SaveCurrentLevel(FindFirstObjectByType<GridManager>(), this, levelName);
-    }
 
-    public void LoadLevel(string levelName)
-    {
-        LevelSaver.LoadLevel(levelName, FindFirstObjectByType<GridManager>(), this);
-    }
 }

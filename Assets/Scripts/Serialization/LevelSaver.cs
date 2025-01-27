@@ -3,6 +3,7 @@ using System.IO;
 using System.Runtime.Serialization.Json;
 using Unity.VisualScripting;
 using Unity.VisualScripting.FullSerializer;
+using UnityEditor;
 using UnityEditor.Overlays;
 using UnityEditor.Playables;
 using UnityEditor.ShaderGraph.Serialization;
@@ -27,6 +28,13 @@ public class LevelStatData
     public ArraySerializeWrapper<int> mBubbleScoreTargets = new ArraySerializeWrapper<int>();
 
     public ArraySerializeWrapper<LevelItemPackage> mLevelObjects = new ArraySerializeWrapper<LevelItemPackage>();
+}
+
+[System.Serializable]
+public class PlayerLevelScoreData
+{
+    string levelName = "";
+    int numBubbles = 3;
 }
 
 
@@ -206,6 +214,31 @@ public class LevelSaver : ScriptableObject
     //    return rawJson;
     //}
 
+    public static void SaveCurrentPlayerScores()
+    {
+        ArraySerializeWrapper<PlayerLevelScoreData> mScores = new ArraySerializeWrapper<PlayerLevelScoreData>();
+        mScores.mItems = FindFirstObjectByType<PlayerScores>().mScores.ToArray();
+
+        string playerScoreString = JsonUtility.ToJson(mScores, true);
+
+
+        // Write json to file
+        StreamWriter writer = new StreamWriter("PlayerScores.json", false);
+        writer.WriteLine(playerScoreString);
+        writer.Close();
+    }
+
+    public static void LoadPlayerScores()
+    {
+        if (File.Exists("PlayerScores" + ".json") == false)
+        {
+            Debug.Log("Level of name PlayerScores does not exist");
+            return;
+        }
+        string levelJson = File.ReadAllText("PlayerScores.json");
+
+
+    }
     public static void SaveLevel(string levelName)
     {
         LevelSaver.SaveCurrentLevel(FindFirstObjectByType<GridManager>(), FindFirstObjectByType<LevelStateManager>(), levelName);
