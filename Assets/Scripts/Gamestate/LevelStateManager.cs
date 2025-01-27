@@ -71,7 +71,7 @@ public class LevelStateManager : MonoBehaviour
          // RILEY NOTE: Load test level, just for now
         if (mHasLoadedTestLevel == false)
         {
-            LevelSaver.LoadLevel("TestLevel2", FindFirstObjectByType<GridManager>(), this); // RILEY NOTE: Start with test level, for testing. Change this when loading actual levels
+            LevelSaver.LoadLevel(FindFirstObjectByType<NextLevel>().nextLevel, FindFirstObjectByType<GridManager>(), this); // RILEY NOTE: Start with test level, for testing. Change this when loading actual levels
             mOnObjectPlaced.Invoke();
             mHasLoadedTestLevel = true;
         }

@@ -9,6 +9,8 @@ public class BubbleController : MonoBehaviour
   private GameObject bouncer;
   private GameObject launcher;
 
+  private AudioSource[] audioSources;
+
   private float moveSpeed = 0.0f;
 
   private float defaultSpeed = 5f;
@@ -29,6 +31,8 @@ public class BubbleController : MonoBehaviour
   {
     bubbleAnimator = GetComponentInChildren<Animator>();
     moveSpeed = defaultSpeed;
+
+    audioSources = GetComponents<AudioSource>();
   }
 
   // Update is called once per frame
@@ -71,11 +75,13 @@ public class BubbleController : MonoBehaviour
     if (collider.TryGetComponent(out BouncerController bouncerController) && !launching)
     {
       BouncerCollision(bouncerController);
+      audioSources[1].Play();
     }
 
     // If colliding with a wind object, pass the wind object to the fan collision method
     if (collider.CompareTag("Wind"))
     {
+      audioSources[3].Play();
       GameObject parent = collider.transform.parent.gameObject;
       Debug.Log("Parent tag: " + parent.tag);
 
@@ -84,21 +90,16 @@ public class BubbleController : MonoBehaviour
 
     if (collider.TryGetComponent(out LauncherController launchController))
     {
+      audioSources[2].Play();
       LauncherCollision(launchController);
     }
 
-        if (collider.CompareTag("Wall"))
-        {
-            Debug.Log(collider.gameObject);
-            Destroy(gameObject);
-        }
-
-        //    if (collider.CompareTag("Fan"))
-        //    {
-        //        Debug.Log("Bubble should go poppy");
-        //        Destroy(gameObject);
-        //    }
+    if (collider.CompareTag("Wall"))
+    {
+      Debug.Log(collider.gameObject);
+      Destroy(gameObject);
     }
+  }
 
   IEnumerator MoveOverTime(Transform obj, Vector3 startPos, Vector3 endPos, float speed)
   {
