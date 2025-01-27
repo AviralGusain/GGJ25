@@ -83,7 +83,7 @@ public class BubbleController : MonoBehaviour
     {
       audioSources[3].Play();
       GameObject parent = collider.transform.parent.gameObject;
-      Debug.Log("Parent tag: " + parent.tag);
+      //Debug.Log("Parent tag: " + parent.tag);
 
       FanCollision(parent);
     }
@@ -132,7 +132,7 @@ public class BubbleController : MonoBehaviour
     }
 
 
-    Debug.Log("Plane: " + plane);
+    //Debug.Log("Plane: " + plane);
 
     // Swap the x and z values of the direction vector
     GenericSwap<float>(ref direction.x, ref direction.z);
@@ -153,7 +153,7 @@ public class BubbleController : MonoBehaviour
 
   void FanCollision(GameObject fan)
   {
-    Debug.Log("Wind collision");
+    //Debug.Log("Wind collision");
 
     // Swap the x and z values of the direction vector
     direction = fan.transform.right;
@@ -162,7 +162,7 @@ public class BubbleController : MonoBehaviour
     finalPos = (direction.z == 0) ? new Vector3(bubble.transform.position.x + direction.x, fan.transform.position.y, fan.transform.position.z) : new Vector3(fan.transform.position.x, fan.transform.position.y, bubble.transform.position.z + direction.z);
     lerp = true;
 
-    Debug.Log(finalPos);
+    //Debug.Log(finalPos);
 
     moveSpeed *= speedMultiplier;
 
@@ -175,7 +175,7 @@ public class BubbleController : MonoBehaviour
 
   void LauncherCollision(LauncherController launcherController)
   {
-    Debug.Log("Launcher collision");
+    //Debug.Log("Launcher collision");
 
     launcher = launcherController.gameObject;
 
@@ -187,7 +187,7 @@ public class BubbleController : MonoBehaviour
     lerp = true;
     launching = true;
 
-    Debug.Log("Launcher Position: " + finalPos);
+    //Debug.Log("Launcher Position: " + finalPos);
 
     // Calculate time it should take to move to the next tile
     //AUDIO
