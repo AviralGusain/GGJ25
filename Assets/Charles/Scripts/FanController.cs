@@ -59,6 +59,7 @@ public class FanController : MonoBehaviour
 
     if (other.CompareTag("Bubble"))
     {
+      gameObject.GetComponent<AudioSource>().Play();
       Destroy(other.transform.gameObject);
     }
   }
