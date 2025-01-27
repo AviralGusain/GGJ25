@@ -205,6 +205,10 @@ public class LevelSaver : ScriptableObject
             GameObject placedObject = grid.PlaceObjectAtPosition(levelObjectData.position, prefabToUse); // place gameobject, with saved position, in levek
             placedObject.transform.rotation = levelObjectData.rotation; // Set rotation
         }
+
+
+        // Saves name of current level
+        levelState.SetCurrLevelName(levelName);
     }
 
     //public static string FixGeneratedJSON(string rawJson)
@@ -234,10 +238,15 @@ public class LevelSaver : ScriptableObject
             Debug.Log("Level of name PlayerScores does not exist");
             return;
         }
-        string levelJson = File.ReadAllText("PlayerScores.json");
+        string scoresJson = File.ReadAllText("PlayerScores.json");
 
+        ArraySerializeWrapper<PlayerLevelScoreData> levelScores = JsonUtility.FromJson<ArraySerializeWrapper<PlayerLevelScoreData>>(scoresJson);
+
+        FindFirstObjectByType<PlayerScores>().mScores = new List<PlayerLevelScoreData>(levelScores.mItems);
 
     }
+
+
     public static void SaveLevel(string levelName)
     {
         LevelSaver.SaveCurrentLevel(FindFirstObjectByType<GridManager>(), FindFirstObjectByType<LevelStateManager>(), levelName);

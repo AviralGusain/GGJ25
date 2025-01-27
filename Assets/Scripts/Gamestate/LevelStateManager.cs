@@ -52,7 +52,7 @@ public class LevelStateManager : MonoBehaviour
 
     bool mHasLoadedTestLevel = false;
 
-    string currLevelName = "";
+    string mCurrLevelName = "";
 
     
 
@@ -78,7 +78,6 @@ public class LevelStateManager : MonoBehaviour
             LevelSaver.LoadLevel(levelNameToLoad, FindFirstObjectByType<GridManager>(), this); // RILEY NOTE: Start with test level, for testing. Change this when loading actual levels
             mOnObjectPlaced.Invoke();
 
-            currLevelName = levelNameToLoad;
             mHasLoadedTestLevel = true;
         }
 
@@ -164,6 +163,17 @@ public class LevelStateManager : MonoBehaviour
         {
             fan.RecastFan();
         }
+    }
+
+    public void SetCurrLevelName(string name)
+    {
+        mCurrLevelName = name;
+    }
+
+
+    public void ResetCurrentLevel()
+    {
+        LoadLevel(mCurrLevelName);
     }
 
     public void SaveLevel(string levelName)
