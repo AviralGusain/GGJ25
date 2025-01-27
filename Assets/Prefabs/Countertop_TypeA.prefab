@@ -30,7 +30,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 0.8, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1229506044843509744}
@@ -240,9 +240,17 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: fc688a4b3f76b3543b29557b6973d1a9, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: fc688a4b3f76b3543b29557b6973d1a9, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 9acb7c9d99c43ed4b9dd8fc7f49b6e3a, type: 2}
+    - target: {fileID: -5754084199372789682, guid: fc688a4b3f76b3543b29557b6973d1a9, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: -5372150818862851647, guid: 4bad76dc08965644daf6029dd168fd2e, type: 3}
     - target: {fileID: 919132149155446097, guid: fc688a4b3f76b3543b29557b6973d1a9, type: 3}
       propertyPath: m_Name
       value: Countertop

@@ -8,26 +8,21 @@ public class ScreenShake : MonoBehaviour
     private Vector3 originalPosition;
     private float shakeTimeRemaining;
 
-    void Start()
-    {
-        originalPosition = transform.position;
-    }
-
     void Update()
     {
         if (shakeTimeRemaining > 0)
         {
             transform.position = originalPosition + (Vector3)(Random.insideUnitCircle * shakeMagnitude);
             shakeTimeRemaining -= Time.deltaTime;
-        }
-        else
-        {
-            transform.position = originalPosition;
+
+            if (shakeTimeRemaining <= 0)
+                transform.position = originalPosition;
         }
     }
 
     public void TriggerShake()
     {
+        originalPosition = transform.position;
         shakeTimeRemaining = shakeDuration;
     }
 }
