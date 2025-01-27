@@ -58,6 +58,13 @@ public class Inventory : MonoBehaviour
 
     public void SelectItem(string itemName)
     {
+        // Avoid deducting inventory count if the same item is already selected and hover object exists
+        if (selectedItem == itemName && hoverObject != null)
+        {
+            Debug.Log($"Item '{itemName}' is already selected.");
+            return;
+        }
+
         if ((itemName == "Bouncer" && bouncerInvCount > 0) ||
             (itemName == "Fan" && fanInvCount > 0) ||
             (itemName == "Launcher" && launcherInvCount > 0) ||  // Launcher selection
