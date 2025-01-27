@@ -44,8 +44,6 @@ public class BouncerController : MonoBehaviour
         //AUDIO
 
     // Make sure the direction passed in valid with the specified orientation
-    //Debug.Log("Direction: " + direction);
-
     switch (orientation)
     {
       // Orientation 0 (no movement down/right)
@@ -81,7 +79,6 @@ public class BouncerController : MonoBehaviour
         break;
 
       default:
-        //Debug.Log("Invalid orientation: " + orientation);
         break;
     }
 

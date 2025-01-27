@@ -26,6 +26,8 @@ public class BubbleController : MonoBehaviour
 
   public Animator bubbleAnimator;
 
+  private float distanceTraveled = 0.0f;
+
   // Start is called once before the first execution of Update after the MonoBehaviour is created
   void Start()
   {
@@ -44,10 +46,18 @@ public class BubbleController : MonoBehaviour
   {
     if (launching && !lerp)
     {
+      if (launcher == null)
+      {
+        audioSources[0].Play();
+        Destroy(gameObject);
+        return;
+      }
+
       LauncherController launchController = launcher.GetComponent<LauncherController>();
+      bubble.gameObject.GetComponent<Collider>().enabled = false;
 
       // Function will return bool that determines if position was reached
-      Vector3 newPos = launchController.LaunchBubble(bubble.gameObject, direction, moveSpeed, Time.deltaTime, ref launching);
+      Vector3 newPos = launchController.LaunchBubble(bubble.gameObject, direction, moveSpeed, Time.deltaTime, ref launching, ref distanceTraveled);
       bubble.MovePosition(newPos);
 
       return;
@@ -71,11 +81,23 @@ public class BubbleController : MonoBehaviour
   {
     moveSpeed = defaultSpeed;
 
+    Debug.Log("Disabled because Collided with: " + collider.transform.root.tag);
+
+    // If object is untagged, destroy it
+    if (collider.CompareTag("Undergrid"))
+    {
+      Debug.Log("Grid collision");
+      return;
+    }
+
+    gameObject.GetComponent<Collider>().enabled = false;
+
     // Collision with a bouncer, pass the bouncer controller to the bouncer collision method
     if (collider.TryGetComponent(out BouncerController bouncerController) && !launching)
     {
-        audioSources[1].Play();
-        BouncerCollision(bouncerController);
+      Debug.Log("Bouncer collision");
+      audioSources[1].Play();
+      BouncerCollision(bouncerController);
     }
 
     // If colliding with a wind object, pass the wind object to the fan collision method
@@ -95,12 +117,18 @@ public class BubbleController : MonoBehaviour
     }
 
 
-        //quickly make walls fucking work
-        if (collider.CompareTag("Wall"))
-        {
-            //gotta add particle effect, popping-like anim, and sfx
-            Destroy(gameObject);
-        }
+    //quickly make walls fucking work
+    if (collider.CompareTag("Wall"))
+    {
+      //gotta add particle effect, popping-like anim, and sfx
+      Destroy(gameObject);
+    }
+
+    // If the spawner, just ignore it
+    if (collider.CompareTag("Spawner"))
+    {
+      gameObject.GetComponent<Collider>().enabled = true;
+    }
   }
 
   IEnumerator MoveOverTime(Transform obj, Vector3 startPos, Vector3 endPos, float speed)
@@ -117,14 +145,13 @@ public class BubbleController : MonoBehaviour
 
     obj.position = endPos; // Ensure it reaches the exact position
     lerp = false;
+
+    // reenable collider
+    gameObject.GetComponent<Collider>().enabled = true;
   }
 
   void BouncerCollision(BouncerController bouncerController)
   {
-
-    //AUDIO
-
-
     // Retrieve the gameobject attached to the bouncer
     bouncer = bouncerController.gameObject;
 
@@ -151,9 +178,6 @@ public class BubbleController : MonoBehaviour
     finalPos = new Vector3(bouncer.transform.position.x + direction.x, bouncer.transform.position.y, bouncer.transform.position.z + direction.z);
     lerp = true;
 
-    // Calculate time it should take to move to the next tile
-
-    //AUDIO
     bubbleAnimator.SetTrigger("Bounce");
 
     StartCoroutine(MoveOverTime(bubble.transform, bubble.position, finalPos, moveSpeed));

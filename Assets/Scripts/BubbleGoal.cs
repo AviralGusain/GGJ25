@@ -20,6 +20,8 @@ public class BubbleGoal : MonoBehaviour
 
   private void OnTriggerEnter(Collider other)
   {
+    Debug.Log("BubbleGoal OnTriggerEnter");
+
     if (other.CompareTag("Bubble"))
     {
       // NOTE: Add check for being correct type of doing that. If doing that, if bubble is not of right type, pop it

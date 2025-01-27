@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4669925713586216972}
   m_Layer: 0
   m_Name: Parent
-  m_TagString: Untagged
+  m_TagString: Wind
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -26,7 +26,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0.3, z: 0.5}
-  m_LocalScale: {x: 10, y: 0, z: 1}
+  m_LocalScale: {x: 4.99, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4156559570442470225}
@@ -223,7 +223,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fan: {fileID: 7960533863981271153}
   castDistance: 10
-  first: 1
 --- !u!114 &582799455436603015
 MonoBehaviour:
   m_ObjectHideFlags: 0

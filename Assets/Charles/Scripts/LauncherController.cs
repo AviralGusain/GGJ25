@@ -4,21 +4,20 @@ using UnityEngine.Rendering;
 
 public class LauncherController : MonoBehaviour
 {
-  public float distanceTraveled = 0.0f;
   public Vector3 originalPosition = Vector3.zero;
 
   public float time = 0.0f;
 
-    private Animator animator;
+  public Animator animator;
 
-    private void Start()
-    {
-        animator = GetComponentInChildren<Animator>();
-    }
-
-    public Vector3 LaunchBubble(GameObject bubble, Vector3 dir, float moveSpeed, float dt, ref bool launching)
+  private void Start()
   {
-        animator.SetTrigger("Launch");
+    animator = GetComponentInChildren<Animator>();
+  }
+
+  public Vector3 LaunchBubble(GameObject bubble, Vector3 dir, float moveSpeed, float dt, ref bool launching, ref float distanceTraveled)
+  {
+    animator.SetTrigger("Launch");
 
     time += dt;
 
@@ -34,18 +33,14 @@ public class LauncherController : MonoBehaviour
     if (dir.x == 0)
     {
       z = Mathf.Clamp(distanceTraveled, 0f, 4f); // Ensure x stays within range
-      Debug.Log("Z: " + z);
 
       y = ParabolicArc(z);
-      Debug.Log("Y: " + y);
     }
     else
     {
       x = Mathf.Clamp(distanceTraveled, 0f, 4f); // Ensure x stays within range
-      Debug.Log("X: " + x);
 
       y = ParabolicArc(x);
-      Debug.Log("Y: " + y);
     }
     distanceTraveled += moveSpeed * dt;
 
@@ -57,7 +52,7 @@ public class LauncherController : MonoBehaviour
     {
       launching = false;
       distanceTraveled = 0;
-      Debug.Log("Time: " + time);
+      bubble.GetComponent<Collider>().enabled = true;
       return transform.GetChild(0).position;
     }
 
@@ -67,8 +62,8 @@ public class LauncherController : MonoBehaviour
   public float ParabolicArc(float x)
   {
     Vector3 result = Vector3.zero;
-   
-    float y = - (5.0f / 8.0f) * Mathf.Pow(x - 2f, 2) + 3.5f;
+
+    float y = -(5.0f / 8.0f) * Mathf.Pow(x - 2f, 2) + 3.5f;
 
     return y;
   }

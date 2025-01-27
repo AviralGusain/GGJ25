@@ -7,55 +7,42 @@ public class FanController : MonoBehaviour
 
   public float castDistance = 10f;
 
-  public bool first = true;
-
-  private Transform airChild;
+  private bool first = true;
 
   // Start is called once before the first execution of Update after the MonoBehaviour is created
   void Start()
   {
-    airChild = fan.transform.GetChild(1);
-
     FindFirstObjectByType<LevelStateManager>().mOnObjectPlaced += RecastFan;
   }
 
   // Update is called once per frame
   void Update()
   {
-    if (first)
-    {
       Vector3 distance = Vector3.zero;
+
+      Transform airChild = fan.transform.GetChild(1);
 
       // Perform a ray cast to check if any objects are hit
       RaycastHit hit;
+
       // Send the raycast from the edge of the fan geometry
-      Vector3 startPosition = /*fan.transform.position + */airChild.position;
-      //Debug.Log("Start position: " + startPosition);
-      //Debug.Log("Fan right: " + fan.transform.right);
+      Vector3 startPosition = airChild.position;
 
       if (Physics.Raycast(startPosition, fan.transform.right, out hit, castDistance))
       {
-        // Calculate the distance from the edge of the fan to the object hit
-        Vector3 test = Vector3.Scale(hit.transform.localScale, fan.transform.right);
-        //Debug.Log("Test: " + test);
+        Debug.Log("Tag Hit on Raycast: " + hit.transform.root.tag);
 
         distance = hit.point - startPosition;
-
-        //Debug.Log("Hit: " + hit.transform.name);
+        Debug.Log("Hit Point: " + hit.point);
       }
       else
       {
         distance = (fan.transform.right * castDistance);
       }
 
-      //Debug.Log("Distance of raycast: " + distance);
-
       // Set the scale of the air child to the distance of the raycast
-      Vector3 scale = new Vector3(distance.magnitude, 0, 1);
+      Vector3 scale = new Vector3(distance.magnitude, 0, 0);
       airChild.localScale = scale;
-
-      first = false;
-    }
   }
 
   private void OnDestroy()

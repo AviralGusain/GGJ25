@@ -15,6 +15,7 @@ TagManager:
   - Ghost_Fan
   - Wand
   - Spawner
+  - Undergrid
   layers:
   - Default
   - TransparentFX
