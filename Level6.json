@@ -1,6 +1,6 @@
 {
-    "numStartingBouncers": 3,
-    "numStartingFans": 0,
+    "numStartingBouncers": 6,
+    "numStartingFans": 3,
     "numStartingLaunchers": 0,
     "mBubbleScoreTargets": {
         "mItems": [
