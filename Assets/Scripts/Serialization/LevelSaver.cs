@@ -32,8 +32,8 @@ public class LevelStatData
 [System.Serializable]
 public class PlayerLevelScoreData
 {
-    string levelName = "";
-    int numBubbles = 3;
+    public string levelName = "";
+    public int numBubbles = 3;
 }
 
 
@@ -191,7 +191,7 @@ public class LevelSaver : ScriptableObject
         // Set inventory based on loaded info (make sure to use set function)
         FindFirstObjectByType<Inventory>().SetNumBouncers(levelState.mNumStartingBouncers);
         FindFirstObjectByType<Inventory>().SetNumFans(levelState.mNumStartingFans);
-        FindFirstObjectByType<Inventory>().SetNumLaunchers(levelState.mNumStartingFans);
+        FindFirstObjectByType<Inventory>().SetNumLaunchers(levelState.mNumStartingLaunchers);
 
         // Spawn each saved object
         foreach (LevelItemPackage levelObjectData in loadedData.mLevelObjects.mItems)
