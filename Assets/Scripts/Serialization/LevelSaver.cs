@@ -120,8 +120,8 @@ public class LevelSaver : ScriptableObject
 
                 // Save rotation
                 currItem.rotation = currLevelObject.transform.rotation;
-
-                levelItemsList.Add(currItem); // Add to list of saved items
+                 
+                levelItemsList.Add(currItem);
             }
         }
 
@@ -152,7 +152,12 @@ public class LevelSaver : ScriptableObject
         string levelSaveJson = JsonUtility.ToJson(saveData, true);
 
         // Write json to file
-        StreamWriter writer = new StreamWriter(levelName + ".json", false);
+        //string filepathPrefix = "Resources/LevelData/";
+        //string filepathPrefix = Application.dataPath + "/SaveData/Levels/";
+
+        string filepathPrefix = "";
+        //StreamWriter writer = new StreamWriter(Application.persistentDataPath + "/" + levelName + ".json", false);
+        StreamWriter writer = new StreamWriter(filepathPrefix + levelName + ".json", false);
         writer.WriteLine(levelSaveJson);
         writer.Close();
     }
@@ -164,13 +169,17 @@ public class LevelSaver : ScriptableObject
 
         grid.RebuildGrid();
 
-        
-        if (File.Exists(levelName  + ".json") == false)
+        //string filepathPrefix = "Resources/LevelData";
+        //string filepathPrefix = Application.dataPath + "/SaveData/Levels/";
+        string filepathPrefix = "";
+
+
+        if (File.Exists(filepathPrefix + levelName  + ".json") == false)
         {
             Debug.Log("Level of name " + levelName + " does not exist");
             return;
         }
-        string levelJson = File.ReadAllText(levelName + ".json");
+        string levelJson = File.ReadAllText(filepathPrefix + levelName + ".json");
 
 
 

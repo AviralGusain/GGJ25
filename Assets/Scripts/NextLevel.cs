@@ -65,6 +65,7 @@ public class NextLevel : MonoBehaviour
             {
                 print("NextLevel:StartNextLevel: Tried to go to the next level but already at max level number " + levelNumber + " going to main menu instead");
                 SceneManager.LoadScene("MainMenu");
+                return;
             }
 
             nextLevel.nextLevel = "Level" + levelNumber;

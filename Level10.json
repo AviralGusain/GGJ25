@@ -1,0 +1,56 @@
+{
+    "numStartingBouncers": 99,
+    "numStartingFans": 99,
+    "numStartingLaunchers": 99,
+    "mBubbleScoreTargets": {
+        "mItems": [
+            20
+        ]
+    },
+    "mNumExcpectedResourceUses": {
+        "mItems": [
+            5,
+            5,
+            5
+        ]
+    },
+    "mHowManyLessThanExpectedForBubbleScore": {
+        "mItems": [
+            0,
+            0,
+            0
+        ]
+    },
+    "mLevelObjects": {
+        "mItems": [
+            {
+                "prefabName": "Spawner",
+                "position": {
+                    "x": -15.5,
+                    "y": 0.0,
+                    "z": -10.5
+                },
+                "rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 1.0
+                }
+            },
+            {
+                "prefabName": "BaseGoal",
+                "position": {
+                    "x": -6.5,
+                    "y": 0.0,
+                    "z": -5.5
+                },
+                "rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 1.0
+                }
+            }
+        ]
+    }
+}
