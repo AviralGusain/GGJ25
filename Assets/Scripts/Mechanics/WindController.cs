@@ -62,8 +62,12 @@ public class WindController : MonoBehaviour
 
   private void OnTriggerEnter(Collider other)
   {
+    Debug.Log("Wind OnTriggerEnter");
+
     if (other.CompareTag("Bubble"))
     {
+      Debug.Log("Bubble hit wind");
+
       gameObject.GetComponent<AudioSource>().Play();
       Destroy(other.transform.gameObject);
     }
