@@ -104,12 +104,12 @@ public class LevelStateManager : MonoBehaviour
             mHasLoadedTestLevel = true;
         }
 
-        if (Input.GetKeyUp(KeyCode.S))
+        if (Input.GetKeyUp(KeyCode.S) && mInDebug)
         {
             LevelSaver.SaveCurrentLevel(FindFirstObjectByType<GridManager>(), this);
         }
 
-        if (Input.GetKeyUp(KeyCode.R))
+        if (Input.GetKeyUp(KeyCode.R) && mInDebug)
         {
             GridManager grid = FindFirstObjectByType<GridManager>();
 
