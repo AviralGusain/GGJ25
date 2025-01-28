@@ -9,8 +9,7 @@ public class WallController : MonoBehaviour
     {
       // Play audio source attached to wall
       gameObject.GetComponent<AudioSource>().Play();
-
-      Destroy(other.gameObject);
+      other.GetComponent<BubbleController>().PopSequence();
     }
   }
 }

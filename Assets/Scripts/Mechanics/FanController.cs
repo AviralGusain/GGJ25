@@ -8,8 +8,8 @@ public class FanController : MonoBehaviour
       // Play audio
       gameObject.GetComponent<AudioSource>().Play();
 
-      // Destroy the bubble
-      Destroy(other.gameObject);
+            // Destroy the bubble
+            other.GetComponent<BubbleController>().PopSequence();
     }
   }
 }

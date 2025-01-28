@@ -17,6 +17,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/LevelScene.unity
     guid: 02dac4071e3c32145be9336a5db40f94
+  - enabled: 1
+    path: Assets/Jared/WinScreen/Win Scene.unity
+    guid: fd2497a34a1b46440b9f7456ef880cfc
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0
