@@ -18,13 +18,16 @@ public class CounterDecor : MonoBehaviour
         {
             int randomThree = Random.Range(0, 3);
 
-            for (int i = 0; i <= randomThree; i++)
-            {
-                Vector3 offset = new Vector3(transform.position.x, transform.position.y - 0.25f, transform.position.z);
+            GameObject obj = Instantiate(decorations[randomThree], decorParent.position, Quaternion.identity);
+            obj.transform.SetParent(decorParent);
 
-                GameObject obj = Instantiate(decorations[i], offset, Quaternion.identity);
-                obj.transform.SetParent(decorParent);
-            }
+            //for (int i = 0; i <= randomThree; i++)
+            //{
+            //    Vector3 offset = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+
+            //    GameObject obj = Instantiate(decorations[i], offset, Quaternion.identity);
+            //    obj.transform.SetParent(decorParent);
+            //}
 
             int randomRotation = Random.Range(0, 4) * 90;
             decorParent.rotation = Quaternion.Euler(0, randomRotation, 0);
