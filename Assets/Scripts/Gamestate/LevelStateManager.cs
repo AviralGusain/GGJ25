@@ -136,6 +136,12 @@ public class LevelStateManager : MonoBehaviour
                 scoresHolder.SetNewScore(mCurrLevelName, levelScore, true);
             }
 
+            NextLevel nextLevel = FindFirstObjectByType<NextLevel>();
+            if (nextLevel != null)
+            {
+                nextLevel.lastLevel = mCurrLevelName;
+            }
+            
             mCurrState = LevelState.Complete;
 
         }
