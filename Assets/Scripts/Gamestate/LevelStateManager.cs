@@ -227,7 +227,7 @@ public class LevelStateManager : MonoBehaviour
 
     public void ObjectPlaced()
     {
-        FanController[] fans = FindObjectsByType<FanController>(FindObjectsSortMode.None);
+        WindController[] fans = FindObjectsByType<WindController>(FindObjectsSortMode.None);
         foreach (var fan in fans)
         {
             fan.RecastFan();

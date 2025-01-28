@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: -5851893214661909264}
   - component: {fileID: 278231599991330454}
   - component: {fileID: -6584578281738723575}
+  - component: {fileID: 755760308722143629}
   m_Layer: 0
   m_Name: Countertop_TypeC
   m_TagString: Wall
@@ -34,6 +35,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1488281555391405432}
+  - {fileID: 4050138987755367730}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &5882566099095541176
@@ -179,6 +181,55 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &755760308722143629
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2809541940165842920}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73e70d308426e8b43891469d2b87742e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  decorations:
+  - {fileID: 4426332305388539789, guid: 176545cf7ef3fda40a9ac5218317589c, type: 3}
+  - {fileID: 84585894954803359, guid: 0211405edabfb934389d0606b54bd4c6, type: 3}
+  - {fileID: 5428899864535057833, guid: e89d1bbaac2847f48949f71fcb618da5, type: 3}
+  oneIn: 4
+  decorParent: {fileID: 4050138987755367730}
+--- !u!1 &6884875168981407044
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4050138987755367730}
+  m_Layer: 0
+  m_Name: DecorParent
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4050138987755367730
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6884875168981407044}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6527694938525630403}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1381981993295919763
 PrefabInstance:
   m_ObjectHideFlags: 0

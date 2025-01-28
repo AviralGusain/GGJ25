@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 public class SplashScreen : MonoBehaviour
 {
     private float Timer = 0f;
-    public float Duration = 4;
+    public float Duration = 4.25f;
 
     private void Start()
     {
@@ -17,6 +17,11 @@ public class SplashScreen : MonoBehaviour
         Timer += Time.deltaTime;
 
         if (Timer >= Duration)
+        {
+            SceneManager.LoadScene("MainMenu");
+        }
+
+        if (Input.GetMouseButtonDown(0))
         {
             SceneManager.LoadScene("MainMenu");
         }
