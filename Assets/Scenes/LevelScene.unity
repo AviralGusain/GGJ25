@@ -3254,6 +3254,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3914820491324946606, guid: e430cb0467abdf741943d4f8dbc41d6b, type: 3}
+      propertyPath: ghostLauncherPrefab
+      value: 
+      objectReference: {fileID: 4909567520097722462, guid: 98372f92d4773c84abac1033e7f4eddd, type: 3}
     - target: {fileID: 8441832252728573502, guid: e430cb0467abdf741943d4f8dbc41d6b, type: 3}
       propertyPath: m_Name
       value: LevelCanvasNEW
