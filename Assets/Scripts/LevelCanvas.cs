@@ -10,6 +10,8 @@ public class LevelCanvas : MonoBehaviour
     private void Start()
     {
         PauseButton.onClick.AddListener(Pause);
+        ResetButton.onClick.AddListener(ResetButtonFunction);
+
         PM = FindAnyObjectByType<PauseManager>();
     }
 
@@ -25,6 +27,6 @@ public class LevelCanvas : MonoBehaviour
 
     public void ResetButtonFunction()
     {
-        //Whatever happens when you press reset
+        FindAnyObjectByType<LevelStateManager>().ResetCurrentLevel();
     }
 }
