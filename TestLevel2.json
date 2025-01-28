@@ -402,6 +402,20 @@
                 }
             },
             {
+                "prefabName": "BaseGoal",
+                "position": {
+                    "x": -9.5,
+                    "y": 0.0,
+                    "z": -8.5
+                },
+                "rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 1.0
+                }
+            },
+            {
                 "prefabName": "Wall",
                 "position": {
                     "x": -9.5,
