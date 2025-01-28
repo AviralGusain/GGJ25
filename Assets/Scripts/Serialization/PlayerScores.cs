@@ -8,10 +8,24 @@ public class PlayerScores : MonoBehaviour
 {
     public List<PlayerLevelScoreData> mScores;
 
+    static PlayerScores mInstance;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        if (mInstance == null) // If no instance made
+        {
+            mInstance = this;
+        }
+        else // Already an instance, destroy it
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        DontDestroyOnLoad(gameObject);
+
+        LevelSaver.LoadPlayerScores();
     }
 
     // Update is called once per frame

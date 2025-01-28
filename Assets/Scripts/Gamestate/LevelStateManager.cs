@@ -135,6 +135,7 @@ public class LevelStateManager : MonoBehaviour
             if (scoresHolder != null)
             {
                 scoresHolder.SetNewScore(mCurrLevelName, levelScore, true);
+                LevelSaver.SaveCurrentPlayerScores();
             }
 
             NextLevel nextLevel = FindFirstObjectByType<NextLevel>();
