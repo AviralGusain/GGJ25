@@ -209,6 +209,8 @@ public class LevelSaver : ScriptableObject
 
         // Saves name of current level
         levelState.SetCurrLevelName(levelName);
+
+        levelState.ReInitLevel();
     }
 
     //public static string FixGeneratedJSON(string rawJson)
