@@ -803,7 +803,7 @@ MonoBehaviour:
     between views. Have fun!
   Screenshot1: {fileID: 21300000, guid: 9903c9a0fa610d74387d7a996a0aea8e, type: 3}
   Screenshot2: {fileID: 21300000, guid: ec729e8bdce2db540bb0fb534e43e064, type: 3}
-  Screenshot3: {fileID: 21300000, guid: 3f2a0d668ee93c44db5324b8972a502a, type: 3}
+  Screenshot3: {fileID: 21300000, guid: b275854f172048a4d8689a2af93e7f6c, type: 3}
 --- !u!1 &8088252337737329354
 GameObject:
   m_ObjectHideFlags: 0
