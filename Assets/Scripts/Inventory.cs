@@ -210,6 +210,7 @@ public class Inventory : MonoBehaviour
             }
 
             FindFirstObjectByType<LevelStateManager>().mOnObjectPlaced.Invoke();
+            FindFirstObjectByType<LevelStateManager>().ObjectPlaced(placedObject);
         }
 
         // Reset hover item state
@@ -255,6 +256,8 @@ public class Inventory : MonoBehaviour
         {
             launcherInvCount++;
         }
+
+        FindFirstObjectByType<LevelStateManager>().mOnObjectPlaced.Invoke();
 
         UpdateCounterDisplays();
     }
