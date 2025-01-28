@@ -8,6 +8,7 @@ public class BubbleController : MonoBehaviour
   public Rigidbody bubble;
   private GameObject bouncer;
   private GameObject launcher;
+  private GameObject windObject;
 
   private AudioSource[] audioSources;
 
@@ -77,6 +78,13 @@ public class BubbleController : MonoBehaviour
 
   private void OnTriggerEnter(Collider collider)
   {
+    if (ReferenceEquals(windObject, collider.gameObject))
+    {
+      moveSpeed = defaultSpeed * speedMultiplier;
+      gameObject.GetComponent<Collider>().enabled = true;
+      return;
+    }
+
     moveSpeed = defaultSpeed;
 
     // If object is untagged, destroy it
@@ -91,6 +99,7 @@ public class BubbleController : MonoBehaviour
     if (collider.TryGetComponent(out BouncerController bouncerController) && !launching)
     {
       BouncerCollision(bouncerController);
+      return;
     }
 
     // Collision with a launcher
@@ -102,14 +111,16 @@ public class BubbleController : MonoBehaviour
       launchController.animator.SetTrigger("Launch");
 
       LauncherCollision(launchController);
+
+      return;
     }
 
     // Collision with a wind object
     if (collider.CompareTag("Wind"))
-    { 
+    {
+      windObject = collider.gameObject;
       WindCollision(collider.gameObject);
     }
-
   }
 
   IEnumerator MoveOverTime(Transform obj, Vector3 startPos, Vector3 endPos, float speed)
@@ -163,7 +174,14 @@ public class BubbleController : MonoBehaviour
 
   void WindCollision(GameObject wind)
   {
-    Debug.Log("Wind collision");
+    Debug.Log("Initial Wind Collision");
+
+    // Play wind audio from
+    AudioSource audio = wind.GetComponent<AudioSource>();
+    if (audio != null)
+    {
+      audio.Play();
+    }
 
     // Swap the x and z values of the direction vector
     direction = wind.transform.right;
