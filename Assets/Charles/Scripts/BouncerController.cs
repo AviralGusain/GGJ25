@@ -35,13 +35,14 @@ public class BouncerController : MonoBehaviour
 
     possible = CollisionCheck(direction, orientation);
 
+    if (!possible) gameObject.GetComponent<AudioSource>().Play();
+
     return orientation;
   }
 
   private bool CollisionCheck(Vector3 direction, int orientation)
   {
         animator.SetTrigger("Bounce");
-        //AUDIO
 
     // Make sure the direction passed in valid with the specified orientation
     switch (orientation)

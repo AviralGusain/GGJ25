@@ -5,9 +5,7 @@ public class FanController : MonoBehaviour
 {
   public GameObject fan;
 
-  public float castDistance = 10f;
-
-  private bool first = true;
+  private float castDistance = 10f;
 
   // Start is called once before the first execution of Update after the MonoBehaviour is created
   void Start()
@@ -15,34 +13,30 @@ public class FanController : MonoBehaviour
     FindFirstObjectByType<LevelStateManager>().mOnObjectPlaced += RecastFan;
   }
 
-  // Update is called once per frame
-  void Update()
+  // Call Recast whenever object is placed
+  public void Recast()
   {
-      Vector3 distance = Vector3.zero;
+    Debug.Log("Recasting fan");
 
-      Transform airChild = fan.transform.GetChild(1);
+    // Start by establishing the direction in which a ray will be cast
+    Vector3 direction = transform.right;
 
-      // Perform a ray cast to check if any objects are hit
-      RaycastHit hit;
+    float distance = castDistance;
 
-      // Send the raycast from the edge of the fan geometry
-      Vector3 startPosition = airChild.position;
+    // Cast a ray in the direction of the fan
+    if (Physics.Raycast(transform.position, direction, out RaycastHit hit, castDistance))
+    {
+      // Print name of object that was hit
+      Debug.Log("Hit object: " + hit.collider.gameObject.name);
 
-      if (Physics.Raycast(startPosition, fan.transform.right, out hit, castDistance))
-      {
-        Debug.Log("Tag Hit on Raycast: " + hit.transform.root.tag);
+      distance = hit.distance;
 
-        distance = hit.point - startPosition;
-        Debug.Log("Hit Point: " + hit.point);
-      }
-      else
-      {
-        distance = (fan.transform.right * castDistance);
-      }
+      Debug.Log("Hit distance: " + distance);
+    }
 
-      // Set the scale of the air child to the distance of the raycast
-      Vector3 scale = new Vector3(distance.magnitude, 0, 0);
-      airChild.localScale = scale;
+    // Set the scale of the fan to the distance of the raycast
+    fan.transform.localScale = new Vector3(distance, fan.transform.localScale.y, fan.transform.localScale.z);
+    Debug.Log("Fan scale: " + fan.transform.localScale);
   }
 
   private void OnDestroy()
@@ -56,7 +50,6 @@ public class FanController : MonoBehaviour
 
   private void OnTriggerEnter(Collider other)
   {
-
     if (other.CompareTag("Bubble"))
     {
       gameObject.GetComponent<AudioSource>().Play();
@@ -66,7 +59,7 @@ public class FanController : MonoBehaviour
 
   public void RecastFan()
   {
-    first = true;
+    Recast();
   }
 
 }
