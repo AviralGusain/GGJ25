@@ -34,6 +34,14 @@ public class CameraManager : MonoBehaviour
         AdjustCamera();
     }
 
+    public void Swap()
+    {
+        perspective = !perspective;
+        currentTarget = perspective ? perspectivePosition : topDownPosition;
+
+        elapsedTime = 0;
+    }
+
     private void AdjustCamera()
     {
         float duration = (transitionSpeed > 0.0f) ? (Vector3.Distance(cameraTransform.position, currentTarget.position) / transitionSpeed) : 0;
