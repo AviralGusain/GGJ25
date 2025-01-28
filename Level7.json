@@ -7,6 +7,20 @@
             5
         ]
     },
+    "mNumExcpectedResourceUses": {
+        "mItems": [
+            1,
+            2,
+            2
+        ]
+    },
+    "mHowManyLessThanExpectedForBubbleScore": {
+        "mItems": [
+            1,
+            2,
+            3
+        ]
+    },
     "mLevelObjects": {
         "mItems": [
             {

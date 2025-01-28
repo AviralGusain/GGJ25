@@ -1,7 +1,7 @@
 {
-    "numStartingBouncers": 6,
-    "numStartingFans": 3,
-    "numStartingLaunchers": 0,
+    "numStartingBouncers": 5,
+    "numStartingFans": 5,
+    "numStartingLaunchers": 5,
     "mBubbleScoreTargets": {
         "mItems": [
             5
@@ -9,16 +9,16 @@
     },
     "mNumExcpectedResourceUses": {
         "mItems": [
-            6,
-            3,
+            0,
+            0,
             0
         ]
     },
     "mHowManyLessThanExpectedForBubbleScore": {
         "mItems": [
             0,
-            1,
-            2
+            0,
+            0
         ]
     },
     "mLevelObjects": {
@@ -262,6 +262,20 @@
                 }
             },
             {
+                "prefabName": "Spawner",
+                "position": {
+                    "x": -14.5,
+                    "y": 0.0,
+                    "z": -10.5
+                },
+                "rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 1.0
+                }
+            },
+            {
                 "prefabName": "Wall",
                 "position": {
                     "x": -14.5,
@@ -290,20 +304,6 @@
                 }
             },
             {
-                "prefabName": "Spawner",
-                "position": {
-                    "x": -13.5,
-                    "y": 0.0,
-                    "z": -7.5
-                },
-                "rotation": {
-                    "x": 0.0,
-                    "y": 0.7071068286895752,
-                    "z": 0.0,
-                    "w": 0.7071068286895752
-                }
-            },
-            {
                 "prefabName": "Wall",
                 "position": {
                     "x": -13.5,
@@ -363,6 +363,160 @@
                 "prefabName": "Wall",
                 "position": {
                     "x": -11.5,
+                    "y": 0.0,
+                    "z": -4.5
+                },
+                "rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 1.0
+                }
+            },
+            {
+                "prefabName": "Wall",
+                "position": {
+                    "x": -10.5,
+                    "y": 0.0,
+                    "z": -11.5
+                },
+                "rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 1.0
+                }
+            },
+            {
+                "prefabName": "Wall",
+                "position": {
+                    "x": -10.5,
+                    "y": 0.0,
+                    "z": -4.5
+                },
+                "rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 1.0
+                }
+            },
+            {
+                "prefabName": "Wall",
+                "position": {
+                    "x": -9.5,
+                    "y": 0.0,
+                    "z": -11.5
+                },
+                "rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 1.0
+                }
+            },
+            {
+                "prefabName": "BaseGoal",
+                "position": {
+                    "x": -9.5,
+                    "y": 0.0,
+                    "z": -8.5
+                },
+                "rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 1.0
+                }
+            },
+            {
+                "prefabName": "Wall",
+                "position": {
+                    "x": -9.5,
+                    "y": 0.0,
+                    "z": -4.5
+                },
+                "rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 1.0
+                }
+            },
+            {
+                "prefabName": "Wall",
+                "position": {
+                    "x": -8.5,
+                    "y": 0.0,
+                    "z": -11.5
+                },
+                "rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 1.0
+                }
+            },
+            {
+                "prefabName": "Wall",
+                "position": {
+                    "x": -8.5,
+                    "y": 0.0,
+                    "z": -4.5
+                },
+                "rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 1.0
+                }
+            },
+            {
+                "prefabName": "Wall",
+                "position": {
+                    "x": -7.5,
+                    "y": 0.0,
+                    "z": -11.5
+                },
+                "rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 1.0
+                }
+            },
+            {
+                "prefabName": "Wall",
+                "position": {
+                    "x": -7.5,
+                    "y": 0.0,
+                    "z": -4.5
+                },
+                "rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 1.0
+                }
+            },
+            {
+                "prefabName": "Wall",
+                "position": {
+                    "x": -6.5,
+                    "y": 0.0,
+                    "z": -11.5
+                },
+                "rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 1.0
+                }
+            },
+            {
+                "prefabName": "Wall",
+                "position": {
+                    "x": -6.5,
                     "y": 0.0,
                     "z": -10.5
                 },
@@ -376,7 +530,7 @@
             {
                 "prefabName": "Wall",
                 "position": {
-                    "x": -11.5,
+                    "x": -6.5,
                     "y": 0.0,
                     "z": -9.5
                 },
@@ -390,7 +544,7 @@
             {
                 "prefabName": "Wall",
                 "position": {
-                    "x": -11.5,
+                    "x": -6.5,
                     "y": 0.0,
                     "z": -8.5
                 },
@@ -404,7 +558,7 @@
             {
                 "prefabName": "Wall",
                 "position": {
-                    "x": -11.5,
+                    "x": -6.5,
                     "y": 0.0,
                     "z": -7.5
                 },
@@ -418,7 +572,7 @@
             {
                 "prefabName": "Wall",
                 "position": {
-                    "x": -11.5,
+                    "x": -6.5,
                     "y": 0.0,
                     "z": -6.5
                 },
@@ -427,356 +581,6 @@
                     "y": 0.0,
                     "z": 0.0,
                     "w": 1.0
-                }
-            },
-            {
-                "prefabName": "Wall",
-                "position": {
-                    "x": -11.5,
-                    "y": 0.0,
-                    "z": -4.5
-                },
-                "rotation": {
-                    "x": 0.0,
-                    "y": 0.0,
-                    "z": 0.0,
-                    "w": 1.0
-                }
-            },
-            {
-                "prefabName": "Wall",
-                "position": {
-                    "x": -10.5,
-                    "y": 0.0,
-                    "z": -11.5
-                },
-                "rotation": {
-                    "x": 0.0,
-                    "y": 0.0,
-                    "z": 0.0,
-                    "w": 1.0
-                }
-            },
-            {
-                "prefabName": "Wall",
-                "position": {
-                    "x": -10.5,
-                    "y": 0.0,
-                    "z": -10.5
-                },
-                "rotation": {
-                    "x": 0.0,
-                    "y": 0.0,
-                    "z": 0.0,
-                    "w": 1.0
-                }
-            },
-            {
-                "prefabName": "Wall",
-                "position": {
-                    "x": -10.5,
-                    "y": 0.0,
-                    "z": -4.5
-                },
-                "rotation": {
-                    "x": 0.0,
-                    "y": 0.0,
-                    "z": 0.0,
-                    "w": 1.0
-                }
-            },
-            {
-                "prefabName": "Wall",
-                "position": {
-                    "x": -9.5,
-                    "y": 0.0,
-                    "z": -11.5
-                },
-                "rotation": {
-                    "x": 0.0,
-                    "y": 0.0,
-                    "z": 0.0,
-                    "w": 1.0
-                }
-            },
-            {
-                "prefabName": "Wall",
-                "position": {
-                    "x": -9.5,
-                    "y": 0.0,
-                    "z": -10.5
-                },
-                "rotation": {
-                    "x": 0.0,
-                    "y": 0.0,
-                    "z": 0.0,
-                    "w": 1.0
-                }
-            },
-            {
-                "prefabName": "Wall",
-                "position": {
-                    "x": -9.5,
-                    "y": 0.0,
-                    "z": -8.5
-                },
-                "rotation": {
-                    "x": 0.0,
-                    "y": 0.0,
-                    "z": 0.0,
-                    "w": 1.0
-                }
-            },
-            {
-                "prefabName": "Wall",
-                "position": {
-                    "x": -9.5,
-                    "y": 0.0,
-                    "z": -7.5
-                },
-                "rotation": {
-                    "x": 0.0,
-                    "y": 0.0,
-                    "z": 0.0,
-                    "w": 1.0
-                }
-            },
-            {
-                "prefabName": "Wall",
-                "position": {
-                    "x": -9.5,
-                    "y": 0.0,
-                    "z": -6.5
-                },
-                "rotation": {
-                    "x": 0.0,
-                    "y": 0.0,
-                    "z": 0.0,
-                    "w": 1.0
-                }
-            },
-            {
-                "prefabName": "Wall",
-                "position": {
-                    "x": -9.5,
-                    "y": 0.0,
-                    "z": -5.5
-                },
-                "rotation": {
-                    "x": 0.0,
-                    "y": 0.0,
-                    "z": 0.0,
-                    "w": 1.0
-                }
-            },
-            {
-                "prefabName": "Wall",
-                "position": {
-                    "x": -9.5,
-                    "y": 0.0,
-                    "z": -4.5
-                },
-                "rotation": {
-                    "x": 0.0,
-                    "y": 0.0,
-                    "z": 0.0,
-                    "w": 1.0
-                }
-            },
-            {
-                "prefabName": "Wall",
-                "position": {
-                    "x": -8.5,
-                    "y": 0.0,
-                    "z": -11.5
-                },
-                "rotation": {
-                    "x": 0.0,
-                    "y": 0.0,
-                    "z": 0.0,
-                    "w": 1.0
-                }
-            },
-            {
-                "prefabName": "Wall",
-                "position": {
-                    "x": -8.5,
-                    "y": 0.0,
-                    "z": -10.5
-                },
-                "rotation": {
-                    "x": 0.0,
-                    "y": 0.0,
-                    "z": 0.0,
-                    "w": 1.0
-                }
-            },
-            {
-                "prefabName": "Wall",
-                "position": {
-                    "x": -8.5,
-                    "y": 0.0,
-                    "z": -5.5
-                },
-                "rotation": {
-                    "x": 0.0,
-                    "y": 0.0,
-                    "z": 0.0,
-                    "w": 1.0
-                }
-            },
-            {
-                "prefabName": "Wall",
-                "position": {
-                    "x": -8.5,
-                    "y": 0.0,
-                    "z": -4.5
-                },
-                "rotation": {
-                    "x": 0.0,
-                    "y": 0.0,
-                    "z": 0.0,
-                    "w": 1.0
-                }
-            },
-            {
-                "prefabName": "Wall",
-                "position": {
-                    "x": -7.5,
-                    "y": 0.0,
-                    "z": -11.5
-                },
-                "rotation": {
-                    "x": 0.0,
-                    "y": 0.0,
-                    "z": 0.0,
-                    "w": 1.0
-                }
-            },
-            {
-                "prefabName": "Wall",
-                "position": {
-                    "x": -7.5,
-                    "y": 0.0,
-                    "z": -10.5
-                },
-                "rotation": {
-                    "x": 0.0,
-                    "y": 0.0,
-                    "z": 0.0,
-                    "w": 1.0
-                }
-            },
-            {
-                "prefabName": "Wall",
-                "position": {
-                    "x": -7.5,
-                    "y": 0.0,
-                    "z": -8.5
-                },
-                "rotation": {
-                    "x": 0.0,
-                    "y": 0.0,
-                    "z": 0.0,
-                    "w": 1.0
-                }
-            },
-            {
-                "prefabName": "Wall",
-                "position": {
-                    "x": -7.5,
-                    "y": 0.0,
-                    "z": -7.5
-                },
-                "rotation": {
-                    "x": 0.0,
-                    "y": 0.0,
-                    "z": 0.0,
-                    "w": 1.0
-                }
-            },
-            {
-                "prefabName": "Wall",
-                "position": {
-                    "x": -7.5,
-                    "y": 0.0,
-                    "z": -5.5
-                },
-                "rotation": {
-                    "x": 0.0,
-                    "y": 0.0,
-                    "z": 0.0,
-                    "w": 1.0
-                }
-            },
-            {
-                "prefabName": "Wall",
-                "position": {
-                    "x": -7.5,
-                    "y": 0.0,
-                    "z": -4.5
-                },
-                "rotation": {
-                    "x": 0.0,
-                    "y": 0.0,
-                    "z": 0.0,
-                    "w": 1.0
-                }
-            },
-            {
-                "prefabName": "Wall",
-                "position": {
-                    "x": -6.5,
-                    "y": 0.0,
-                    "z": -11.5
-                },
-                "rotation": {
-                    "x": 0.0,
-                    "y": 0.0,
-                    "z": 0.0,
-                    "w": 1.0
-                }
-            },
-            {
-                "prefabName": "Wall",
-                "position": {
-                    "x": -6.5,
-                    "y": 0.0,
-                    "z": -10.5
-                },
-                "rotation": {
-                    "x": 0.0,
-                    "y": 0.0,
-                    "z": 0.0,
-                    "w": 1.0
-                }
-            },
-            {
-                "prefabName": "Wall",
-                "position": {
-                    "x": -6.5,
-                    "y": 0.0,
-                    "z": -8.5
-                },
-                "rotation": {
-                    "x": 0.0,
-                    "y": 0.0,
-                    "z": 0.0,
-                    "w": 1.0
-                }
-            },
-            {
-                "prefabName": "BaseGoal",
-                "position": {
-                    "x": -6.5,
-                    "y": 0.0,
-                    "z": -7.5
-                },
-                "rotation": {
-                    "x": 0.0,
-                    "y": 0.7071068286895752,
-                    "z": 0.0,
-                    "w": 0.7071068286895752
                 }
             },
             {
