@@ -175,7 +175,7 @@ public class Object : MonoBehaviour
         }
         else
         {
-            Debug.LogError("Blueprint Renderer not assigned or missing!");
+            //Debug.LogError("Blueprint Renderer not assigned or missing!");
         }
     }
 }
