@@ -22,8 +22,6 @@ public class BubbleController : MonoBehaviour
   private bool launching = false;
   private Vector3 finalPos;
 
-  public bool reset = false;
-
   public Animator bubbleAnimator;
 
   private float distanceTraveled = 0.0f;
@@ -95,6 +93,7 @@ public class BubbleController : MonoBehaviour
       BouncerCollision(bouncerController);
     }
 
+    // Collision with a launcher
     if (collider.TryGetComponent(out LauncherController launchController))
     {
       audioSources[0].Play();
@@ -104,6 +103,13 @@ public class BubbleController : MonoBehaviour
 
       LauncherCollision(launchController);
     }
+
+    // Collision with a wind object
+    if (collider.CompareTag("Wind"))
+    { 
+      WindCollision(collider.gameObject);
+    }
+
   }
 
   IEnumerator MoveOverTime(Transform obj, Vector3 startPos, Vector3 endPos, float speed)
@@ -155,25 +161,22 @@ public class BubbleController : MonoBehaviour
     StartCoroutine(MoveOverTime(bubble.transform, bubble.position, finalPos, moveSpeed));
   }
 
-  void FanCollision(GameObject fan)
+  void WindCollision(GameObject wind)
   {
-    //Debug.Log("Wind collision");
+    Debug.Log("Wind collision");
 
     // Swap the x and z values of the direction vector
-    direction = fan.transform.right;
+    direction = wind.transform.right;
 
     // Move in the direction by one tile using the fan transform
-    finalPos = (direction.z == 0) ? new Vector3(bubble.transform.position.x + direction.x, fan.transform.position.y, fan.transform.position.z) : new Vector3(fan.transform.position.x, fan.transform.position.y, bubble.transform.position.z + direction.z);
+    finalPos = (direction.z == 0) ? new Vector3(bubble.transform.position.x + direction.x, wind.transform.position.y, wind.transform.position.z) : new Vector3(wind.transform.position.x, wind.transform.position.y, bubble.transform.position.z + direction.z);
     lerp = true;
-
-    //Debug.Log(finalPos);
 
     moveSpeed *= speedMultiplier;
 
-    // Calculate time it should take to move to the next tile
-    //AUDIO
     bubbleAnimator.SetTrigger("Bounce");
 
+    // Start coroutine to move the bubble
     StartCoroutine(MoveOverTime(bubble.transform, bubble.position, finalPos, moveSpeed));
   }
 
@@ -189,7 +192,6 @@ public class BubbleController : MonoBehaviour
     lerp = true;
     launching = true;
 
-    //AUDIO
     bubbleAnimator.SetTrigger("Bounce");
 
     StartCoroutine(MoveOverTime(bubble.transform, bubble.position, finalPos, moveSpeed));
