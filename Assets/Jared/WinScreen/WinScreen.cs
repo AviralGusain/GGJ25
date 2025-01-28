@@ -51,14 +51,24 @@ public class WinScreen : MonoBehaviour
 
             if (BubbleTimer >= BubblePause)
             {
-                if (SceneManager.GetActiveScene().buildIndex + 1 >= SceneManager.sceneCountInBuildSettings)
+                NextLevel nextLevelManager = FindFirstObjectByType<NextLevel>();
+                if (nextLevelManager != null) // If next level manager exists (should always in game, but maybe not if you open up a specific scene in testing)
                 {
-                    SceneManager.LoadScene("MainMenu");
+                    nextLevelManager.StartNextLevel(); // Starts next level if there is one, or main menu if not
+                    return;
                 }
-                else
-                {
-                    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex, LoadSceneMode.Single);
-                }
+                //if (SceneManager.GetActiveScene().buildIndex + 1 >= SceneManager.sceneCountInBuildSettings)
+                //{
+                //    SceneManager.LoadScene("MainMenu");
+                //}
+                //else
+                //{
+                   
+                //    else
+                //    {
+                //        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex, LoadSceneMode.Single);
+                //    }
+                //}
             }
         }
     }
@@ -81,4 +91,5 @@ public class WinScreen : MonoBehaviour
             Stars[i].GetComponent<Animator>().SetTrigger("Explode");
         }
     }
+
 }
