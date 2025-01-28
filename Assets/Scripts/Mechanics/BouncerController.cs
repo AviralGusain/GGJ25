@@ -8,11 +8,13 @@ public class BouncerController : MonoBehaviour
   private int orientation;
 
   private Animator animator;
+    private ParticleSystem particle;
 
   private AudioSource[] audioSources;
 
   private void Start()
   {
+        particle = GetComponentInChildren<ParticleSystem>();
     animator = GetComponentInChildren<Animator>();
 
     audioSources = GetComponents<AudioSource>();
@@ -57,6 +59,7 @@ public class BouncerController : MonoBehaviour
   private bool CollisionCheck(Vector3 direction, int orientation)
   {
     animator.SetTrigger("Bounce");
+        particle.Play();
 
     // Make sure the direction passed in valid with the specified orientation
     switch (orientation)
