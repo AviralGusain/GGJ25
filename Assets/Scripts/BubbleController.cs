@@ -48,6 +48,7 @@ public class BubbleController : MonoBehaviour
     {
       if (launcher == null)
       {
+        audioSources[0].Play();
         Destroy(gameObject);
         return;
       }
@@ -80,37 +81,28 @@ public class BubbleController : MonoBehaviour
   {
     moveSpeed = defaultSpeed;
 
-
-    // If undergrid or spawn collision occurs, just ignore it
-    if (collider.CompareTag("Undergrid") || collider.CompareTag("Spawner"))
+    // If object is untagged, destroy it
+    if (collider.CompareTag("Undergrid") || collider.CompareTag("Spawner") || collider.CompareTag("Bubble"))
     {
       return;
     }
 
     gameObject.GetComponent<Collider>().enabled = false;
-    Debug.Log("Disabled because Collided with: " + collider.transform.root.tag);
 
     // Collision with a bouncer, pass the bouncer controller to the bouncer collision method
     if (collider.TryGetComponent(out BouncerController bouncerController) && !launching)
     {
-      Debug.Log("Bouncer collision");
-      audioSources[0].Play();
       BouncerCollision(bouncerController);
     }
 
     if (collider.TryGetComponent(out LauncherController launchController))
     {
-      audioSources[1].Play();
+      audioSources[0].Play();
+
+      // Play launch animation
+      launchController.animator.SetTrigger("Launch");
+
       LauncherCollision(launchController);
-    }
-
-    // If colliding with a wind object, pass the wind object to the fan collision method
-    if (collider.CompareTag("Wind"))
-    {
-      audioSources[2].Play();
-      GameObject parent = collider.transform.parent.gameObject;
-
-      FanCollision(parent);
     }
   }
 
@@ -149,9 +141,6 @@ public class BubbleController : MonoBehaviour
       return;
     }
 
-
-    //Debug.Log("Plane: " + plane);
-
     // Swap the x and z values of the direction vector
     GenericSwap<float>(ref direction.x, ref direction.z);
 
@@ -168,7 +157,7 @@ public class BubbleController : MonoBehaviour
 
   void FanCollision(GameObject fan)
   {
-    Debug.Log("Wind collision");
+    //Debug.Log("Wind collision");
 
     // Swap the x and z values of the direction vector
     direction = fan.transform.right;
@@ -176,6 +165,8 @@ public class BubbleController : MonoBehaviour
     // Move in the direction by one tile using the fan transform
     finalPos = (direction.z == 0) ? new Vector3(bubble.transform.position.x + direction.x, fan.transform.position.y, fan.transform.position.z) : new Vector3(fan.transform.position.x, fan.transform.position.y, bubble.transform.position.z + direction.z);
     lerp = true;
+
+    //Debug.Log(finalPos);
 
     moveSpeed *= speedMultiplier;
 
@@ -198,10 +189,7 @@ public class BubbleController : MonoBehaviour
     lerp = true;
     launching = true;
 
-
-    // trigger animation of launcher
-    launcherController.animator.SetTrigger("Launch");
-
+    //AUDIO
     bubbleAnimator.SetTrigger("Bounce");
 
     StartCoroutine(MoveOverTime(bubble.transform, bubble.position, finalPos, moveSpeed));
