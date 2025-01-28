@@ -7,14 +7,18 @@ public class BouncerController : MonoBehaviour
   public GameObject bouncer;
   private int orientation;
 
-    private Animator animator;
+  private Animator animator;
 
-    private void Start()
-    {
-        animator = GetComponentInChildren<Animator>();
-    }
+  private AudioSource[] audioSources;
 
-    public int GetReflectionPlane(Vector3 direction, ref bool possible)
+  private void Start()
+  {
+    animator = GetComponentInChildren<Animator>();
+
+    audioSources = GetComponents<AudioSource>();
+  }
+
+  public int GetReflectionPlane(Vector3 direction, ref bool possible)
   {
     int yAngle = (int)bouncer.transform.rotation.eulerAngles.y;
 
@@ -31,18 +35,28 @@ public class BouncerController : MonoBehaviour
     // Take rotation of the object along the y-axis
     orientation = (yAngle / 90);
 
-    //Debug.Log("Orientation: " + orientation);
-
     possible = CollisionCheck(direction, orientation);
 
-    if (!possible) gameObject.GetComponent<AudioSource>().Play();
+    if (!possible)
+    {
+      audioSources[0].Play();
+    }
 
     return orientation;
   }
 
+  private void OnTriggerEnter(Collider other)
+  {
+    if (other.gameObject.CompareTag("Bubble"))
+    {
+      // Play audio source attached to bouncer
+      audioSources[1].Play();
+    }
+  }
+
   private bool CollisionCheck(Vector3 direction, int orientation)
   {
-        animator.SetTrigger("Bounce");
+    animator.SetTrigger("Bounce");
 
     // Make sure the direction passed in valid with the specified orientation
     switch (orientation)
