@@ -209,6 +209,8 @@ public class LevelSaver : ScriptableObject
 
         // Saves name of current level
         levelState.SetCurrLevelName(levelName);
+
+        levelState.ReInitLevel();
     }
 
     //public static string FixGeneratedJSON(string rawJson)
@@ -235,7 +237,7 @@ public class LevelSaver : ScriptableObject
     {
         if (File.Exists("PlayerScores" + ".json") == false)
         {
-            Debug.Log("Level of name PlayerScores does not exist");
+            Debug.Log("File of name PlayerScores does not exist");
             return;
         }
         string scoresJson = File.ReadAllText("PlayerScores.json");

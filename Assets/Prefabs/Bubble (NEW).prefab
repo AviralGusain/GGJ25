@@ -51,8 +51,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bubble: {fileID: 723079552741143600}
   direction: {x: 0, y: 0, z: 0}
-  reset: 1
   bubbleAnimator: {fileID: 0}
+  popParticles: {fileID: 4576778290476891413, guid: 747a47146150c14449fdf39d289251bd, type: 3}
 --- !u!114 &8470561530171180208
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -9,10 +9,12 @@ public class BubbleGoal : MonoBehaviour
 
     private float moveSpeed = 0.25f;
 
+    public ParticleSystem particle;
+
   // Start is called once before the first execution of Update after the MonoBehaviour is created
   void Start()
   {
-
+        particle = GetComponentInChildren<ParticleSystem>();
   }
 
   // Update is called once per frame
@@ -36,9 +38,17 @@ public class BubbleGoal : MonoBehaviour
         mOnBubbleReachedGoal.Invoke(new BubbleData());
       }
 
-      StartCoroutine(GoalSequence(bubbleController, 1.0f));
+            
+            StartCoroutine(Particles());
+            StartCoroutine(GoalSequence(bubbleController, 1.0f));
     }
   }
+
+    private IEnumerator Particles()
+    {
+        yield return new WaitForSeconds(1f);
+        particle.Play();
+    }
 
   private IEnumerator GoalSequence(BubbleController bubbleController, float lifeTimer)
   {

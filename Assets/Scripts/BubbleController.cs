@@ -24,6 +24,7 @@ public class BubbleController : MonoBehaviour
   private Vector3 finalPos;
 
   public Animator bubbleAnimator;
+    public GameObject popParticles;
 
   private float distanceTraveled = 0.0f;
 
@@ -48,7 +49,7 @@ public class BubbleController : MonoBehaviour
       if (launcher == null)
       {
         audioSources[0].Play();
-        Destroy(gameObject);
+        PopSequence();
         return;
       }
 
@@ -154,7 +155,7 @@ public class BubbleController : MonoBehaviour
 
     if (!possible)
     {
-      Destroy(gameObject);
+      PopSequence();
       return;
     }
 
@@ -212,4 +213,10 @@ public class BubbleController : MonoBehaviour
 
     StartCoroutine(MoveOverTime(bubble.transform, bubble.position, finalPos, moveSpeed));
   }
+
+    public void PopSequence()
+    {
+        Instantiate(popParticles, transform.position, Quaternion.identity);
+        Destroy(gameObject);
+    }
 }
