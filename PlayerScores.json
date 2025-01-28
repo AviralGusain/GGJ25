@@ -2,7 +2,7 @@
     "mItems": [
         {
             "levelName": "Level1",
-            "numBubbles": 0
+            "numBubbles": 3
         },
         {
             "levelName": "Level2",
@@ -10,6 +10,30 @@
         },
         {
             "levelName": "Level3",
+            "numBubbles": 0
+        },
+        {
+            "levelName": "Level4",
+            "numBubbles": 0
+        },
+        {
+            "levelName": "Level5",
+            "numBubbles": 0
+        },
+        {
+            "levelName": "Level6",
+            "numBubbles": 0
+        },
+        {
+            "levelName": "Level7",
+            "numBubbles": 0
+        },
+        {
+            "levelName": "Level8",
+            "numBubbles": 0
+        },
+        {
+            "levelName": "Level9",
             "numBubbles": 0
         }
     ]

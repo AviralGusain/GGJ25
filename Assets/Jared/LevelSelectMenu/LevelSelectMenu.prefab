@@ -290,6 +290,7 @@ MonoBehaviour:
   StarPanel: {fileID: 7249632544160546687}
   StarPrefab: {fileID: 885793902704060968, guid: d606ed0345e7e8c41910ef230289ea32, type: 3}
   StarCount: 0
+  LevelName: Level5
 --- !u!1 &579987974189918026
 GameObject:
   m_ObjectHideFlags: 0
@@ -934,6 +935,7 @@ MonoBehaviour:
   StarPanel: {fileID: 1783780052833279421}
   StarPrefab: {fileID: 885793902704060968, guid: d606ed0345e7e8c41910ef230289ea32, type: 3}
   StarCount: 0
+  LevelName: Level4
 --- !u!1 &2482663942921988679
 GameObject:
   m_ObjectHideFlags: 0
@@ -1224,6 +1226,7 @@ MonoBehaviour:
   StarPanel: {fileID: 1621720173550270030}
   StarPrefab: {fileID: 885793902704060968, guid: d606ed0345e7e8c41910ef230289ea32, type: 3}
   StarCount: 0
+  LevelName: Level9
 --- !u!1 &2501833986629798427
 GameObject:
   m_ObjectHideFlags: 0
@@ -1589,6 +1592,7 @@ MonoBehaviour:
   StarPanel: {fileID: 8008064686513563679}
   StarPrefab: {fileID: 885793902704060968, guid: d606ed0345e7e8c41910ef230289ea32, type: 3}
   StarCount: 0
+  LevelName: Level6
 --- !u!1 &2664569915566604594
 GameObject:
   m_ObjectHideFlags: 0
@@ -1954,6 +1958,7 @@ MonoBehaviour:
   StarPanel: {fileID: 5064536679050012911}
   StarPrefab: {fileID: 885793902704060968, guid: d606ed0345e7e8c41910ef230289ea32, type: 3}
   StarCount: 0
+  LevelName: Level2
 --- !u!1 &2885371830435580696
 GameObject:
   m_ObjectHideFlags: 0
@@ -2955,6 +2960,7 @@ MonoBehaviour:
   StarPanel: {fileID: 691821148228002239}
   StarPrefab: {fileID: 885793902704060968, guid: d606ed0345e7e8c41910ef230289ea32, type: 3}
   StarCount: 0
+  LevelName: Level3
 --- !u!1 &5423754833384146726
 GameObject:
   m_ObjectHideFlags: 0
@@ -3599,6 +3605,7 @@ MonoBehaviour:
   StarPanel: {fileID: 1453584088428647826}
   StarPrefab: {fileID: 885793902704060968, guid: d606ed0345e7e8c41910ef230289ea32, type: 3}
   StarCount: 0
+  LevelName: Level1
 --- !u!1 &7425660229068316773
 GameObject:
   m_ObjectHideFlags: 0
@@ -4176,6 +4183,7 @@ MonoBehaviour:
   StarPanel: {fileID: 609379850584615745}
   StarPrefab: {fileID: 885793902704060968, guid: d606ed0345e7e8c41910ef230289ea32, type: 3}
   StarCount: 0
+  LevelName: Level1
 --- !u!1 &7875306347328949421
 GameObject:
   m_ObjectHideFlags: 0
@@ -4466,6 +4474,7 @@ MonoBehaviour:
   StarPanel: {fileID: 8406012483243829251}
   StarPrefab: {fileID: 885793902704060968, guid: d606ed0345e7e8c41910ef230289ea32, type: 3}
   StarCount: 0
+  LevelName: Level7
 --- !u!1 &8298495348795658754
 GameObject:
   m_ObjectHideFlags: 0
@@ -4756,6 +4765,7 @@ MonoBehaviour:
   StarPanel: {fileID: 2531340551023021374}
   StarPrefab: {fileID: 885793902704060968, guid: d606ed0345e7e8c41910ef230289ea32, type: 3}
   StarCount: 0
+  LevelName: Level8
 --- !u!1 &8353682400883321911
 GameObject:
   m_ObjectHideFlags: 0
