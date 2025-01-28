@@ -46,4 +46,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nextLevel: Level1
   lastLevel: 
-  numLevels: 10
+  numLevels: 9
