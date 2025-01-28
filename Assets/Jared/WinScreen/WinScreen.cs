@@ -20,6 +20,14 @@ public class WinScreen : MonoBehaviour
 
     private void Start()
     {
+        // Get player score
+        PlayerScores scores = FindFirstObjectByType<PlayerScores>();
+        NextLevel nextLevel = FindFirstObjectByType<NextLevel>();
+        if (scores != null && nextLevel != null)
+        {
+            StarCount = scores.GetLevelScore(nextLevel.lastLevel).numBubbles;
+        }
+
         if (StarCount >= 3)
             StarCount = 3;
 
