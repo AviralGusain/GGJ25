@@ -968,10 +968,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mBubbleScoreTargets: 05000000
-  mCurrBubbleScores: 
+  mCurrBubbleScores: 00000000
   mNumStartingBouncers: 0
   mNumStartingFans: 0
   mNumStartingLaunchers: 0
+  mNumExcpectedResourceUses: 000000000000000000000000
+  mHowManyLessThanExpectedForBubbleScore: 000000000000000000000000
+  mInDebug: 1
 --- !u!4 &1254413936
 Transform:
   m_ObjectHideFlags: 0

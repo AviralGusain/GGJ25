@@ -25,6 +25,8 @@ public class LevelStatData
     public int numStartingLaunchers = 5;
 
     public ArraySerializeWrapper<int> mBubbleScoreTargets = new ArraySerializeWrapper<int>();
+    public ArraySerializeWrapper<int> mNumExcpectedResourceUses = new ArraySerializeWrapper<int>();
+    public ArraySerializeWrapper<int> mHowManyLessThanExpectedForBubbleScore = new ArraySerializeWrapper<int>();
 
     public ArraySerializeWrapper<LevelItemPackage> mLevelObjects = new ArraySerializeWrapper<LevelItemPackage>();
 }
@@ -135,6 +137,10 @@ public class LevelSaver : ScriptableObject
 
         saveData.mLevelObjects.mItems = levelItemsList.ToArray();
 
+        // Save expected resources 
+        saveData.mNumExcpectedResourceUses.mItems = levelManager.mNumExcpectedResourceUses.ToArray();
+
+        saveData.mHowManyLessThanExpectedForBubbleScore.mItems = levelManager.mHowManyLessThanExpectedForBubbleScore.ToArray();
 
         // Make a list of all objects
         //grid.SetLevelSaveData(levelItemsList);
@@ -168,25 +174,28 @@ public class LevelSaver : ScriptableObject
 
 
 
-        //GridManager tempGridManager = JsonUtility.FromJson<GridManager>(levelJson);
-        //JsonUtility.FromJsonOverwrite(levelJson, grid); // Load in grid data
+        // Load in grid data
         LevelStatData loadedData = new LevelStatData();
         JsonUtility.FromJsonOverwrite(levelJson, loadedData); // Load in level grid data
 
-        //ArraySerializeWrapper<LevelItemPackage> testList = new ArraySerializeWrapper<LevelItemPackage>();
-        //JsonUtility.FromJsonOverwrite(levelJson, testList); // Load in grid data
-
-
-        //List<LevelItemPackage> levelObjects = grid.GetLevelSaveData(); // load in data for level objects to spawn
-        //List<LevelItemPackage> levelObjects = grid.GetLevelSaveData(); // load in data for level objects to spawn
-
         // Load in level stats
         levelState.mBubbleScoreTargets = new List<int>(loadedData.mBubbleScoreTargets.mItems); // Load in score targets
+
+        if (loadedData.mNumExcpectedResourceUses.mItems != null)
+        {
+            levelState.mNumExcpectedResourceUses = new List<int>(loadedData.mNumExcpectedResourceUses.mItems); // Load in expected resource uses
+        }
+        if (loadedData.mHowManyLessThanExpectedForBubbleScore.mItems != null)
+        {
+            levelState.mHowManyLessThanExpectedForBubbleScore = new List<int>(loadedData.mHowManyLessThanExpectedForBubbleScore.mItems); // Load in expected resource uses
+        }
+
 
         // Load in resources
         levelState.mNumStartingBouncers = loadedData.numStartingBouncers;
         levelState.mNumStartingFans = loadedData.numStartingFans;
         levelState.mNumStartingLaunchers = loadedData.numStartingLaunchers;
+
 
         // Set inventory based on loaded info (make sure to use set function)
         FindFirstObjectByType<Inventory>().SetNumBouncers(levelState.mNumStartingBouncers);
@@ -212,12 +221,6 @@ public class LevelSaver : ScriptableObject
 
         levelState.ReInitLevel();
     }
-
-    //public static string FixGeneratedJSON(string rawJson)
-    //{
-    //    rawJson = "{\"Items:\":" + rawJson + "}";
-    //    return rawJson;
-    //}
 
     public static void SaveCurrentPlayerScores()
     {
