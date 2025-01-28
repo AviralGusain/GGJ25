@@ -174,8 +174,6 @@ public class BubbleController : MonoBehaviour
 
   void WindCollision(GameObject wind)
   {
-    Debug.Log("Initial Wind Collision");
-
     // Play wind audio from
     AudioSource audio = wind.GetComponent<AudioSource>();
     if (audio != null)
