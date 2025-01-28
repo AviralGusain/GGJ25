@@ -49,7 +49,6 @@ public class BubbleController : MonoBehaviour
       if (launcher == null)
       {
         audioSources[0].Play();
-                Debug.Log("Launcher?");
         PopSequence();
         return;
       }
@@ -156,7 +155,6 @@ public class BubbleController : MonoBehaviour
 
     if (!possible)
     {
-            Debug.Log("Bouncer");
       PopSequence();
       return;
     }
