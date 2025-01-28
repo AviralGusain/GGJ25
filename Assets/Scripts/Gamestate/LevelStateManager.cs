@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using UnityEngine;
 using UnityEngine.Rendering.UI;
+using UnityEngine.SceneManagement;
 
 public enum BubbleSize
 {
@@ -60,7 +61,7 @@ public class LevelStateManager : MonoBehaviour
 
     LevelState mCurrState = LevelState.Active;
 
-    bool mInDebug = true;
+    public bool mInDebug = true;
 
     bool mHasLoadedTestLevel = false;
 
@@ -141,9 +142,15 @@ public class LevelStateManager : MonoBehaviour
             {
                 nextLevel.lastLevel = mCurrLevelName;
             }
+
+            if (mInDebug == false) // Only go to win scene if not in debug
+            {
+                SceneManager.LoadScene("Win Scene");
+            }
             
             mCurrState = LevelState.Complete;
 
+            
         }
     }
 
