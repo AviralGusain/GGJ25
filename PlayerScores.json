@@ -1,0 +1,16 @@
+{
+    "mItems": [
+        {
+            "levelName": "Level1",
+            "numBubbles": 0
+        },
+        {
+            "levelName": "Level2",
+            "numBubbles": 2
+        },
+        {
+            "levelName": "Level3",
+            "numBubbles": 0
+        }
+    ]
+}

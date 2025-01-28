@@ -235,12 +235,12 @@ public class LevelSaver : ScriptableObject
 
     public static void LoadPlayerScores()
     {
-        if (File.Exists(Application.persistentDataPath + "/PlayerScores" + ".json") == false)
+        if (File.Exists("PlayerScores" + ".json") == false)
         {
             Debug.Log("File of name PlayerScores does not exist");
             return;
         }
-        string scoresJson = File.ReadAllText(Application.persistentDataPath + "/PlayerScores.json");
+        string scoresJson = File.ReadAllText("PlayerScores.json");
 
         ArraySerializeWrapper<PlayerLevelScoreData> levelScores = JsonUtility.FromJson<ArraySerializeWrapper<PlayerLevelScoreData>>(scoresJson);
 

@@ -52,9 +52,9 @@ public class PlayerScores : MonoBehaviour
         }
 
 
-        print("PlayerScores:GetLevelScore: No score exists for level name " + levelName);
+        //print("PlayerScores:GetLevelScore: No score exists for level name " + levelName);
 
-        return null;
+        //return null;
     }
 
     public void SetNewScore(string levelName, int newScore, bool onlyIfHigher)
