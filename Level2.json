@@ -16,9 +16,9 @@
     },
     "mHowManyLessThanExpectedForBubbleScore": {
         "mItems": [
-            0,
-            1,
-            2
+            5,
+            5,
+            1
         ]
     },
     "mLevelObjects": {
