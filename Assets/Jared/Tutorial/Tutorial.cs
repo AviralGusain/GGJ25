@@ -23,6 +23,7 @@ public class Tutorial : MonoBehaviour
     private void Start()
     {
         nl = FindAnyObjectByType<NextLevel>();
+        nl.nextLevel = "Level1";
 
         NextButton.onClick.AddListener(ChangeSlide);
 
