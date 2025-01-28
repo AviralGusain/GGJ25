@@ -10,6 +10,7 @@ public class LauncherController : MonoBehaviour
 
   public Animator animator;
 
+
   private void Start()
   {
     animator = GetComponentInChildren<Animator>();

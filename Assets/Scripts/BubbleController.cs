@@ -8,6 +8,7 @@ public class BubbleController : MonoBehaviour
   public Rigidbody bubble;
   private GameObject bouncer;
   private GameObject launcher;
+  private GameObject windObject;
 
   private AudioSource[] audioSources;
 
@@ -21,8 +22,6 @@ public class BubbleController : MonoBehaviour
   private bool lerp = false;
   private bool launching = false;
   private Vector3 finalPos;
-
-  public bool reset = false;
 
   public Animator bubbleAnimator;
 
@@ -48,6 +47,7 @@ public class BubbleController : MonoBehaviour
     {
       if (launcher == null)
       {
+        audioSources[0].Play();
         Destroy(gameObject);
         return;
       }
@@ -78,39 +78,48 @@ public class BubbleController : MonoBehaviour
 
   private void OnTriggerEnter(Collider collider)
   {
+    if (ReferenceEquals(windObject, collider.gameObject))
+    {
+      moveSpeed = defaultSpeed * speedMultiplier;
+      gameObject.GetComponent<Collider>().enabled = true;
+      return;
+    }
+
     moveSpeed = defaultSpeed;
 
-
-    // If undergrid or spawn collision occurs, just ignore it
-    if (collider.CompareTag("Undergrid") || collider.CompareTag("Spawner"))
+    // If object is untagged, destroy it
+    if (collider.CompareTag("Undergrid") || collider.CompareTag("Spawner") || collider.CompareTag("Bubble"))
     {
       return;
     }
 
     gameObject.GetComponent<Collider>().enabled = false;
-    Debug.Log("Disabled because Collided with: " + collider.transform.root.tag);
 
     // Collision with a bouncer, pass the bouncer controller to the bouncer collision method
     if (collider.TryGetComponent(out BouncerController bouncerController) && !launching)
     {
-      Debug.Log("Bouncer collision");
-      audioSources[0].Play();
       BouncerCollision(bouncerController);
+      return;
     }
 
+    // Collision with a launcher
     if (collider.TryGetComponent(out LauncherController launchController))
     {
-      audioSources[1].Play();
+      audioSources[0].Play();
+
+      // Play launch animation
+      launchController.animator.SetTrigger("Launch");
+
       LauncherCollision(launchController);
+
+      return;
     }
 
-    // If colliding with a wind object, pass the wind object to the fan collision method
+    // Collision with a wind object
     if (collider.CompareTag("Wind"))
     {
-      audioSources[2].Play();
-      GameObject parent = collider.transform.parent.gameObject;
-
-      FanCollision(parent);
+      windObject = collider.gameObject;
+      WindCollision(collider.gameObject);
     }
   }
 
@@ -149,9 +158,6 @@ public class BubbleController : MonoBehaviour
       return;
     }
 
-
-    //Debug.Log("Plane: " + plane);
-
     // Swap the x and z values of the direction vector
     GenericSwap<float>(ref direction.x, ref direction.z);
 
@@ -166,23 +172,29 @@ public class BubbleController : MonoBehaviour
     StartCoroutine(MoveOverTime(bubble.transform, bubble.position, finalPos, moveSpeed));
   }
 
-  void FanCollision(GameObject fan)
+  void WindCollision(GameObject wind)
   {
-    Debug.Log("Wind collision");
+    Debug.Log("Initial Wind Collision");
+
+    // Play wind audio from
+    AudioSource audio = wind.GetComponent<AudioSource>();
+    if (audio != null)
+    {
+      audio.Play();
+    }
 
     // Swap the x and z values of the direction vector
-    direction = fan.transform.right;
+    direction = wind.transform.right;
 
     // Move in the direction by one tile using the fan transform
-    finalPos = (direction.z == 0) ? new Vector3(bubble.transform.position.x + direction.x, fan.transform.position.y, fan.transform.position.z) : new Vector3(fan.transform.position.x, fan.transform.position.y, bubble.transform.position.z + direction.z);
+    finalPos = (direction.z == 0) ? new Vector3(bubble.transform.position.x + direction.x, wind.transform.position.y, wind.transform.position.z) : new Vector3(wind.transform.position.x, wind.transform.position.y, bubble.transform.position.z + direction.z);
     lerp = true;
 
     moveSpeed *= speedMultiplier;
 
-    // Calculate time it should take to move to the next tile
-    //AUDIO
     bubbleAnimator.SetTrigger("Bounce");
 
+    // Start coroutine to move the bubble
     StartCoroutine(MoveOverTime(bubble.transform, bubble.position, finalPos, moveSpeed));
   }
 
@@ -197,10 +209,6 @@ public class BubbleController : MonoBehaviour
     finalPos = launcher.transform.position;
     lerp = true;
     launching = true;
-
-
-    // trigger animation of launcher
-    launcherController.animator.SetTrigger("Launch");
 
     bubbleAnimator.SetTrigger("Bounce");
 
