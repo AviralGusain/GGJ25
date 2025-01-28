@@ -1,5 +1,5 @@
 {
-    "numStartingBouncers": 2,
+    "numStartingBouncers": 3,
     "numStartingFans": 0,
     "numStartingLaunchers": 0,
     "mBubbleScoreTargets": {
@@ -476,6 +476,20 @@
                 "position": {
                     "x": -12.5,
                     "y": 0.0,
+                    "z": -7.5
+                },
+                "rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 1.0
+                }
+            },
+            {
+                "prefabName": "Wall",
+                "position": {
+                    "x": -12.5,
+                    "y": 0.0,
                     "z": -6.5
                 },
                 "rotation": {
@@ -546,6 +560,20 @@
                 "position": {
                     "x": -11.5,
                     "y": 0.0,
+                    "z": -7.5
+                },
+                "rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 1.0
+                }
+            },
+            {
+                "prefabName": "Wall",
+                "position": {
+                    "x": -11.5,
+                    "y": 0.0,
                     "z": -6.5
                 },
                 "rotation": {
@@ -672,20 +700,6 @@
                 "position": {
                     "x": -9.5,
                     "y": 0.0,
-                    "z": -9.5
-                },
-                "rotation": {
-                    "x": 0.0,
-                    "y": 0.0,
-                    "z": 0.0,
-                    "w": 1.0
-                }
-            },
-            {
-                "prefabName": "Wall",
-                "position": {
-                    "x": -9.5,
-                    "y": 0.0,
                     "z": -5.5
                 },
                 "rotation": {
@@ -729,34 +743,6 @@
                     "x": -8.5,
                     "y": 0.0,
                     "z": -10.5
-                },
-                "rotation": {
-                    "x": 0.0,
-                    "y": 0.0,
-                    "z": 0.0,
-                    "w": 1.0
-                }
-            },
-            {
-                "prefabName": "Wall",
-                "position": {
-                    "x": -8.5,
-                    "y": 0.0,
-                    "z": -9.5
-                },
-                "rotation": {
-                    "x": 0.0,
-                    "y": 0.0,
-                    "z": 0.0,
-                    "w": 1.0
-                }
-            },
-            {
-                "prefabName": "Wall",
-                "position": {
-                    "x": -8.5,
-                    "y": 0.0,
-                    "z": -8.5
                 },
                 "rotation": {
                     "x": 0.0,
