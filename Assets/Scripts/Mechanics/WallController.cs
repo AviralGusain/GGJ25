@@ -7,10 +7,10 @@ public class WallController : MonoBehaviour
   {
     if (other.gameObject.CompareTag("Bubble"))
     {
+            Debug.Log("wall");
       // Play audio source attached to wall
       gameObject.GetComponent<AudioSource>().Play();
-
-      Destroy(other.gameObject);
+      other.GetComponent<BubbleController>().PopSequence();
     }
   }
 }
